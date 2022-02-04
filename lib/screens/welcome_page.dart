@@ -1,3 +1,5 @@
+import 'package:amritotsavam_app/screens/login_page.dart';
+import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
@@ -29,11 +31,21 @@ class WelcomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GradientButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    },
                     title: 'Login'
                   ),
                   GradientButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SignUpPage()));
+                    },
                     title: 'Sign Up'
                   ),
                 ],
