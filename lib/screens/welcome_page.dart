@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
 //TODO: Style externally in ThemeData
@@ -11,14 +12,13 @@ class WelcomePage extends StatelessWidget {
         body: Container(
           decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromARGB(255, 76, 11, 255),
-                  Color.fromARGB(255, 3, 185, 255),
-                ],
-              )
-          ),
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color.fromARGB(255, 76, 11, 255),
+              Color.fromARGB(255, 3, 185, 255),
+            ],
+          )),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,14 +28,14 @@ class WelcomePage extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  MaterialButton(
+                  GradientButton(
                     onPressed: () {},
-                    child: const Text("Login"),
+                    title: 'Login'
                   ),
-                  MaterialButton(
+                  GradientButton(
                     onPressed: () {},
-                    child: const Text("Sign Up"),
-                  )
+                    title: 'Sign Up'
+                  ),
                 ],
               )
             ],
