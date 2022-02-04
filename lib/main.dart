@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'screens/welcome_page.dart';
 
+//TODO: Add logic to validate JWT and switch between WelcomePage and Home Page
+
 void main() {
   runApp(const MyApp());
 }
