@@ -1,4 +1,7 @@
+import 'package:amritotsavam_app/screens/signup_page.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
+import 'package:amritotsavam_app/widgets/vertical_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,7 +17,53 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: const AppBarBackButton("Home"),
-        body: Column(),
+        body: SizedBox(
+          height: MediaQuery.of(context).size.height*0.7,
+          child: Column(
+            children: [
+              SizedBox(
+                  height: MediaQuery.of(context).size.height*0.235,
+                  child: Row(
+                children: [
+                  VerticalCard(
+                      route:
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                      title: 'Nirmal Karthikeyan',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route:
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                      title: 'Nirmal Karthikeyan',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                ],
+              )),
+              SizedBox(
+                height: MediaQuery.of(context).size.height*0.235,
+                  child: Row(
+                children: [
+                  VerticalCard(
+                      route:
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                      title: 'Nirmal Karthikeyan',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route:
+                          MaterialPageRoute(builder: (context) => SignUpPage()),
+                      title: 'Nirmal Karthikeyan',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                ],
+              ))
+            ],
+          ),
+        ),
       ),
     );
   }
