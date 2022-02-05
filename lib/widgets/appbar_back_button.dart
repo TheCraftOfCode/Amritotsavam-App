@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
   const AppBarBackButton(this.title, {Key? key, this.actions})
@@ -31,7 +33,7 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
           }),
       actions: actions ?? [],
       centerTitle: true,
-      title: Text(title),
+      title: Text(title, style: GoogleFonts.nunito(color: colors.primaryTextColor),),
     );
   }
 }
