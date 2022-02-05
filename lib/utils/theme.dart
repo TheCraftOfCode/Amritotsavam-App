@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 class darkTheme {
   static ThemeData get DarkTheme {
     return ThemeData(
+      primaryTextTheme: TextTheme(bodyText1: GoogleFonts.nunito(color: colors.primaryTextColor)),
       primaryColor: Colors.white,
       scaffoldBackgroundColor: colors.scaffoldColor,
       iconTheme: IconThemeData(color: colors.primaryTextColor),
@@ -13,13 +14,12 @@ class darkTheme {
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: colors.textFieldColor,
-        enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide.none),
-        focusedBorder: const OutlineInputBorder(
-            borderSide: BorderSide.none),
-        border: const OutlineInputBorder(
-            borderSide: BorderSide.none),
-        contentPadding: const EdgeInsets.all(7.0),
+        enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: colors.primaryTextColor)),
+        border: OutlineInputBorder(
+            borderSide: BorderSide(color: colors.primaryTextColor)),
+        contentPadding: const EdgeInsets.all(10.0),
         labelStyle: GoogleFonts.nunito(color: colors.primaryTextColor),
         floatingLabelStyle:
         GoogleFonts.nunito(color: colors.primaryTextColor),

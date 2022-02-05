@@ -3,18 +3,18 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 
 //TODO: Add styling
-class GradientButton extends StatefulWidget {
-  const GradientButton({Key? key, required this.onPressed, required this.title})
+class RoundedButton extends StatefulWidget {
+  const RoundedButton({Key? key, required this.onPressed, required this.title})
       : super(key: key);
 
   final Function()? onPressed;
   final String title;
 
   @override
-  _GradientButtonState createState() => _GradientButtonState();
+  _RoundedButtonState createState() => _RoundedButtonState();
 }
 
-class _GradientButtonState extends State<GradientButton> {
+class _RoundedButtonState extends State<RoundedButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(

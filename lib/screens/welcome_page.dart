@@ -25,12 +25,12 @@ class WelcomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Center(child: const Text("REPLACE LOGO")),
-              Center(child: const Text("REPLACE CAPTION")),
+              const Center(child: const Text("REPLACE LOGO")),
+              const Center(child: const Text("REPLACE CAPTION")),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  GradientButton(
+                  RoundedButton(
                     onPressed: () {
                       Navigator.push(
                           context,
@@ -39,7 +39,7 @@ class WelcomePage extends StatelessWidget {
                     },
                     title: 'LOGIN'
                   ),
-                  GradientButton(
+                  RoundedButton(
                     onPressed: () {
                       Navigator.push(
                           context,

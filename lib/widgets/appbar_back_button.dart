@@ -23,6 +23,8 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      //TODO: Find way to get the gradient in background color to continue here
+      backgroundColor: Colors.transparent,
       leading: IconButton(
           splashRadius: 20,
           icon: const Icon(
