@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:google_fonts/google_fonts.dart';
 
 //TODO: Add styling
 class GradientButton extends StatefulWidget {
@@ -16,15 +18,16 @@ class _GradientButtonState extends State<GradientButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 50),
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
           onPressed: widget.onPressed,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 18),
+            padding: const EdgeInsets.symmetric(vertical: 14),
             child: Text(
               widget.title,
+              style: GoogleFonts.nunito(color: colors.accentColor, fontSize: 20, fontWeight: FontWeight.bold),
             ),
           ),
           style: ElevatedButton.styleFrom(

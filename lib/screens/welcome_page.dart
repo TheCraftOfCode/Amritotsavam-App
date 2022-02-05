@@ -3,7 +3,7 @@ import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
-//TODO: Style externally in ThemeData
+
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -37,7 +37,7 @@ class WelcomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const LoginPage()));
                     },
-                    title: 'Login'
+                    title: 'LOGIN'
                   ),
                   GradientButton(
                     onPressed: () {
@@ -46,7 +46,7 @@ class WelcomePage extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => const SignUpPage()));
                     },
-                    title: 'Sign Up'
+                    title: 'SIGN UP'
                   ),
                 ],
               )

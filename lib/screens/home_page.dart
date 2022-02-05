@@ -13,7 +13,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBarBackButton("Home"),
+        appBar: const AppBarBackButton("Home"),
         body: Column(),
       ),
     );
