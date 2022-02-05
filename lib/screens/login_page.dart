@@ -5,6 +5,7 @@ import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:amritotsavam_app/screens/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -71,9 +72,8 @@ class _LoginPageState extends State<LoginPage> {
                       RoundedButton(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginPage()));
+                                context, MaterialPageRoute(builder: (context) => HomePage())
+                            );
                           },
                           title: 'LOGIN'),
                     ],
@@ -83,7 +83,6 @@ class _LoginPageState extends State<LoginPage> {
                   flex: 2,
                   child: Row(
                     children: [
-                      //TODO: Figure out why ThemeData bodyText doesn't work
                       Text(
                           'New around here?',
                           style: GoogleFonts.nunito(color: colors.primaryTextColor)
