@@ -1,6 +1,4 @@
 import 'package:amritotsavam_app/screens/signup_page.dart';
-import 'package:amritotsavam_app/utils/theme.dart';
-import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:flutter/material.dart';
@@ -15,8 +13,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  MaterialPageRoute signUpRoute = MaterialPageRoute(builder: (context) => SignUpPage());
+  MaterialPageRoute signUpRoute =
+      MaterialPageRoute(builder: (context) => SignUpPage());
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +37,9 @@ class _LoginPageState extends State<LoginPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Expanded(flex: 6,child: Center(child: Text("REPLACE ILLUSTRATION"))),
+                const Expanded(
+                    flex: 6,
+                    child: Center(child: Text("REPLACE ILLUSTRATION"))),
                 Expanded(
                   flex: 2,
                   child: Text(
@@ -51,12 +51,13 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 Expanded(
-                  flex:  9,
+                  flex: 9,
                   child: Column(
                     children: [
                       TextFormField(
                         textAlign: TextAlign.start,
-                        style: GoogleFonts.nunito(color: colors.primaryTextColor),
+                        style:
+                            GoogleFonts.nunito(color: colors.primaryTextColor),
                         decoration: const InputDecoration(
                             label: Text("Username / E-Mail"),
                             hintText: "Enter your username / e-mail here"),
@@ -72,8 +73,9 @@ class _LoginPageState extends State<LoginPage> {
                       RoundedButton(
                           onPressed: () {
                             Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => HomePage())
-                            );
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
                           },
                           title: 'LOGIN'),
                     ],
@@ -83,11 +85,11 @@ class _LoginPageState extends State<LoginPage> {
                   flex: 2,
                   child: Row(
                     children: [
-                      Text(
-                          'New around here?',
-                          style: GoogleFonts.nunito(color: colors.primaryTextColor)
-                        // darkTheme.DarkTheme.textTheme.bodyText1,
-                      ),
+                      Text('New around here?',
+                          style:
+                              GoogleFonts.nunito(color: colors.primaryTextColor)
+                          // darkTheme.DarkTheme.textTheme.bodyText1,
+                          ),
                       TextButton(
                           onPressed: () {
                             Navigator.popAndPushNamed(context, '/signUp');
@@ -95,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             'Sign up',
                             style:
-                            GoogleFonts.nunito(color: colors.accentColor),
+                                GoogleFonts.nunito(color: colors.accentColor),
                           ))
                     ],
                   ),

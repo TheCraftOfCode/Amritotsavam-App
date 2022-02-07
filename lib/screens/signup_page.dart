@@ -1,7 +1,5 @@
 import 'package:amritotsavam_app/screens/login_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
-import 'package:amritotsavam_app/utils/theme.dart';
-import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +33,9 @@ class _SignUpPageState extends State<SignUpPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const Expanded(flex: 6,child: Center(child: Text("REPLACE ILLUSTRATION"))),
+                const Expanded(
+                    flex: 6,
+                    child: Center(child: Text("REPLACE ILLUSTRATION"))),
                 Expanded(
                   flex: 2,
                   child: Text(
@@ -47,12 +47,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
                 Expanded(
-                  flex:  9,
+                  flex: 9,
                   child: Column(
                     children: [
                       TextFormField(
                         textAlign: TextAlign.start,
-                        style: GoogleFonts.nunito(color: colors.primaryTextColor),
+                        style:
+                            GoogleFonts.nunito(color: colors.primaryTextColor),
                         decoration: const InputDecoration(
                             label: Text("Username / E-Mail"),
                             hintText: "Enter your username / e-mail here"),
@@ -79,25 +80,25 @@ class _SignUpPageState extends State<SignUpPage> {
                 Expanded(
                   flex: 2,
                   child: Row(
-                      children: [
-                        //TODO: Figure out why ThemeData bodyText doesn't work
-                        Text(
-                          'New around here?',
-                          style: GoogleFonts.nunito(color: colors.primaryTextColor)
+                    children: [
+                      //TODO: Figure out why ThemeData bodyText doesn't work
+                      Text('New around here?',
+                          style:
+                              GoogleFonts.nunito(color: colors.primaryTextColor)
                           // darkTheme.DarkTheme.textTheme.bodyText1,
-                        ),
-                        TextButton(
-                            onPressed: () {
-                              Navigator.popAndPushNamed(context, '/login');
-                            },
-                            child: Text(
-                              'Login',
-                              style:
-                              GoogleFonts.nunito(color: colors.accentColor),
-                            ))
-                      ],
-                    ),
+                          ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.popAndPushNamed(context, '/login');
+                          },
+                          child: Text(
+                            'Login',
+                            style:
+                                GoogleFonts.nunito(color: colors.accentColor),
+                          ))
+                    ],
                   ),
+                ),
               ],
             ),
           ),

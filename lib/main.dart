@@ -22,15 +22,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkTheme.DarkTheme,
-      home: const WelcomePage(),
-      debugShowCheckedModeBanner: false,
-      routes:  <String, WidgetBuilder> {
-    '/signUp': (BuildContext context) => const SignUpPage(),
-    '/login' : (BuildContext context) => const LoginPage(),
-    '/home' : (BuildContext context) => const HomePage(),
-    '/welcome' : (BuildContext context) => const WelcomePage(),}
-    );
+        theme: darkTheme.DarkTheme,
+        home: const WelcomePage(),
+        debugShowCheckedModeBanner: false,
+        routes: <String, WidgetBuilder>{
+          '/signUp': (BuildContext context) => const SignUpPage(),
+          '/login': (BuildContext context) => const LoginPage(),
+          '/home': (BuildContext context) => const HomePage(),
+          '/welcome': (BuildContext context) => const WelcomePage(),
+        });
   }
 }
-

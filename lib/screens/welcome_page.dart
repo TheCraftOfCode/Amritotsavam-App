@@ -3,7 +3,6 @@ import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
-
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -31,23 +30,21 @@ class WelcomePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   RoundedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const LoginPage()));
-                    },
-                    title: 'LOGIN'
-                  ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()));
+                      },
+                      title: 'LOGIN'),
                   RoundedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const SignUpPage()));
-                    },
-                    title: 'SIGN UP'
-                  ),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignUpPage()));
+                      },
+                      title: 'SIGN UP'),
                 ],
               )
             ],

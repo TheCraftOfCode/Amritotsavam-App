@@ -35,7 +35,10 @@ class AppBarBackButton extends StatelessWidget implements PreferredSizeWidget {
           }),
       actions: actions ?? [],
       centerTitle: true,
-      title: Text(title, style: GoogleFonts.nunito(color: colors.primaryTextColor),),
+      title: Text(
+        title,
+        style: GoogleFonts.nunito(color: colors.primaryTextColor),
+      ),
     );
   }
 }

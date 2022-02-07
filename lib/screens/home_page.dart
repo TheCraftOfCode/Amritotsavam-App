@@ -12,57 +12,159 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int currentIndex = 0;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var width = size.width;
+    var height = size.height;
+    height -= kToolbarHeight;
+    height -= kBottomNavigationBarHeight;
+    var aspectRatioOne = (width / 2) / ((height - 10) / 2);
+    var aspectRatioTwo = (width / 2) / ((height - 10) / 3);
+    var appBarTitle = currentIndex == 0 ? "Home" : "About";
+
+    ///(width / columnCount) / (height / minRowCountOnScreen)
+
     return SafeArea(
       child: Scaffold(
-        appBar: const AppBarBackButton("Home"),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height*0.7,
-          child: Column(
-            children: [
-              SizedBox(
-                  height: MediaQuery.of(context).size.height*0.235,
-                  child: Row(
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentIndex,
+          onTap: (int index) {
+            setState(() {
+              currentIndex = index;
+            });
+            pageController.animateToPage(
+              index,
+              duration: const Duration(
+                milliseconds: 200,
+              ),
+              curve: Curves.easeIn,
+            );
+          },
+          backgroundColor: Colors.transparent,
+          unselectedItemColor: Colors.white,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline),
+              label: 'About',
+            ),
+          ],
+        ),
+        appBar: AppBarBackButton(appBarTitle),
+        body: PageView(
+          controller: pageController,
+          onPageChanged: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: aspectRatioOne,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 children: [
                   VerticalCard(
-                      route:
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                      title: 'Nirmal Karthikeyan',
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Events',
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
-                      route:
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                      title: 'Nirmal Karthikeyan',
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Schedule',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Rules',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Results',
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                 ],
-              )),
-              SizedBox(
-                height: MediaQuery.of(context).size.height*0.235,
-                  child: Row(
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: aspectRatioTwo,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
                 children: [
                   VerticalCard(
-                      route:
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                      title: 'Nirmal Karthikeyan',
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'About Amritotsovam',
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
-                      route:
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                      title: 'Nirmal Karthikeyan',
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Central Coordinators',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Event Managers',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'House Captains',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Team Members',
+                      svgLocation: 'svgLocation',
+                      gradientStartingColor: colors.gradientStartColor,
+                      gradientEndingColor: colors.gradientEndColor),
+                  VerticalCard(
+                      route: MaterialPageRoute(
+                          builder: (context) => const SignUpPage()),
+                      title: 'Contact Us',
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                 ],
-              ))
-            ],
-          ),
+              ),
+            ),
+          ],
         ),
       ),
     );

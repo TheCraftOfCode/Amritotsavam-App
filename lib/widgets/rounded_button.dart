@@ -27,7 +27,10 @@ class _RoundedButtonState extends State<RoundedButton> {
             padding: const EdgeInsets.symmetric(vertical: 14),
             child: Text(
               widget.title,
-              style: GoogleFonts.nunito(color: colors.accentColor, fontSize: 20, fontWeight: FontWeight.bold),
+              style: GoogleFonts.nunito(
+                  color: colors.accentColor,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
             ),
           ),
           style: ElevatedButton.styleFrom(

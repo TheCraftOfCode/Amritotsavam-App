@@ -22,11 +22,12 @@ class VerticalCard extends StatefulWidget {
   _VerticalCardState createState() => _VerticalCardState();
 }
 
+//TODO: Change Color? Add icon and change Text to AutoText thingey?
 class _VerticalCardState extends State<VerticalCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.only(bottom: 20, left: 15),
+        padding: const EdgeInsets.all(0),
         child: Card(
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
@@ -35,16 +36,14 @@ class _VerticalCardState extends State<VerticalCard> {
           semanticContainer: true,
           child: Container(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [widget.gradientStartingColor, widget.gradientEndingColor],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight
-              )
-            ),
+                gradient: LinearGradient(colors: [
+              widget.gradientStartingColor,
+              widget.gradientEndingColor
+            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
             child: Stack(
               children: [
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.of(context).push(widget.route);
                   },
                 ),
