@@ -84,6 +84,7 @@ class _HomePageState extends State<HomePage> {
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'Events',
+                      fontSize: 30,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
@@ -92,6 +93,7 @@ class _HomePageState extends State<HomePage> {
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'Schedule',
+                      fontSize: 30,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
@@ -100,6 +102,7 @@ class _HomePageState extends State<HomePage> {
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'Rules',
+                      fontSize: 30,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
@@ -108,6 +111,7 @@ class _HomePageState extends State<HomePage> {
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'Results',
+                      fontSize: 30,
                       textAlign: TextAlign.start,
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
@@ -127,8 +131,9 @@ class _HomePageState extends State<HomePage> {
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'About Amritotsovam',
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       svgLocation: 'svgLocation',
+                      fontSize: 20,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -136,7 +141,8 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Central Coordinators',
                       svgLocation: 'svgLocation',
-                      textAlign: TextAlign.center,
+                      fontSize: 20,
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -144,23 +150,26 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Event Managers',
                       svgLocation: 'svgLocation',
-                      textAlign: TextAlign.center,
+                      fontSize: 20,
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'House Captains',
+                      fontSize: 20,
                       svgLocation: 'svgLocation',
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'Team Members',
+                      fontSize: 20,
                       svgLocation: 'svgLocation',
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -168,7 +177,8 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Contact Us',
                       svgLocation: 'svgLocation',
-                      textAlign: TextAlign.center,
+                      fontSize: 20,
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                 ],

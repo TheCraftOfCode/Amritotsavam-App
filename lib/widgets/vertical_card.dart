@@ -10,6 +10,7 @@ class VerticalCard extends StatefulWidget {
       required this.svgLocation,
       required this.gradientStartingColor,
       required this.textAlign,
+        required this.fontSize,
       required this.gradientEndingColor})
       : super(key: key);
 
@@ -19,6 +20,7 @@ class VerticalCard extends StatefulWidget {
   final Color gradientStartingColor;
   final Color gradientEndingColor;
   final TextAlign textAlign;
+  final fontSize;
 
   @override
   _VerticalCardState createState() => _VerticalCardState();
@@ -61,7 +63,7 @@ class _VerticalCardState extends State<VerticalCard> {
                         textAlign: widget.textAlign,
                         style: GoogleFonts.nunito(
                             color: Colors.white,
-                            fontSize: 30,
+                            fontSize: widget.fontSize.toDouble(),
                             fontWeight: FontWeight.w500),
                       ),
                     ],
