@@ -85,6 +85,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Events',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -92,6 +93,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Schedule',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -99,12 +101,14 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Rules',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.start,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'Results',
+                      textAlign: TextAlign.start,
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
@@ -123,6 +127,7 @@ class _HomePageState extends State<HomePage> {
                       route: MaterialPageRoute(
                           builder: (context) => const SignUpPage()),
                       title: 'About Amritotsovam',
+                      textAlign: TextAlign.center,
                       svgLocation: 'svgLocation',
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
@@ -131,6 +136,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Central Coordinators',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.center,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -138,6 +144,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Event Managers',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.center,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -145,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'House Captains',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.center,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -152,6 +160,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Team Members',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.center,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
@@ -159,6 +168,7 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const SignUpPage()),
                       title: 'Contact Us',
                       svgLocation: 'svgLocation',
+                      textAlign: TextAlign.center,
                       gradientStartingColor: colors.gradientStartColor,
                       gradientEndingColor: colors.gradientEndColor),
                 ],

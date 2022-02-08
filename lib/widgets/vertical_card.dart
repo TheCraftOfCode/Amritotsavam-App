@@ -9,6 +9,7 @@ class VerticalCard extends StatefulWidget {
       required this.title,
       required this.svgLocation,
       required this.gradientStartingColor,
+      required this.textAlign,
       required this.gradientEndingColor})
       : super(key: key);
 
@@ -17,6 +18,7 @@ class VerticalCard extends StatefulWidget {
   final String svgLocation;
   final Color gradientStartingColor;
   final Color gradientEndingColor;
+  final TextAlign textAlign;
 
   @override
   _VerticalCardState createState() => _VerticalCardState();
@@ -56,6 +58,7 @@ class _VerticalCardState extends State<VerticalCard> {
                       //TODO: Add SVG based on event category
                       Text(
                         widget.title,
+                        textAlign: widget.textAlign,
                         style: GoogleFonts.nunito(
                             color: Colors.white,
                             fontSize: 30,
