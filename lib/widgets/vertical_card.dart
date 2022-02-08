@@ -10,7 +10,7 @@ class VerticalCard extends StatefulWidget {
       required this.svgLocation,
       required this.gradientStartingColor,
       required this.textAlign,
-        required this.fontSize,
+      required this.fontSize,
       required this.gradientEndingColor})
       : super(key: key);
 
@@ -38,38 +38,43 @@ class _VerticalCardState extends State<VerticalCard> {
             borderRadius: BorderRadius.circular(10.0),
           ),
           semanticContainer: true,
-          child: Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [
-              widget.gradientStartingColor,
-              widget.gradientEndingColor
-            ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-            child: Stack(
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(widget.route);
-                  },
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //TODO: Add SVG based on event category
-                      Text(
-                        widget.title,
-                        textAlign: widget.textAlign,
-                        style: GoogleFonts.nunito(
-                            color: Colors.white,
-                            fontSize: widget.fontSize.toDouble(),
-                            fontWeight: FontWeight.w500),
+          child: Material(
+            child: Ink(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                widget.gradientStartingColor,
+                widget.gradientEndingColor
+              ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+              child: InkWell(
+                onTap: (){},
+                child: Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //TODO: Add SVG based on event category
+                          Text(
+                            widget.title,
+                            textAlign: widget.textAlign,
+                            style: GoogleFonts.nunito(
+                                color: Colors.white,
+                                fontSize: widget.fontSize.toDouble(),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        //Navigator.of(context).push(widget.route);
+                      },
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ),
           elevation: 5,
