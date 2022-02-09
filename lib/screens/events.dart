@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,9 @@ Widget _horizontalListView(context, title, List list) {
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return _horizontalWidgetCard("Event ${index + 1}",
-                  "January ${index + 20} 2022", () {}, true);
+                  "January ${index + 20} 2022", () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
+                  }, true);
               //TODO: Replace with inFocus variable
             },
           ),
