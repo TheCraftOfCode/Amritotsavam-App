@@ -39,6 +39,7 @@ dependencies:
   google_nav_bar:
   flutter_svg:
   responsive_sizer:
+  auto_size_text:
 
 
 dev_dependencies:
