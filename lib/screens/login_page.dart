@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                       TextButton(
                           onPressed: () {
-                            Navigator.popAndPushNamed(context, '/signUp');
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpPage()));
                           },
                           child: Text(
                             'Sign up',

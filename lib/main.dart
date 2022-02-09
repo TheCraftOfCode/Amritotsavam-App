@@ -26,11 +26,12 @@ class MyApp extends StatelessWidget {
         theme: darkTheme.DarkTheme,
         home: const WelcomePage(),
         debugShowCheckedModeBanner: false,
-        routes: <String, WidgetBuilder>{
-          '/signUp': (BuildContext context) => const SignUpPage(),
-          '/login': (BuildContext context) => const LoginPage(),
-          '/home': (BuildContext context) => const HomePage(),
-          '/welcome': (BuildContext context) => const WelcomePage(),
-        });
+        // routes: <String, WidgetBuilder>{
+        //   '/signUp': (BuildContext context) => const SignUpPage(),
+        //   '/login': (BuildContext context) => const LoginPage(),
+        //   '/home': (BuildContext context) => const HomePage(),
+        //   '/welcome': (BuildContext context) => const WelcomePage(),
+        // }
+    );
   }
 }
