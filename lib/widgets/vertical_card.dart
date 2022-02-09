@@ -62,7 +62,7 @@ class _VerticalCardState extends State<VerticalCard> {
                             style: GoogleFonts.nunito(
                                 color: Colors.white,
                                 fontSize: widget.fontSize.toDouble(),
-                                fontWeight: FontWeight.w500),
+                                fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
