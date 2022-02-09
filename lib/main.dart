@@ -10,6 +10,7 @@ import 'package:amritotsavam_app/utils/theme.dart';
 //TODO: Add logic to validate JWT and switch between WelcomePage and Home Page
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());
