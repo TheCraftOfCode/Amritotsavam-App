@@ -1,7 +1,6 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:amritotsavam_app/widgets/gradient_button.dart';
-import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Home extends StatefulWidget {
@@ -46,10 +45,10 @@ class _HomeState extends State<Home> {
               _horizontalListView(context, "RSVP'd Events", listRSVP),
               _dropDown(["ALL EVENTS", "STARRED EVENTS", "RSVP'D EVENTS"],
                   chosenOption, (newValue) {
-                    setState(() {
-                      chosenOption = newValue;
-                    });
-                  }),
+                setState(() {
+                  chosenOption = newValue;
+                });
+              }),
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -109,7 +108,7 @@ Widget _horizontalListView(context, title, List list) {
             scrollDirection: Axis.horizontal,
             itemBuilder: (BuildContext context, int index) {
               return _horizontalWidgetCard("Event ${index + 1}",
-                  "January ${index + 20} 2022", () {}, false);
+                  "January ${index + 20} 2022", () {}, true);
               //TODO: Replace with inFocus variable
             },
           ),
@@ -123,44 +122,55 @@ Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus) {
   return Padding(
       padding: const EdgeInsets.only(bottom: 20, left: 15),
       child: Card(
-        color:
-        inFocus == true ? Colors.white : colors.inactiveCardColor,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         semanticContainer: true,
-        child: Stack(
-          children: [
-            InkWell(
-              onTap: onTap,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //TODO: Add icon based on event category
-                  Text(
-                    cardTitle,
-                    style: GoogleFonts.raleway(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Text(cardDate,
-                        style: GoogleFonts.raleway(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500)),
-                  )
-                ],
+        child: Ink(
+          decoration: inFocus == true
+              ? BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                  colors.gradientStartColor,
+                  colors.gradientEndColor
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight))
+              : BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                  colors.inactiveCardColor,
+                  colors.inactiveCardColor
+                ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
+          child: Stack(
+            children: [
+              InkWell(
+                onTap: onTap,
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //TODO: Add icon based on event category
+                    Text(
+                      cardTitle,
+                      style: GoogleFonts.raleway(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(cardDate,
+                          style: GoogleFonts.raleway(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
         elevation: 5,
       ));
@@ -188,94 +198,113 @@ class _MainCardWidgetState extends State<_MainCardWidget> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.23,
-      width: double.infinity,
-      child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            semanticContainer: true,
-            child: Stack(
-              children: [
-                InkWell(
-                  onTap: widget.onTap,
-                ),
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Container(
-                      width: 30,
-                      height: 30,
-                      decoration: const BoxDecoration(
-                        //TODO: Change Icon Color and Icon?
-                          shape: BoxShape.circle,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Color.fromARGB(173, 255, 199, 252),
-                                blurRadius: 20),
-                          ]),
-                      child: IconButton(
-                        color: isSelected
-                            ? const Color.fromARGB(255, 255, 0, 119)
-                            : Colors.white,
-                        padding: EdgeInsets.zero,
-                        splashRadius: 15,
-                        icon: Icon(
-                          isSelected ? Icons.star : Icons.star_border,
-                          size: 25,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            isSelected = !isSelected;
-                          });
-                          widget.isStarred(isSelected);
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          widget.cardTitle,
-                          style: GoogleFonts.raleway(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w500),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 6.0),
-                          child: Text(
-                            widget.cardDate,
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.nunito(
-                              color: colors.primaryTextColor,
+        height: MediaQuery.of(context).size.height * 0.23,
+        width: double.infinity,
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Card(
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              semanticContainer: true,
+              child: Material(
+                child: Ink(
+                    decoration: BoxDecoration(
+                        gradient: widget.onFocus
+                            ? LinearGradient(
+                                colors: [
+                                    colors.gradientStartColor,
+                                    colors.gradientEndColor
+                                  ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight)
+                            : LinearGradient(
+                                colors: [
+                                    colors.inactiveCardColor,
+                                    colors.inactiveCardColor
+                                  ],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight)),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Stack(
+                        children: [
+                          InkWell(
+                            onTap: widget.onTap,
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Container(
+                                width: 30,
+                                height: 30,
+                                decoration: const BoxDecoration(
+                                    //TODO: Change Icon Color and Icon?
+                                    shape: BoxShape.circle,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color.fromARGB(
+                                              173, 255, 199, 252),
+                                          blurRadius: 20),
+                                    ]),
+                                child: IconButton(
+                                  color: isSelected
+                                      ? const Color.fromARGB(255, 255, 0, 119)
+                                      : Colors.white,
+                                  padding: EdgeInsets.zero,
+                                  splashRadius: 15,
+                                  icon: Icon(
+                                    isSelected ? Icons.star : Icons.star_border,
+                                    size: 25,
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      isSelected = !isSelected;
+                                    });
+                                    widget.isStarred(isSelected);
+                                  },
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-            elevation: 10,
-            color: widget.onFocus
-                ? colors.inactiveCardColor
-                : colors.scaffoldColor,
-          )),
-    );
+                          Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.cardTitle,
+                                    style: GoogleFonts.raleway(
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6.0),
+                                    child: Text(
+                                      widget.cardDate,
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.nunito(
+                                        color: colors.primaryTextColor,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )),
+              ),
+              elevation: 10,
+            )));
   }
 }
 
@@ -366,7 +395,7 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                           top: 4, bottom: 14),
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                           color: colors.gradientStartColor),
                                       height: 4.0,
                                       width: 32.0,
@@ -412,10 +441,10 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                 ),
                 Positioned(
                     child: Image.asset(
-                      'assets/mask.png',
-                      width: horizontalCenteredDisplacement,
-                      fit: BoxFit.fill,
-                    ))
+                  'assets/mask.png',
+                  width: horizontalCenteredDisplacement,
+                  fit: BoxFit.fill,
+                ))
               ],
             );
           },

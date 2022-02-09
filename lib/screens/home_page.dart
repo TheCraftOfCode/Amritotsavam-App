@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
@@ -82,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   VerticalCard(
                       route: MaterialPageRoute(
-                          builder: (context) => const SignUpPage()),
+                          builder: (context) => const Home()),
                       title: 'Events',
                       fontSize: 30,
                       svgLocation: 'svgLocation',

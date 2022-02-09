@@ -69,7 +69,7 @@ class _VerticalCardState extends State<VerticalCard> {
                     ),
                     InkWell(
                       onTap: () {
-                        //Navigator.of(context).push(widget.route);
+                        Navigator.of(context).push(widget.route);
                       },
                     ),
                   ],
