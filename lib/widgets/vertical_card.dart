@@ -5,21 +5,21 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 class VerticalCard extends StatefulWidget {
   const VerticalCard(
       {Key? key,
-      required this.route,
       required this.title,
       required this.svgLocation,
       required this.gradientStartingColor,
       required this.textAlign,
       required this.fontSize,
+      required this.route,
       required this.gradientEndingColor})
       : super(key: key);
 
-  final MaterialPageRoute route;
   final String title;
   final String svgLocation;
   final Color gradientStartingColor;
   final Color gradientEndingColor;
   final TextAlign textAlign;
+  final Widget route;
   final fontSize;
 
   @override
@@ -36,18 +36,17 @@ class _VerticalCardState extends State<VerticalCard> {
           clipBehavior: Clip.antiAlias,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
+            side: BorderSide.none
           ),
           semanticContainer: true,
           child: Material(
-            child: Ink(
+            child: Container(
               decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
                 widget.gradientStartingColor,
                 widget.gradientEndingColor
               ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-              child: InkWell(
-                onTap: (){},
-                child: Stack(
+              child: Stack(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(12),
@@ -69,14 +68,14 @@ class _VerticalCardState extends State<VerticalCard> {
                     ),
                     InkWell(
                       onTap: () {
-                        Navigator.of(context).push(widget.route);
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (context) => widget.route));
                       },
                     ),
                   ],
                 ),
               ),
             ),
-          ),
           elevation: 5,
         ));
   }
