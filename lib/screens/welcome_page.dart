@@ -3,6 +3,8 @@ import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 
+//TODO: Change color to a darker background
+///Logo blends in with current color
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
@@ -24,7 +26,11 @@ class WelcomePage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Center(child: const Text("REPLACE LOGO")),
+              const Center(
+                  child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      child: Image(
+                          image: AssetImage('assets/amritotsavam_logo.png')))),
               const Center(child: const Text("REPLACE CAPTION")),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
