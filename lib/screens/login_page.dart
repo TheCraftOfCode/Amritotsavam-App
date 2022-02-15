@@ -1,7 +1,14 @@
+import 'dart:convert';
+
 import 'package:amritotsavam_app/screens/signup_page.dart';
+import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
+import 'package:amritotsavam_app/widgets/error_box.dart';
+import 'package:amritotsavam_app/widgets/password_widget.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/screens/home_page.dart';
@@ -14,8 +21,16 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _emailKey = GlobalKey<FormFieldState>();
+  final _passwordKey = GlobalKey<FormFieldState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   MaterialPageRoute signUpRoute =
-      MaterialPageRoute(builder: (context) => SignUpPage());
+      MaterialPageRoute(builder: (context) => const SignUpPage());
+
+  String error = "";
+  bool showProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,29 +69,87 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     children: [
                       TextFormField(
+                        key: _emailKey,
+                        controller: _emailController,
                         textAlign: TextAlign.start,
                         style:
                             GoogleFonts.nunito(color: colors.primaryTextColor),
+                        validator: (value) {
+                          if (value == "" || value == null) {
+                            return "Please enter User-ID / E-Mail";
+                          } else if (!EmailValidator.validate(value)) {
+                            return "Invalid Email";
+                          } else {
+                            return null;
+                          }
+                        },
                         decoration: const InputDecoration(
-                            label: Text("Username / E-Mail"),
+                            label: Text("User-ID / E-Mail"),
                             hintText: "Enter your username / e-mail here"),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20, bottom: 30),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              label: Text("Password"),
-                              hintText: "Enter your password"),
+                        padding: const EdgeInsets.only(top: 20),
+                        child: PasswordFormFieldWidget(
+                          passwordKey: _passwordKey,
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value == "" || value == null) {
+                              return "Please enter password";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: GoogleFonts.nunito(
+                              color: colors.primaryTextColor),
+                          label: "Password",
+                          hintText: "Enter your password",
                         ),
                       ),
-                      RoundedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => HomePage()));
-                          },
-                          title: 'LOGIN'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, bottom: 30),
+                        child: ErrorBox(error),
+                      ),
+                      showProgress
+                          ? const CircularProgressIndicator()
+                          : RoundedButton(
+                              onPressed: () async {
+                                setState(() {
+                                  error = "";
+                                });
+                                bool emailBool =
+                                    _emailKey.currentState!.validate();
+                                bool passwordBool =
+                                    _passwordKey.currentState!.validate();
+                                if (emailBool && passwordBool) {
+                                  setState(() {
+                                    showProgress = true;
+                                  });
+                                  var res = await makePostRequest(
+                                      json.encode({
+                                        "email": _emailController.text,
+                                        "password": _passwordController.text
+                                      }),
+                                      "/login",
+                                      null,
+                                      false);
+                                  setState(() {
+                                    showProgress = false;
+                                  });
+                                  if (res.statusCode == 200) {
+                                    jwtTokenSet = res.body;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const HomePage()));
+                                  } else {
+                                    setState(() {
+                                      error = res.body;
+                                    });
+                                  }
+                                }
+                              },
+                              title: 'LOGIN'),
                     ],
                   ),
                 ),
@@ -91,10 +164,10 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUpPage()));
+                                    builder: (context) => const SignUpPage()));
                           },
                           child: Text(
                             'Sign up',

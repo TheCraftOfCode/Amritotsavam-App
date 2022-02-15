@@ -4,6 +4,7 @@ import 'package:amritotsavam_app/screens/login_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
+import 'package:amritotsavam_app/widgets/password_widget.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +16,7 @@ class SignUpPage extends StatefulWidget {
   _SignUpPageState createState() => _SignUpPageState();
 }
 
+//TODO: Complete Auth and replace TextFormField with Password widget
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
@@ -70,28 +72,24 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              label: Text("Password"),
-                              hintText: "Enter your password"),
+                        child: PasswordFormFieldWidget(
+                          label: "password",
+                          hintText: "Enter your password",
+                          style: GoogleFonts.nunito(
+                              color: colors.primaryTextColor),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 20, bottom: 30),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              label: Text("Password"),
-                              hintText: "Enter your password again"),
+                        child: PasswordFormFieldWidget(
+                          label: "password",
+                          hintText: "Enter your password again",
+                          style: GoogleFonts.nunito(
+                              color: colors.primaryTextColor),
                         ),
                       ),
                       RoundedButton(
                           onPressed: () async {
-                            // var res = await makePostRequest(
-                            //     json.encode(
-                            //         {"email": "soorya.s27@gmail.coms", "password": "Password123!"}),
-                            //     "/login",
-                            //     null,
-                            //     false);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -113,10 +111,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => const LoginPage()));
                           },
                           child: Text(
                             'Login',
