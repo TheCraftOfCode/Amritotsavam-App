@@ -1,4 +1,5 @@
 import 'package:amritotsavam_app/screens/signup_page.dart';
+import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:flutter/material.dart';
@@ -33,10 +34,8 @@ class _LoginPageState extends State<LoginPage> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+            child: CustomSliverView(
+              columnList: [
                 const Expanded(
                     flex: 6,
                     child: Center(child: Text("REPLACE ILLUSTRATION"))),
@@ -92,7 +91,10 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> SignUpPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpPage()));
                           },
                           child: Text(
                             'Sign up',

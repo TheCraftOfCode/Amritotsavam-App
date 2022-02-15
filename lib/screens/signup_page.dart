@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:amritotsavam_app/screens/login_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/rounded_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -29,10 +33,8 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+            child: CustomSliverView(
+              columnList: [
                 const Expanded(
                     flex: 6,
                     child: Center(child: Text("REPLACE ILLUSTRATION"))),
@@ -55,19 +57,41 @@ class _SignUpPageState extends State<SignUpPage> {
                         style:
                             GoogleFonts.nunito(color: colors.primaryTextColor),
                         decoration: const InputDecoration(
-                            label: Text("Username / E-Mail"),
+                            label: Text("User-ID / E-Mail"),
                             hintText: "Enter your username / e-mail here"),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20, bottom: 30),
+                        padding: const EdgeInsets.only(top: 20),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              label: Text("User Name"),
+                              hintText: "Enter your Display name"),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
                         child: TextFormField(
                           decoration: const InputDecoration(
                               label: Text("Password"),
                               hintText: "Enter your password"),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, bottom: 30),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              label: Text("Password"),
+                              hintText: "Enter your password again"),
+                        ),
+                      ),
                       RoundedButton(
-                          onPressed: () {
+                          onPressed: () async {
+                            // var res = await makePostRequest(
+                            //     json.encode(
+                            //         {"email": "soorya.s27@gmail.coms", "password": "Password123!"}),
+                            //     "/login",
+                            //     null,
+                            //     false);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -89,7 +113,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                       TextButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
                           },
                           child: Text(
                             'Login',
