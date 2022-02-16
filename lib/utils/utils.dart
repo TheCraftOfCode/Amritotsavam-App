@@ -6,7 +6,6 @@ const storage = FlutterSecureStorage();
 
 Future<String> get jwtTokenGet async {
   var jwt = await storage.read(key: storageJWTKey);
-  print(jwt);
   if (jwt == null) return "";
   return jwt;
 }
