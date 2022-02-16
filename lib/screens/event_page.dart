@@ -13,10 +13,14 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
-  final _url = "https://forms.office.com/Pages/ResponsePage.aspx?id=o835AF4H5USqC6ujrdZTn0SCTfFMedVCpsWxs5LS-T9UMEFFUVkyMlM5OEVTODFJN0dTU1ExSlJTRi4u";
+  final _url =
+      "https://forms.office.com/Pages/ResponsePage.aspx?id=o835AF4H5USqC6ujrdZTn0SCTfFMedVCpsWxs5LS-T9UMEFFUVkyMlM5OEVTODFJN0dTU1ExSlJTRi4u";
+
   void _launchURL() async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
+
+  bool _expanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,16 +77,6 @@ class _EventsPageState extends State<EventsPage> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 30, horizontal: 20),
-                      child: Text("VOC Park Grounds",
-                          style: GoogleFonts.nunito(
-                            color: Colors.white70,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 20,
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
                           vertical: 20, horizontal: 20),
                       child: Text(
                         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
@@ -95,12 +89,80 @@ class _EventsPageState extends State<EventsPage> {
                     ),
                   ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: ExpansionPanelList(
+                    animationDuration: const Duration(milliseconds: 500),
+                    children: [
+                      ExpansionPanel(
+                        backgroundColor: Colors.blue,
+                        headerBuilder: (context, isExpanded) {
+                          return const ListTile(
+                            title: Text(
+                              'Rules',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          );
+                        },
+                        body: const ListTile(
+                          title: Text('Description text',
+                              style: TextStyle(color: Colors.black)),
+                        ),
+                        isExpanded: _expanded,
+                        canTapOnHeader: true,
+                      ),
+                    ],
+                    dividerColor: Colors.grey,
+                    expansionCallback: (panelIndex, isExpanded) {
+                      _expanded = !_expanded;
+                      setState(() {});
+                    },
+                  ),
+                ),
+                //TODO: Style ExpansionPanelList
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: ExpansionPanelList(
+                    animationDuration: const Duration(milliseconds: 500),
+                    children: [
+                      ExpansionPanel(
+                        backgroundColor: Colors.blue,
+                        headerBuilder: (context, isExpanded) {
+                          return const ListTile(
+                            title: Text(
+                              'Judgement Criteria',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          );
+                        },
+                        body: const ListTile(
+                          title: Text('Description text',
+                              style: TextStyle(color: Colors.black)),
+                        ),
+                        isExpanded: _expanded,
+                        canTapOnHeader: true,
+                      ),
+                    ],
+                    dividerColor: Colors.grey,
+                    expansionCallback: (panelIndex, isExpanded) {
+                      _expanded = !_expanded;
+                      setState(() {});
+                    },
+                  ),
+                ),
                 //TODO: Add submission button
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 40),
                   child: GradientButton(
                     onPressed: _launchURL,
-
                     title: 'REGISTER',
                     startingColor: colors.gradientStartColor,
                     endingColor: colors.gradientEndColor,
