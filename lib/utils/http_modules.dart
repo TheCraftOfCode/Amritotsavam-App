@@ -33,6 +33,7 @@ Future<http.Response> makePostRequest(
 
     if (res.statusCode == 412) {
       if (context != null) {
+        jwtTokenSet = "";
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(builder: (context) => const WelcomePage()),
             (Route<dynamic> route) => false);
