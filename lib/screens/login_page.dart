@@ -116,6 +116,12 @@ class _LoginPageState extends State<LoginPage> {
                                 setState(() {
                                   error = "";
                                 });
+                                //TODO: Delete after debugging
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                        const HomePage()));
                                 bool emailBool =
                                     _emailKey.currentState!.validate();
                                 bool passwordBool =
