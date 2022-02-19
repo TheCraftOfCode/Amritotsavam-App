@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -104,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -112,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 20,
                       textAlign: TextAlign.start,
                       svgLocation: 'svgLocation',
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                 ],
               ),
@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                       textAlign: TextAlign.start,
                       svgLocation: 'svgLocation',
                       fontSize: 17,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                       svgLocation: 'svgLocation',
                       fontSize: 17,
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                       svgLocation: 'svgLocation',
                       fontSize: 17,
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -155,7 +155,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 17,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                       fontSize: 17,
                       svgLocation: 'svgLocation',
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                   VerticalCard(
                       route: SignUpPage(),
@@ -171,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                       svgLocation: 'svgLocation',
                       fontSize: 17,
                       textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientStartColor,
+                      gradientStartingColor: colors.gradientBeginColor,
                       gradientEndingColor: colors.gradientEndColor),
                 ],
               ),

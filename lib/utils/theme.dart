@@ -31,9 +31,9 @@ class darkTheme {
           buttonColor: colors.primaryTextColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(colors.primaryTextColor),
+            backgroundColor: MaterialStateProperty.all(colors.buttonColor),
             shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
             ),
             textStyle: MaterialStateProperty.all(GoogleFonts.nunito(color: colors.accentColor)),
           )),

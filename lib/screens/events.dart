@@ -134,8 +134,7 @@ Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus) {
           decoration: inFocus == true
               ? BoxDecoration(
                   gradient: LinearGradient(colors: [
-                  colors.gradientStartColor,
-                  colors.gradientEndColor
+                  colors.activeCardColor, colors.activeCardColor
                 ], begin: Alignment.topLeft, end: Alignment.bottomRight))
               : BoxDecoration(
                   gradient: LinearGradient(colors: [
@@ -217,8 +216,8 @@ class _MainCardWidgetState extends State<_MainCardWidget> {
                         gradient: widget.onFocus
                             ? LinearGradient(
                                 colors: [
-                                    colors.gradientStartColor,
-                                    colors.gradientEndColor
+                                    colors.activeCardColor,
+                                  colors.activeCardColor
                                   ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight)
@@ -399,7 +398,7 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: colors.gradientStartColor),
+                                          color: colors.gradientBeginColor),
                                       height: 4.0,
                                       width: 32.0,
                                     ),
@@ -422,7 +421,7 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                     ? colors.accentColor
                                     : Colors.white,
                                 padding: EdgeInsets.zero,
-                                constraints: BoxConstraints(),
+                                constraints: const BoxConstraints(),
                                 splashRadius: 15,
                                 icon: Icon(
                                   isSelected ? Icons.star : Icons.star_border,

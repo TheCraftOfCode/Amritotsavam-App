@@ -35,3 +35,13 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+//TODO: Add forgot password
+//TODO: Re-enable verification
+//TODO: Redesign login, sign up
+//TODO: Change color scheme
+//TODO: ExpansionPanel add
+//TODO: Change home page nav bar
+//TODO: Add admin console
+//TODO:

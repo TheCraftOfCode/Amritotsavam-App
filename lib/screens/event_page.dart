@@ -161,11 +161,9 @@ class _EventsPageState extends State<EventsPage> {
                 //TODO: Add submission button
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 40),
-                  child: GradientButton(
+                  child: ElevatedButton(
                     onPressed: _launchURL,
-                    title: 'REGISTER',
-                    startingColor: colors.gradientStartColor,
-                    endingColor: colors.gradientEndColor,
+                    child: Text('REGISTER'),
                   ),
                 ),
               ],

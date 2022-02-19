@@ -12,7 +12,7 @@ class _ScheduleState extends State<Schedule> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarBackButton('Schedule'),
+      appBar: const AppBarBackButton('Schedule'),
       body: Container(),
     );
   }

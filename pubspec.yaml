@@ -43,6 +43,7 @@ dependencies:
   url_launcher: ^6.0.20
   flutter_secure_storage: ^5.0.2
   email_validator: ^2.0.1
+  smooth_page_indicator: ^1.0.0+2
   oktoast: ^3.1.5
 
 
