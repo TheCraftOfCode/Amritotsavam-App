@@ -6,6 +6,8 @@ import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:amritotsavam_app/widgets/vertical_card.dart';
 import 'package:flutter/material.dart';
+import 'package:amritotsavam_app/utils/constants.dart' as constants;
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -53,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               curve: Curves.easeIn,
             );
           },
-          backgroundColor: Colors.transparent,
+          backgroundColor: const Color(0xff302B62),
           unselectedItemColor: Colors.white,
           items: const [
             BottomNavigationBarItem(
@@ -66,7 +68,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        appBar: AppBarBackButton(appBarTitle),
         body: PageView(
           controller: pageController,
           onPageChanged: (index) {
@@ -75,76 +76,47 @@ class _HomePageState extends State<HomePage> {
             });
           },
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  DataCard(
-                    'Events',
-                    'assets/amritotsavam_logo.png',
-                    EventsPage()
-                  ),
-                  DataCard('Results', 'imageUrl', SignUpPage())
-                ],
+            Container(
+              decoration: constants.gradientDecoration,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    //TODO: Add appbar with navigation drawer, notifications icon
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20, left: 10),
+                      child: Align(alignment: Alignment.topLeft,child: Text('Home',style: GoogleFonts.nunito(fontSize: 30, color: colors.primaryTextColor, fontWeight: FontWeight.bold),)),
+                    ),
+                    DataCard(
+                      'Events',
+                      'assets/svg/events.svg',
+                      EventsPage()
+                    ),
+                    DataCard('Results', 'assets/svg/results.svg', SignUpPage())
+                  ],
+                ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: aspectRatioTwo,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                children: [
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'About Amritotsovam',
-                      textAlign: TextAlign.start,
-                      svgLocation: 'svgLocation',
-                      fontSize: 17,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Central Coordinators',
-                      svgLocation: 'svgLocation',
-                      fontSize: 17,
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Event Managers',
-                      svgLocation: 'svgLocation',
-                      fontSize: 17,
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'House Captains',
-                      fontSize: 17,
-                      svgLocation: 'svgLocation',
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Team Members',
-                      fontSize: 17,
-                      svgLocation: 'svgLocation',
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Contact Us',
-                      svgLocation: 'svgLocation',
-                      fontSize: 17,
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                ],
+            Container(
+              decoration: constants.gradientDecoration,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    //TODO: Add appbar with navigation drawer, notifications icon
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 20, left: 10),
+                      child: Align(alignment: Alignment.topLeft,child: Text('About',style: GoogleFonts.nunito(fontSize: 30, color: colors.primaryTextColor, fontWeight: FontWeight.bold),)),
+                    ),
+                    DataCard(
+                        'About Amritotsavam',
+                        'assets/svg/events.svg',
+                        EventsPage()
+                    ),
+                    DataCard('Event Managers', 'assets/svg/results.svg', SignUpPage()),
+                    DataCard('Team Members', 'assets/svg/results.svg', SignUpPage())
+                  ],
+                ),
               ),
             ),
           ],

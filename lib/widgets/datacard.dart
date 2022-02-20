@@ -44,35 +44,28 @@ class DataCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            AutoSizeText(heading,
+                                maxLines: 3,
+                                style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold,
+                                    fontSize: (heading.length>1) ? 20 : 25,
+                                    color: colors.primaryTextColor)),
+                          ],
+                        ),
+                    ),
+                    flex: (heading.length>1) ? 3: 2,
+                  ),
+                  Expanded(
+                    child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: SvgPicture.asset(imageUrl),
                     ),
-                    flex: 2,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 10, right: 10),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          AutoSizeText(heading,
-                              maxLines: 3,
-                              style: GoogleFonts.nunito(
-                                fontWeight: FontWeight.bold,
-                                  fontSize: 25, color: colors.primaryTextColor)),
-                        ],
-                      ),
-                    ),
-                    flex: 6,
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 8.0),
-                      child: SvgPicture.asset('assets/svg/right-icon-arrow.svg',
-                          color: colors.primaryTextColor),
-                    ),
-                    flex: 1,
+                    flex: 3,
                   ),
                 ],
               ),
