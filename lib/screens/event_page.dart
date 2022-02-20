@@ -14,7 +14,7 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> {
   final _url =
       "https://forms.office.com/Pages/ResponsePage.aspx?id=o835AF4H5USqC6ujrdZTn0SCTfFMedVCpsWxs5LS-T9UMEFFUVkyMlM5OEVTODFJN0dTU1ExSlJTRi4u";
-
+  final testText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
   void _launchURL() async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
@@ -108,7 +108,7 @@ class _EventsPageState extends State<EventsPage> {
                           padding: const EdgeInsets.symmetric(
                               vertical: 20),
                           child: Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                            testText,
                             textAlign: TextAlign.justify,
                             style: GoogleFonts.nunito(
                               color: Colors.white,
@@ -129,18 +129,24 @@ class _EventsPageState extends State<EventsPage> {
                       animationDuration: const Duration(milliseconds: 500),
                       children: [
                         ExpansionPanel(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: colors.buttonColor,
                           headerBuilder: (context, isExpanded) {
-                            return const ListTile(
+                            return ListTile(
+                              style: ListTileStyle.drawer,
+                              iconColor: colors.primaryTextColor,
                               title: Text(
                                 'Rules',
-                                style: TextStyle(color: Colors.black),
+                                style: GoogleFonts.nunito(color: colors.primaryTextColor,fontSize: 17),
                               ),
                             );
                           },
-                          body: const ListTile(
-                            title: Text('Description text',
-                                style: TextStyle(color: Colors.black)),
+                          body: ListTile(
+                            tileColor: colors.dateCardColor,
+                            title: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(testText,
+                                  style: GoogleFonts.nunito(color: colors.primaryTextColor)),
+                            ),
                           ),
                           isExpanded: _rulesExpanded,
                           canTapOnHeader: true,
@@ -164,18 +170,24 @@ class _EventsPageState extends State<EventsPage> {
                       animationDuration: const Duration(milliseconds: 500),
                       children: [
                         ExpansionPanel(
-                          backgroundColor: Colors.blue,
+                          backgroundColor: colors.buttonColor,
                           headerBuilder: (context, isExpanded) {
-                            return const ListTile(
+                            return ListTile(
+                              style: ListTileStyle.drawer,
+                              iconColor: colors.primaryTextColor,
                               title: Text(
                                 'Judgement Criteria',
-                                style: TextStyle(color: Colors.black),
+                                style: GoogleFonts.nunito(color: colors.primaryTextColor, fontSize: 17),
                               ),
                             );
                           },
-                          body: const ListTile(
-                            title: Text('Description text',
-                                style: TextStyle(color: Colors.black)),
+                          body: ListTile(
+                            tileColor: colors.dateCardColor,
+                            title: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(testText,
+                                  style: GoogleFonts.nunito(color: colors.primaryTextColor)),
+                            ),
                           ),
                           isExpanded: _judgementExpanded,
                           canTapOnHeader: true,
