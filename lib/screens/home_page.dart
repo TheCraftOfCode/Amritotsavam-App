@@ -4,9 +4,11 @@ import 'package:amritotsavam_app/screens/results.dart';
 import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
+import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -67,72 +69,86 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: PageView(
-          controller: pageController,
-          onPageChanged: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
-          children: [
-            Container(
-              decoration: constants.gradientDecoration,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    //TODO: Add appbar with navigation drawer, notifications icon
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 20.0, bottom: 20, left: 10),
-                      child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'Home',
-                            style: GoogleFonts.nunito(
-                                fontSize: 30,
-                                color: colors.primaryTextColor,
-                                fontWeight: FontWeight.bold),
-                          )),
-                    ),
-                    DataCard('Events', 'assets/svg/events.svg', Events()),
-                    DataCard('Results', 'assets/svg/results.svg', ResultsHomePage())
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              decoration: constants.gradientDecoration,
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Column(
-                  children: [
-                    //TODO: Add appbar with navigation drawer, notifications icon
-                    Padding(
-                      padding: const EdgeInsets.only(
-                          top: 20.0, bottom: 20, left: 10),
-                      child: Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            'About',
-                            style: GoogleFonts.nunito(
-                                fontSize: 30,
-                                color: colors.primaryTextColor,
-                                fontWeight: FontWeight.bold),
-                          )),
-                    ),
-                    DataCard('About Amritotsavam', 'assets/svg/events.svg',
-                        Events()),
-                    DataCard('Event Managers', 'assets/svg/results.svg',
-                        SignUpPage()),
-                    DataCard(
-                        'Team Members', 'assets/svg/results.svg', SignUpPage())
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+        body: FutureBuilder(
+            future: makePostRequest(null, "/getEvents", null, true,
+                context: context),
+            builder: (BuildContext context, AsyncSnapshot<http.Response> request) {
+              if(request.hasData){
+                print(request.data!.body);
+              }
+              return request.hasData
+                  ? PageView(
+                      controller: pageController,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                      },
+                      children: [
+                        Container(
+                          decoration: constants.gradientDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Column(
+                              children: [
+                                //TODO: Add appbar with navigation drawer, notifications icon
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 20.0, bottom: 20, left: 10),
+                                  child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'Home',
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 30,
+                                            color: colors.primaryTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ),
+                                DataCard('Events', 'assets/svg/events.svg',
+                                    Events()),
+                                DataCard('Results', 'assets/svg/results.svg',
+                                    ResultsHomePage())
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          decoration: constants.gradientDecoration,
+                          child: Padding(
+                            padding: const EdgeInsets.all(15),
+                            child: Column(
+                              children: [
+                                //TODO: Add appbar with navigation drawer, notifications icon
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 20.0, bottom: 20, left: 10),
+                                  child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        'About',
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 30,
+                                            color: colors.primaryTextColor,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ),
+                                DataCard('About Amritotsavam',
+                                    'assets/svg/events.svg', Events()),
+                                DataCard('Event Managers',
+                                    'assets/svg/results.svg', SignUpPage()),
+                                DataCard('Team Members',
+                                    'assets/svg/results.svg', SignUpPage())
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    );
+            }),
       ),
     );
   }

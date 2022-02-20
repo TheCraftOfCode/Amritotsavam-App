@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: darkTheme.DarkTheme,
-      //home: const LoadValidPageWidget(WelcomePage(), HomePage()),
-      home: WelcomePage(),
+      home: const LoadValidPageWidget(WelcomePage(), HomePage()),
+      //home: WelcomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -18,7 +18,7 @@ Widget ErrorBox(errorMessage) {
             color: const Color.fromARGB(255, 255, 172, 172),
             borderRadius: BorderRadius.circular(5.0),
           ),
-          height: 50,
+          height: 45,
           width: double.infinity,
         )
       : Container();
