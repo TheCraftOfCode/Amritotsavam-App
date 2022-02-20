@@ -19,7 +19,8 @@ class _EventsPageState extends State<EventsPage> {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
-  bool _expanded = false;
+  bool _rulesExpanded = false;
+  bool _judgementExpanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,10 +72,10 @@ class _EventsPageState extends State<EventsPage> {
                         ),
 
                         Padding(
-                          padding: EdgeInsets.only(top: 40.0),
+                          padding: const EdgeInsets.only(top: 40.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(19),
-                            child: Image(
+                            child: const Image(
                                 image: AssetImage('assets/background_image.png'),
                                 width: double.infinity,
                                 fit: BoxFit.fill),
@@ -141,13 +142,13 @@ class _EventsPageState extends State<EventsPage> {
                             title: Text('Description text',
                                 style: TextStyle(color: Colors.black)),
                           ),
-                          isExpanded: _expanded,
+                          isExpanded: _rulesExpanded,
                           canTapOnHeader: true,
                         ),
                       ],
                       dividerColor: Colors.grey,
                       expansionCallback: (panelIndex, isExpanded) {
-                        _expanded = !_expanded;
+                        _rulesExpanded = !_rulesExpanded;
                         setState(() {});
                       },
                     ),
@@ -176,13 +177,13 @@ class _EventsPageState extends State<EventsPage> {
                             title: Text('Description text',
                                 style: TextStyle(color: Colors.black)),
                           ),
-                          isExpanded: _expanded,
+                          isExpanded: _judgementExpanded,
                           canTapOnHeader: true,
                         ),
                       ],
                       dividerColor: Colors.grey,
                       expansionCallback: (panelIndex, isExpanded) {
-                        _expanded = !_expanded;
+                        _judgementExpanded = !_judgementExpanded;
                         setState(() {});
                       },
                     ),
@@ -193,7 +194,7 @@ class _EventsPageState extends State<EventsPage> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(onPressed: _launchURL, child: Text('Submit', style: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 17),)),
-                        SizedBox(width: 20,),
+                        const SizedBox(width: 20,),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: colors.primaryTextColor
