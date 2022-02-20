@@ -1,15 +1,11 @@
-import 'dart:convert';
-
-import 'package:amritotsavam_app/utils/http_modules.dart';
-import 'package:amritotsavam_app/utils/utils.dart';
+import 'package:amritotsavam_app/screens/home_page.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:amritotsavam_app/utils/colors.dart' as colors;
-import 'package:amritotsavam_app/utils/constants.dart' as constants;
-import 'package:amritotsavam_app/screens/home_page.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
@@ -151,33 +147,40 @@ class _SignInPageState extends State<SignInPage> {
                         child: Align(
                           alignment: Alignment.bottomLeft,
                           child: ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                var res = await makePostRequest(
-                                    json.encode({
-                                      "email": _emailController.text,
-                                      "password": _passwordController.text
-                                    }),
-                                    "/login",
-                                    null,
-                                    false);
-                                setState(() {
-                                  showProgress = false;
-                                });
-                                if (res.statusCode == 200) {
-                                  jwtTokenSet = res.body;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePage()));
-                                } else {
-                                  setState(() {
-                                    error = res.body;
-                                  });
-                                }
-                              }
-                            },
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const HomePage()));
+                            }
+                            // onPressed: () async {
+                            //   if (_formKey.currentState!.validate()) {
+                            //     var res = await makePostRequest(
+                            //         json.encode({
+                            //           "email": _emailController.text,
+                            //           "password": _passwordController.text
+                            //         }),
+                            //         "/login",
+                            //         null,
+                            //         false);
+                            //     setState(() {
+                            //       showProgress = false;
+                            //     });
+                            //     if (res.statusCode == 200) {
+                            //       jwtTokenSet = res.body;
+                            //       Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //               builder: (context) =>
+                            //                   const HomePage()));
+                            //     } else {
+                            //       setState(() {
+                            //         error = res.body;
+                            //       });
+                            //     }
+                            //   }
+                            // },
+                            ,
                             child: Text(
                               'SIGN IN',
                               style: GoogleFonts.nunito(
