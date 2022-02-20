@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/screens/admin/events_page.dart';
 import 'package:amritotsavam_app/screens/admin/user_management.dart';
 import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/widgets/admin_user_list.dart';
@@ -39,7 +40,7 @@ class _AdminPageState extends State<AdminPage> {
             DataCard('Manage Accounts',
                 'assets/svg/events.svg', UserManagement()),
             DataCard('Manage Events',
-                'assets/svg/events.svg', const Events()),
+                'assets/svg/events.svg', EventsList()),
             DataCard('Publish Results',
                 'assets/svg/events.svg', const Events()),
           ],
