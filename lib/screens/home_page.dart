@@ -1,4 +1,4 @@
-import 'package:amritotsavam_app/screens/admin_page.dart';
+import 'package:amritotsavam_app/screens/admin/admin_page.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/results.dart';
@@ -67,6 +67,10 @@ class _HomePageState extends State<HomePage> {
             BottomNavigationBarItem(
               icon: Icon(Icons.info_outline),
               label: 'About',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.admin_panel_settings_outlined),
+              label: 'Admin',
             ),
           ],
         ),
