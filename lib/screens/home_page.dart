@@ -2,11 +2,9 @@ import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
-import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
-import 'package:amritotsavam_app/widgets/datacard.dart';
-import 'package:amritotsavam_app/widgets/vertical_card.dart';
-import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
+import 'package:amritotsavam_app/widgets/datacard.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,14 +82,19 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     //TODO: Add appbar with navigation drawer, notifications icon
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0, bottom: 20, left: 10),
-                      child: Align(alignment: Alignment.topLeft,child: Text('Home',style: GoogleFonts.nunito(fontSize: 30, color: colors.primaryTextColor, fontWeight: FontWeight.bold),)),
+                      padding: const EdgeInsets.only(
+                          top: 20.0, bottom: 20, left: 10),
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'Home',
+                            style: GoogleFonts.nunito(
+                                fontSize: 30,
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
-                    DataCard(
-                      'Events',
-                      'assets/svg/events.svg',
-                      EventsPage()
-                    ),
+                    DataCard('Events', 'assets/svg/events.svg', Events()),
                     DataCard('Results', 'assets/svg/results.svg', SignUpPage())
                   ],
                 ),
@@ -100,21 +103,29 @@ class _HomePageState extends State<HomePage> {
             Container(
               decoration: constants.gradientDecoration,
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 child: Column(
                   children: [
                     //TODO: Add appbar with navigation drawer, notifications icon
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0, bottom: 20, left: 10),
-                      child: Align(alignment: Alignment.topLeft,child: Text('About',style: GoogleFonts.nunito(fontSize: 30, color: colors.primaryTextColor, fontWeight: FontWeight.bold),)),
+                      padding: const EdgeInsets.only(
+                          top: 20.0, bottom: 20, left: 10),
+                      child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            'About',
+                            style: GoogleFonts.nunito(
+                                fontSize: 30,
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.bold),
+                          )),
                     ),
+                    DataCard('About Amritotsavam', 'assets/svg/events.svg',
+                        Events()),
+                    DataCard('Event Managers', 'assets/svg/results.svg',
+                        SignUpPage()),
                     DataCard(
-                        'About Amritotsavam',
-                        'assets/svg/events.svg',
-                        EventsPage()
-                    ),
-                    DataCard('Event Managers', 'assets/svg/results.svg', SignUpPage()),
-                    DataCard('Team Members', 'assets/svg/results.svg', SignUpPage())
+                        'Team Members', 'assets/svg/results.svg', SignUpPage())
                   ],
                 ),
               ),

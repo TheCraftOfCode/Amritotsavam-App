@@ -1,23 +1,29 @@
 import 'package:amritotsavam_app/screens/event_page.dart';
-import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:amritotsavam_app/utils/constants.dart' as constants;
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class Events extends StatefulWidget {
+  const Events({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _EventsState createState() => _EventsState();
 }
 
-class _HomeState extends State<Home> {
+///Apparently using static values in SizedBoxes and ConstrainedBoxes are
+///more responsive than using mediaQueries, the value is relative just like dp
+/// in android
+
+class _EventsState extends State<Events> {
   //TODO: Update lists with model
   final listUpcoming = ["EVENT", "EVENT", "EVENT", "EVENT", "EVENT", "EVENT"];
   final listRSVP = ["EVENT", "EVENT", "EVENT", "EVENT", "EVENT", "EVENT"];
   final allEventsList = ["Event", "Event", "Event", "Event", "Event", "Event"];
 
   String chosenOption = "ALL EVENTS";
+  int focusedPage = 0;
 
   @override
   void initState() {
@@ -36,278 +42,180 @@ class _HomeState extends State<Home> {
           //TODO: Refresh page on pull
           return _refreshRandomNumbers();
         },
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _horizontalListView(context, "Upcoming Events", listUpcoming),
-              _horizontalListView(context, "RSVP'd Events", listRSVP),
-              _dropDown(["ALL EVENTS", "STARRED EVENTS", "RSVP'D EVENTS"],
-                  chosenOption, (newValue) {
-                setState(() {
-                  chosenOption = newValue;
-                });
-              }),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: allEventsList.length,
-                itemBuilder: (_, i) {
-                  return _MainContentCardWidget(
-                    cardTitle: 'Some Festival Name Here',
-                    cardSubTitle: 'This is some festival on some date',
-                    onTap: () {},
-                    isStarred: (bool) {},
-                    cardDate: 'Feb 2 2022',
-                  );
-                  //     "${allEventsList[i]} ${i + 1}", () {}, context, (bool) {
-                  //   print(bool);
-                  // }, "January ${20+i} 2022",true);
-                },
-              )
-            ],
+        child: Container(
+          decoration: constants.gradientDecoration,
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                //TODO: Add appbar with search and notifications
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 70.0, bottom: 20, left: 15),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Home',
+                        style: GoogleFonts.nunito(
+                            fontSize: 30,
+                            color: colors.primaryTextColor,
+                            fontWeight: FontWeight.bold),
+                      )),
+                ),
+                _HorizontalListView(
+                    context: context,
+                    list: listUpcoming,
+                    title: "Upcoming Events"),
+                const SizedBox(height: 20,),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                  child: Text('All Events', style: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 20, color: colors.primaryTextColor),),
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: allEventsList.length,
+                  itemBuilder: (_, i) {
+                    return _MainContentCardWidget(
+                      cardTitle: 'Some Festival Name Here',
+                      cardSubTitle: 'This is some festival on some date',
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const EventsPage()));
+                      },
+                      isStarred: (bool) {},
+                      cardDate: 'Feb 2 2022',
+                    );
+                  },
+                )
+              ],
+            ),
           ),
-        ),
-      ),
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: colors.accentColor),
-        centerTitle: true,
-        title: Text(
-          "Home",
-          style: GoogleFonts.montserrat(
-              fontSize: 20, color: colors.primaryTextColor),
         ),
       ),
     );
   }
 }
 
-Widget _horizontalListView(context, title, List list) {
-  return SizedBox(
-    height: MediaQuery.of(context).size.height * 0.235,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
-          child: Text(
-            title,
-            style: GoogleFonts.nunito(
-                color: colors.primaryTextColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w500),
+class _HorizontalListView extends StatefulWidget {
+  final List list;
+  final String title;
+  final BuildContext context;
+
+  const _HorizontalListView(
+      {Key? key,
+        required this.context,
+        required this.title,
+        required this.list})
+      : super(key: key);
+
+  @override
+  _HorizontalListViewState createState() => _HorizontalListViewState();
+}
+
+class _HorizontalListViewState extends State<_HorizontalListView> {
+  int currentPagePosition = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 200,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 15, top: 10, bottom: 10),
+            child: Text(
+              widget.title,
+              style: GoogleFonts.poppins(
+                  color: colors.primaryTextColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500),
+            ),
           ),
-        ),
-        Expanded(
-          child: PageView.builder(
-            itemCount: list.length,
-            padEnds: false,
-            controller: PageController(viewportFraction: 0.68),
-            scrollDirection: Axis.horizontal,
-            itemBuilder: (BuildContext context, int index) {
-              return _horizontalWidgetCard("Event ${index + 1}",
-                  "January ${index + 20} 2022", () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => EventsPage()));
-                  }, true);
-              //TODO: Replace with inFocus variable
-            },
-          ),
-        )
-      ],
-    ),
-  );
+          Expanded(
+            child: PageView.builder(
+              itemCount: widget.list.length,
+              padEnds: false,
+              onPageChanged: (page) {
+                setState(() {
+                  currentPagePosition = page;
+                });
+              },
+              controller: PageController(viewportFraction: 0.7),
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (BuildContext context, int index) {
+                return _horizontalWidgetCard("Event ${index + 1}",
+                    "January ${index + 20} 2022", () {}, currentPagePosition == index);
+              },
+            ),
+          )
+        ],
+      ),
+    );
+  }
 }
 
 Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus) {
   return Padding(
       padding: const EdgeInsets.only(bottom: 20, left: 15),
       child: Card(
+        color:
+        inFocus == true ? colors.activeCardColor : colors.inactiveCardColor,
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
         semanticContainer: true,
-        child: Ink(
-          decoration: inFocus == true
-              ? BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                  colors.activeCardColor, colors.activeCardColor
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight))
-              : BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                  colors.inactiveCardColor,
-                  colors.inactiveCardColor
-                ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-          child: Stack(
-            children: [
-              InkWell(
-                onTap: onTap,
+        child: Stack(
+          children: [
+            InkWell(
+              onTap: onTap,
+            ),
+            Positioned(
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Image.asset(
+                    'assets/mask.png',
+                    fit: BoxFit.fill,
+                    width: 70,
+                  ),
+                )),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  //TODO: Add icon based on event category
+                  Text(
+                    cardTitle,
+                    style: GoogleFonts.raleway(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Text(cardDate,
+                        style: GoogleFonts.raleway(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500)),
+                  )
+                ],
               ),
-              Padding(
-                padding: const EdgeInsets.all(12),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //TODO: Add icon based on event category
-                    Text(
-                      cardTitle,
-                      style: GoogleFonts.raleway(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: Text(cardDate,
-                          style: GoogleFonts.raleway(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500)),
-                    )
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-        elevation: 5,
+        elevation: 10,
       ));
-}
-
-class _MainCardWidget extends StatefulWidget {
-  const _MainCardWidget(this.cardTitle, this.onTap, this.context,
-      this.isStarred, this.cardDate, this.onFocus,
-      {Key? key})
-      : super(key: key);
-  final String cardTitle;
-  final String cardDate;
-  final VoidCallback onTap;
-  final Function(bool) isStarred;
-  final BuildContext context;
-  final bool onFocus;
-
-  @override
-  _MainCardWidgetState createState() => _MainCardWidgetState();
-}
-
-class _MainCardWidgetState extends State<_MainCardWidget> {
-  bool isSelected = false;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        height: MediaQuery.of(context).size.height * 0.23,
-        width: double.infinity,
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Card(
-              clipBehavior: Clip.antiAlias,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              semanticContainer: true,
-              child: Material(
-                child: Ink(
-                    decoration: BoxDecoration(
-                        gradient: widget.onFocus
-                            ? LinearGradient(
-                                colors: [
-                                    colors.activeCardColor,
-                                  colors.activeCardColor
-                                  ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight)
-                            : LinearGradient(
-                                colors: [
-                                    colors.inactiveCardColor,
-                                    colors.inactiveCardColor
-                                  ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight)),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Stack(
-                        children: [
-                          InkWell(
-                            onTap: widget.onTap,
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Container(
-                                width: 30,
-                                height: 30,
-                                decoration: const BoxDecoration(
-                                    //TODO: Change Icon Color and Icon?
-                                    shape: BoxShape.circle,
-                                    boxShadow: [
-                                      BoxShadow(
-                                          color: Color.fromARGB(
-                                              173, 255, 199, 252),
-                                          blurRadius: 20),
-                                    ]),
-                                child: IconButton(
-                                  color: isSelected
-                                      ? const Color.fromARGB(255, 255, 0, 119)
-                                      : Colors.white,
-                                  padding: EdgeInsets.zero,
-                                  splashRadius: 15,
-                                  icon: Icon(
-                                    isSelected ? Icons.star : Icons.star_border,
-                                    size: 25,
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      isSelected = !isSelected;
-                                    });
-                                    widget.isStarred(isSelected);
-                                  },
-                                ),
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    widget.cardTitle,
-                                    style: GoogleFonts.raleway(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 6.0),
-                                    child: Text(
-                                      widget.cardDate,
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.nunito(
-                                        color: colors.primaryTextColor,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )),
-              ),
-              elevation: 10,
-            )));
-  }
 }
 
 class _MainContentCardWidget extends StatefulWidget {
@@ -334,11 +242,8 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: BoxConstraints(
-        minHeight: MediaQuery.of(context).size.height * 0.4,
-      ),
-      // height: MediaQuery.of(context).size.height * 0.23,
+    return SizedBox(
+      height: 200,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: LayoutBuilder(
@@ -350,7 +255,8 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                   left: (horizontalCenteredDisplacement) / 2,
                   child: InkWell(
                     child: Card(
-                      color: colors.scaffoldColor,
+                      elevation: 10,
+                      color: colors.inactiveCardColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -393,26 +299,24 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                       ),
                                     ),
                                     Container(
-                                      margin: const EdgeInsets.only(
-                                          top: 4, bottom: 14),
+                                      margin: const EdgeInsets.only(top: 4),
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: colors.gradientBeginColor),
+                                          BorderRadius.circular(10),
+                                          color: colors.dividerColor),
                                       height: 4.0,
                                       width: 32.0,
                                     ),
-                                    Expanded(
-                                        flex: 1,
-                                        child: AutoSizeText(
-                                          widget.cardDate,
-                                          minFontSize: 15,
-                                          textAlign: TextAlign.center,
-                                          style: GoogleFonts.nunito(
-                                            fontSize: 18,
-                                            color: colors.primaryTextColor,
-                                          ),
-                                        ))
+                                    Expanded(child: Container()),
+                                    AutoSizeText(
+                                      widget.cardDate,
+                                      minFontSize: 15,
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 18,
+                                        color: colors.primaryTextColor,
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
@@ -421,7 +325,6 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                     ? colors.accentColor
                                     : Colors.white,
                                 padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
                                 splashRadius: 15,
                                 icon: Icon(
                                   isSelected ? Icons.star : Icons.star_border,
@@ -443,10 +346,10 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                 ),
                 Positioned(
                     child: Image.asset(
-                  'assets/mask.png',
-                  width: horizontalCenteredDisplacement,
-                  fit: BoxFit.fill,
-                ))
+                      'assets/mask.png',
+                      width: horizontalCenteredDisplacement,
+                      fit: BoxFit.fill,
+                    ))
               ],
             );
           },
@@ -460,20 +363,19 @@ Widget _dropDown(listOfOptions, chosenOption, onChanged) {
   return Padding(
     padding: const EdgeInsets.only(left: 20),
     child: Card(
-      //TODO: Reduce the height of the card
       elevation: 5,
-      color: colors.dropDownCardColor,
+      color: colors.dataCardColor,
       child: DropdownButtonHideUnderline(
         child: ButtonTheme(
           alignedDropdown: true,
           child: DropdownButton<dynamic>(
-            dropdownColor: colors.dropDownCardColor,
-            icon: const Padding(
-              padding: EdgeInsets.only(right: 5),
+            dropdownColor: colors.dataCardColor,
+            icon: Padding(
+              padding: const EdgeInsets.only(right: 5),
               child: Icon(
                 // Add this
                 Icons.keyboard_arrow_down, // Add this
-                color: Colors.red, // Add this
+                color: colors.primaryTextColor, // Add this
               ),
             ),
             value: chosenOption,
@@ -481,17 +383,15 @@ Widget _dropDown(listOfOptions, chosenOption, onChanged) {
             items: listOfOptions.map<DropdownMenuItem>((value) {
               return DropdownMenuItem(
                 value: value,
-                child: Container(
-                  child: Text(
-                    value,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                child: Text(
+                  value,
+                  overflow: TextOverflow.ellipsis,
                 ),
               );
             }).toList(),
             onChanged: onChanged,
-            style: GoogleFonts.nunito(
-                color: Colors.white, decorationColor: Colors.red),
+            style: GoogleFonts.poppins(
+                color: Colors.white, decorationColor: colors.primaryTextColor),
           ),
         ),
       ),
