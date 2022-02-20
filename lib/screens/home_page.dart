@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/screens/admin_page.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/results.dart';
@@ -143,6 +144,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
+                        AdminPage()
                       ],
                     )
                   : const Center(

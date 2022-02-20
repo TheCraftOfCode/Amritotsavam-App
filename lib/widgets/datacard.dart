@@ -53,7 +53,7 @@ class DataCard extends StatelessWidget {
                                 maxLines: 3,
                                 style: GoogleFonts.nunito(
                                   fontWeight: FontWeight.bold,
-                                    fontSize: (heading.length>20) ? 20 : 25,
+                                    fontSize: (heading.length>15) ? 20 : 25,
                                     color: colors.primaryTextColor)),
                           ],
                         ),

@@ -4,12 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ResultCard extends StatefulWidget {
-  const ResultCard(this.position, this.imageUrl, this.rollNo, this.club, this.color, this.textColor, {Key? key}) : super(key: key);
+  const ResultCard(this.position, this.imageUrl, this.rollNo, this.house, this.color, this.textColor, {Key? key}) : super(key: key);
 
   final String position;
   final String imageUrl;
   final String rollNo;
-  final String club;
+  final String house;
   final Color color;
   final Color textColor;
   @override
@@ -53,7 +53,7 @@ class _ResultCardState extends State<ResultCard> {
                         fontSize: 17,
                         color: widget.textColor)),
                 Container(height: 10,),
-                AutoSizeText(widget.club,
+                AutoSizeText(widget.house,
                     maxLines: 3,
                     style: GoogleFonts.nunito(
                         fontWeight: FontWeight.bold,
@@ -62,7 +62,7 @@ class _ResultCardState extends State<ResultCard> {
               ],
             ),
           ),
-          flex: (widget.position.length>25) ? 3: 2,
+          flex: (widget.position.length>15) ? 3: 2,
         ),
         Expanded(
           child: Padding(
