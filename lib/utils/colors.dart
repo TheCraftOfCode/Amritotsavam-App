@@ -21,6 +21,7 @@ var loginGradientBeginColor = const Color(0xff58577A);
 var loginGradientEndColor = const Color(0xff171639);
 var textBoxFill = const Color(0xff332e53);
 var textBoxTextColor = const Color(0xffd9d0d0);
+var dataCardColor = const Color(0xff3C386E);
 
 
 

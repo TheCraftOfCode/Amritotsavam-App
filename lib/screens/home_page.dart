@@ -3,6 +3,7 @@ import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/widgets/appbar_back_button.dart';
+import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:amritotsavam_app/widgets/vertical_card.dart';
 import 'package:flutter/material.dart';
 
@@ -76,44 +77,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             Padding(
               padding: const EdgeInsets.all(10),
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: aspectRatioOne,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
+              child: Column(
                 children: [
-                  VerticalCard(
-                      route: EventsPage(),
-                      title: 'Events',
-                      fontSize: 20,
-                      svgLocation: 'svgLocation',
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Schedule',
-                      fontSize: 20,
-                      svgLocation: 'svgLocation',
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Rules',
-                      fontSize: 20,
-                      svgLocation: 'svgLocation',
-                      textAlign: TextAlign.start,
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
-                  VerticalCard(
-                      route: SignUpPage(),
-                      title: 'Results',
-                      fontSize: 20,
-                      textAlign: TextAlign.start,
-                      svgLocation: 'svgLocation',
-                      gradientStartingColor: colors.gradientBeginColor,
-                      gradientEndingColor: colors.gradientEndColor),
+                  DataCard(
+                    'Events',
+                    'assets/amritotsavam_logo.png',
+                    EventsPage()
+                  ),
+                  DataCard('Results', 'imageUrl', SignUpPage())
                 ],
               ),
             ),
