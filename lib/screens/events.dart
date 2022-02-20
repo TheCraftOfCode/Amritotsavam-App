@@ -322,7 +322,7 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                               ),
                               IconButton(
                                 color: isSelected
-                                    ? colors.accentColor
+                                    ? colors.dividerColor
                                     : Colors.white,
                                 padding: EdgeInsets.zero,
                                 splashRadius: 15,
