@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           )),
                     ),
                     DataCard('Events', 'assets/svg/events.svg', Events()),
-                    DataCard('Results', 'assets/svg/results.svg', ResultsPage())
+                    DataCard('Results', 'assets/svg/results.svg', ResultsHomePage())
                   ],
                 ),
               ),

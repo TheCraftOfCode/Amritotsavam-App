@@ -1,4 +1,5 @@
 import 'package:amritotsavam_app/screens/home_page.dart';
+import 'package:amritotsavam_app/screens/result_page.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,14 +8,14 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 
 
-class ResultsPage extends StatefulWidget {
-  const ResultsPage({Key? key}) : super(key: key);
+class ResultsHomePage extends StatefulWidget {
+  const ResultsHomePage({Key? key}) : super(key: key);
 
   @override
-  _ResultsPageState createState() => _ResultsPageState();
+  _ResultsHomePageState createState() => _ResultsHomePageState();
 }
 
-class _ResultsPageState extends State<ResultsPage> {
+class _ResultsHomePageState extends State<ResultsHomePage> {
 
   final listUpcoming = ["EVENT", "EVENT", "EVENT", "EVENT", "EVENT", "EVENT"];
   final listRSVP = ["EVENT", "EVENT", "EVENT", "EVENT", "EVENT", "EVENT"];
@@ -64,7 +65,7 @@ class _ResultsPageState extends State<ResultsPage> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePage()));
+                              builder: (context) => ResultPage()));
                     },
                   );
                 },
