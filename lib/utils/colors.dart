@@ -23,6 +23,7 @@ var textBoxFill = const Color(0xff332e53);
 var textBoxTextColor = const Color(0xffd9d0d0);
 var dataCardColor = const Color(0xff3C386E);
 var dividerColor = const Color(0xffdcc1ff);
+var dateCardColor = const Color(0xff454166);
 
 
 
