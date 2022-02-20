@@ -1,5 +1,6 @@
 import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
+import 'package:amritotsavam_app/screens/results.dart';
 import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                           )),
                     ),
                     DataCard('Events', 'assets/svg/events.svg', Events()),
-                    DataCard('Results', 'assets/svg/results.svg', SignUpPage())
+                    DataCard('Results', 'assets/svg/results.svg', ResultsPage())
                   ],
                 ),
               ),
