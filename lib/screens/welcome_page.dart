@@ -44,9 +44,9 @@ class WelcomePage extends StatelessWidget {
                         child: Container(),
                         flex: 1,
                       ),
-                      const Expanded(
+                      Expanded(
                         flex: 3,
-                        child: Text('Replace with app logo'),),
+                        child: Image.asset('assets/amritotsavam_logo.png')),
                       Expanded(
                         flex: 4,
                         child: Column(
