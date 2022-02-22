@@ -144,53 +144,55 @@ class _AdminUserListState extends State<AdminUserList> {
                   ],
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: IconButton(
-                    onPressed: () {
-                      if (role == "admin") {
-                        displayDialog(context, "Yes", "No", () async {
-                          Navigator.of(context).pop();
-                          final response = await makePostRequest(
-                              json.encode({"email": email}),
-                              "/deleteAdminUser",
-                              null,
-                              true,
-                              context: context);
-                          if (response.statusCode == 200) {
-                            setState(() {
-                              listData?.removeAt(index);
-                            });
-                            //TODO: Toast on success
+              role != "super_admin"
+                  ? Expanded(
+                      flex: 1,
+                      child: IconButton(
+                          onPressed: () {
+                            if (role == "admin") {
+                              displayDialog(context, "Yes", "No", () async {
+                                Navigator.of(context).pop();
+                                final response = await makePostRequest(
+                                    json.encode({"email": email}),
+                                    "/deleteAdminUser",
+                                    null,
+                                    true,
+                                    context: context);
+                                if (response.statusCode == 200) {
+                                  setState(() {
+                                    listData?.removeAt(index);
+                                  });
+                                  //TODO: Toast on success
 
-                          }
-                        }, "Delete Admin",
-                            "Are you sure you want to delete this admin?");
-                      } else if (role == "user") {
-                        displayDialog(context, "Yes", "No", () async {
-                          Navigator.of(context).pop();
-                          final response = await makePostRequest(
-                              json.encode({"email": email}),
-                              "/deleteUser",
-                              null,
-                              true,
-                              context: context);
-                          if (response.statusCode == 200) {
-                            setState(() {
-                              listData?.removeAt(index);
-                            });
-                            //TODO: Toast on success
+                                }
+                              }, "Delete Admin",
+                                  "Are you sure you want to delete this admin?");
+                            } else if (role == "user") {
+                              displayDialog(context, "Yes", "No", () async {
+                                Navigator.of(context).pop();
+                                final response = await makePostRequest(
+                                    json.encode({"email": email}),
+                                    "/deleteUser",
+                                    null,
+                                    true,
+                                    context: context);
+                                if (response.statusCode == 200) {
+                                  setState(() {
+                                    listData?.removeAt(index);
+                                  });
+                                  //TODO: Toast on success
 
-                          }
-                        }, "Delete User",
-                            "Are you sure you want to delete this user?");
-                      }
-                    },
-                    icon: const Icon(
-                      Icons.delete_forever,
-                      color: Colors.red,
-                    )),
-              ),
+                                }
+                              }, "Delete User",
+                                  "Are you sure you want to delete this user?");
+                            }
+                          },
+                          icon: const Icon(
+                            Icons.delete_forever,
+                            color: Colors.red,
+                          )),
+                    )
+                  : Container(),
             ],
           ),
         ),
