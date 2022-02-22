@@ -188,10 +188,11 @@ class ProfilePage extends StatelessWidget {
                 return Container(
                   decoration: constants.gradientDecoration,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Center(child: CircularProgressIndicator()),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Center(
                           child: Text(
                             'Please wait...',
