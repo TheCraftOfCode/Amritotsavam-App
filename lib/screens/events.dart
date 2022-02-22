@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
+import 'package:amritotsavam_app/screens/home_page.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart'; //for date format
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
@@ -164,17 +166,31 @@ class _EventsState extends State<Events> {
                           )
                         else
                           Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: Center(
-                              child: Text(
-                                "No events have been created so far",
-                                style: GoogleFonts.nunito(
-                                  fontSize: 17,
-                                  color: colors.primaryTextColor,
-                                ),
+                            padding: const EdgeInsets.only(top: 30, left: 15, right: 20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Center(child: Image.asset('assets/events_empty.png', fit: BoxFit.contain,)),
+                                  Text("Nothing to see here", style: GoogleFonts.nunito(fontSize: 25, color: colors.primaryTextColor, fontWeight: FontWeight.bold),),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20.0, bottom: 40, left: 30, right: 35),
+                                    child: Text(
+                                      "No events have been published so far, do check in later. Cheers!",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.nunito(
+                                        fontSize: 17,
+                                        color: colors.primaryTextColor,
+
+                                      ),
+                                    ),
+                                  ),
+                                  Align(alignment: Alignment.topRight,child: ElevatedButton(onPressed: (){
+                                    Navigator.pop(context);
+                                  }, child: Text('TAKE ME BACK', style: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.bold),)))
+                                ],
                               ),
                             ),
-                          )
                       ],
                     ),
                   ),
@@ -242,14 +258,7 @@ class _HorizontalListViewState extends State<_HorizontalListView> {
                 return _horizontalWidgetCard(
                     widget.list[index].eventName,
                     widget.list[index].eventDate,
-                    () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EventsPage(
-                                eventData: widget.list[index],
-                              )));
-                    },
+                    () {},
                     currentPagePosition == index);
               },
             ),
