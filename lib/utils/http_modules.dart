@@ -25,7 +25,7 @@ Future<http.Response> makePostRequest(
             headers: contentType,
             body: body)
         .timeout(
-      const Duration(seconds: 1),
+      const Duration(seconds: 10),
       onTimeout: () {
         // Time has run out, do what you wanted to do.
         return http.Response(json.encode({'message': 'Server Timed out!'}),

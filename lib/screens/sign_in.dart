@@ -12,6 +12,8 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'forgot_password_email.dart';
+
 class SignInPage extends StatefulWidget {
   const SignInPage({Key? key}) : super(key: key);
 
@@ -122,6 +124,20 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Align(
+                            alignment: Alignment.topRight,
+                            child: TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const ForgotPasswordEmailField()));
+                                },
+                                child: const Text('Forgot Password?'))),
+                      ),
+                      Padding(
                         padding: constants.textFieldPadding,
                         child: error == "" ? Container() : ErrorBox(error),
                       ),
@@ -150,7 +166,6 @@ class _SignInPageState extends State<SignInPage> {
                                   showProgress = false;
                                 });
                                 if (res.statusCode == 200) {
-                                  print(res.body);
                                   jwtTokenSet = json.decode(res.body)['token'];
                                   setName = json.decode(res.body)['name'];
                                   setUserRole = json.decode(res.body)['role'];
@@ -159,8 +174,10 @@ class _SignInPageState extends State<SignInPage> {
                                   setEmailID = json.decode(res.body)['email'];
                                   setUserId = json.decode(res.body)['userId'];
                                   Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(builder: (context) => const HomePage()),
-                                          (Route<dynamic> route) => false);
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomePage()),
+                                      (Route<dynamic> route) => false);
                                 } else {
                                   setState(() {
                                     error = json.decode(res.body)['message'];
