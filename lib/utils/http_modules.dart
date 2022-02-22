@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amritotsavam_app/screens/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -23,11 +25,11 @@ Future<http.Response> makePostRequest(
             headers: contentType,
             body: body)
         .timeout(
-      const Duration(seconds: 1),
+      const Duration(seconds: 10),
       onTimeout: () {
         // Time has run out, do what you wanted to do.
-        return http.Response(
-            'Server Timed out!', 408); // Request Timeout response status code
+        return http.Response(json.encode({'message': 'Server Timed out!'}),
+            408); // Request Timeout response status code
       },
     );
 

@@ -1,8 +1,6 @@
 import 'package:amritotsavam_app/screens/admin/events_page.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results.dart';
 import 'package:amritotsavam_app/screens/admin/user_management.dart';
-import 'package:amritotsavam_app/screens/events.dart';
-import 'package:amritotsavam_app/widgets/admin_user_list.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
@@ -10,7 +8,7 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 
 class AdminPage extends StatefulWidget {
-
+  const AdminPage({Key? key}) : super(key: key);
 
   @override
   _AdminPageState createState() => _AdminPageState();

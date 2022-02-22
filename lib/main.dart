@@ -1,7 +1,7 @@
 import 'package:amritotsavam_app/screens/home_page.dart';
-import 'package:amritotsavam_app/screens/login_page.dart';
 import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/theme.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/load_valid_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

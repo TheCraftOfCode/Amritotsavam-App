@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 class PasswordFormFieldWidget extends StatefulWidget {
   const PasswordFormFieldWidget(
@@ -34,19 +36,35 @@ class _PasswordFormFieldWidgetState extends State<PasswordFormFieldWidget> {
       validator: widget.validator,
       style: widget.style,
       decoration: InputDecoration(
-          label: Text(widget.label),
-          hintText: widget.hintText,
-          suffixIcon: IconButton(
+        label: Text(widget.label,
+            style: GoogleFonts.raleway(
+                color: colors.textBoxTextColor, fontSize: 12)),
+        hintText: widget.hintText,
+        suffixIcon: Material(
+          color: Colors.transparent,
+          child: IconButton(
             icon: Icon(
               setPasswordVisible ? Icons.visibility : Icons.visibility_off,
             ),
             onPressed: () {
               setState(() {
                 setPasswordVisible = !setPasswordVisible;
-                print(setPasswordVisible);
               });
             },
-          )),
+          ),
+        ),
+        filled: true,
+        hintStyle: GoogleFonts.poppins(
+            color: colors.primaryTextColor.withOpacity(0.7)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(5)),
+        fillColor: colors.textBoxFill,
+        focusColor: colors.textBoxFill,
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide.none,
+            borderRadius: BorderRadius.circular(5)),
+      ),
     );
   }
 }

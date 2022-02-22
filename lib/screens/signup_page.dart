@@ -3,8 +3,10 @@ import 'dart:convert';
 import 'package:amritotsavam_app/screens/sign_in.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/utils.dart';
+import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
+import 'package:amritotsavam_app/widgets/password_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -71,8 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 25, bottom: 10),
+                        padding: constants.textFieldPadding,
                         child: TextFormField(
                             controller: _nameController,
                             style: GoogleFonts.montserrat(
@@ -85,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               }
                             },
                             decoration: InputDecoration(
-                              label: Text('NAME',
+                              label: Text('Name',
                                   style: GoogleFonts.raleway(
                                       color: colors.textBoxTextColor,
                                       fontSize: 12)),
@@ -105,8 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 15, bottom: 10),
+                        padding: constants.textFieldPadding,
                         child: TextFormField(
                             controller: _emailController,
                             style: GoogleFonts.montserrat(
@@ -122,7 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             },
                             decoration: InputDecoration(
                               label: Text(
-                                'EMAIL ADDRESS',
+                                'Email Address',
                                 style: GoogleFonts.raleway(
                                     color: colors.textBoxTextColor,
                                     fontSize: 12),
@@ -143,44 +143,24 @@ class _SignUpPageState extends State<SignUpPage> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 15, bottom: 10),
-                        child: TextFormField(
-                            controller: _passwordController,
-                            style: GoogleFonts.montserrat(
-                                color: colors.primaryTextColor),
-                            validator: (value) {
-                              if (value == "" || value == null) {
-                                return "Please enter password";
-                              } else {
-                                return null;
-                              }
-                            },
-                            decoration: InputDecoration(
-                              label: Text(
-                                'PASSWORD',
-                                style: GoogleFonts.raleway(
-                                    color: colors.textBoxTextColor,
-                                    fontSize: 12),
-                              ),
-                              filled: true,
-                              hintText: 'Please enter your password',
-                              hintStyle: GoogleFonts.poppins(
-                                  color:
-                                      colors.primaryTextColor.withOpacity(0.7)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(5)),
-                              fillColor: colors.textBoxFill,
-                              focusColor: colors.textBoxFill,
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(5)),
-                            )),
+                        padding: constants.textFieldPadding,
+                        child: PasswordFormFieldWidget(
+                          hintText: 'Please enter your password',
+                          label: 'Password',
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value == "" || value == null) {
+                              return "Please enter password";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: GoogleFonts.montserrat(
+                              color: colors.primaryTextColor),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 15, bottom: 10),
+                        padding: constants.textFieldPadding,
                         child: error == "" ? Container() : ErrorBox(error),
                       ),
                       Padding(
@@ -203,15 +183,19 @@ class _SignUpPageState extends State<SignUpPage> {
                                   showProgress = false;
                                 });
                                 if (res.statusCode == 200) {
-                                  jwtTokenSet = res.body;
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const SignInPage()));
+                                  error = '';
+                                  displayDialog(context, "Continue", null, () {
+                                    Navigator.of(context).pop();
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const SignInPage()));
+                                  }, "Account has been registered",
+                                      "Please check your mail and open the verification link within the next 15 minutes to complete registration");
                                 } else {
                                   setState(() {
-                                    error = res.body;
+                                    error = json.decode(res.body)['message'];
                                   });
                                 }
                               }

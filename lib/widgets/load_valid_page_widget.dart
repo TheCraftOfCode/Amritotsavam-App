@@ -26,8 +26,11 @@ class LoadValidPageWidget extends StatelessWidget {
 
   Future<String> getVerifiedJwt(context) async {
     var jwt = await jwtTokenGet;
+    if (jwt == '') return '';
 
-    var res = await makePostRequest(null, "/validateToken", null, true, context: context);
+    var res = await makePostRequest(null, "/validateToken", null, true,
+        context: context);
+    print(res.statusCode);
     if (res.statusCode != 200 && res.statusCode != 412) {
       showToast("Couldn't validate token, continuing in offline mode!");
     }

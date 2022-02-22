@@ -4,13 +4,25 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 const String networkAddress = '10.0.2.2:8000';
 const bool isHTTPS = false;
 const String storageJWTKey = "USER_AUTH_JWT";
+const String nameKey = "USER_NAME";
+const String roleKey = "USER_ROLE";
+const String dateRegistered = "USER_REGISTER_DATE";
+const String emailIdKey = "USER_EMAIL";
+const textFieldPadding =
+    EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10);
+
+const user = "user";
+const admin = "admin";
+const superAdmin = "super_admin";
 
 var gradientDecoration = BoxDecoration(
     gradient: LinearGradient(
         colors: colors.gradientColors,
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        stops: const [0.0,0.5,1.0]
-    ));
+        stops: const [0.0, 0.5, 1.0]));
 
-var loginGradients = [colors.loginGradientBeginColor, colors.loginGradientEndColor];
+var loginGradients = [
+  colors.loginGradientBeginColor,
+  colors.loginGradientEndColor
+];

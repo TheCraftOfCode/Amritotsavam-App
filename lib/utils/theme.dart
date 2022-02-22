@@ -13,7 +13,6 @@ class darkTheme {
           elevation: 0, backgroundColor: Colors.transparent, centerTitle: true),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: colors.textFieldColor,
         enabledBorder: const OutlineInputBorder(borderSide: BorderSide.none),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: colors.primaryTextColor)),

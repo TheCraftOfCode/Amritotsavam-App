@@ -1,8 +1,13 @@
+import 'dart:convert';
+
 import 'package:amritotsavam_app/screens/home_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
+import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
+import 'package:amritotsavam_app/widgets/password_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -65,8 +70,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 25, bottom: 10),
+                        padding: constants.textFieldPadding,
                         child: TextFormField(
                             controller: _emailController,
                             validator: (value) {
@@ -86,8 +90,7 @@ class _SignInPageState extends State<SignInPage> {
                                       color: colors.textBoxTextColor,
                                       fontSize: 12)),
                               filled: true,
-                              hintText:
-                                  'Please enter your registered amrita email address',
+                              hintText: 'Please enter your amrita email id',
                               hintStyle: GoogleFonts.poppins(
                                   color:
                                       colors.primaryTextColor.withOpacity(0.7)),
@@ -102,44 +105,24 @@ class _SignInPageState extends State<SignInPage> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 15, bottom: 10),
-                        child: TextFormField(
-                            controller: _passwordController,
-                            validator: (value) {
-                              if (value == "" || value == null) {
-                                return "Please enter password";
-                              } else {
-                                return null;
-                              }
-                            },
-                            style: GoogleFonts.montserrat(
-                                color: colors.primaryTextColor),
-                            decoration: InputDecoration(
-                              label: Text(
-                                'PASSWORD',
-                                style: GoogleFonts.raleway(
-                                    color: colors.textBoxTextColor,
-                                    fontSize: 12),
-                              ),
-                              filled: true,
-                              hintText: 'Please enter your password',
-                              hintStyle: GoogleFonts.poppins(
-                                  color:
-                                      colors.primaryTextColor.withOpacity(0.7)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(5)),
-                              fillColor: colors.textBoxFill,
-                              focusColor: colors.textBoxFill,
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(5)),
-                            )),
+                        padding: constants.textFieldPadding,
+                        child: PasswordFormFieldWidget(
+                          hintText: 'Please enter your password',
+                          label: 'Password',
+                          controller: _passwordController,
+                          validator: (value) {
+                            if (value == "" || value == null) {
+                              return "Please enter password";
+                            } else {
+                              return null;
+                            }
+                          },
+                          style: GoogleFonts.montserrat(
+                              color: colors.primaryTextColor),
+                        ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, right: 50, top: 15, bottom: 10),
+                        padding: constants.textFieldPadding,
                         child: error == "" ? Container() : ErrorBox(error),
                       ),
                       Padding(
@@ -147,40 +130,50 @@ class _SignInPageState extends State<SignInPage> {
                         child: Align(
                           alignment: Alignment.bottomLeft,
                           child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HomePage()));
-                            }
-                            // onPressed: () async {
-                            //   if (_formKey.currentState!.validate()) {
-                            //     var res = await makePostRequest(
-                            //         json.encode({
-                            //           "email": _emailController.text,
-                            //           "password": _passwordController.text
-                            //         }),
-                            //         "/login",
-                            //         null,
-                            //         false);
-                            //     setState(() {
-                            //       showProgress = false;
-                            //     });
-                            //     if (res.statusCode == 200) {
-                            //       jwtTokenSet = res.body;
-                            //       Navigator.push(
-                            //           context,
-                            //           MaterialPageRoute(
-                            //               builder: (context) =>
-                            //                   const HomePage()));
-                            //     } else {
-                            //       setState(() {
-                            //         error = res.body;
-                            //       });
-                            //     }
-                            //   }
-                            // },
-                            ,
+                            // onPressed: () {
+                            //   Navigator.push(
+                            //       context,
+                            //       MaterialPageRoute(
+                            //           builder: (context) => const HomePage()));
+                            // }
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                var res = await makePostRequest(
+                                    json.encode({
+                                      "email": _emailController.text,
+                                      "password": _passwordController.text
+                                    }),
+                                    "/login",
+                                    null,
+                                    false);
+                                setState(() {
+                                  showProgress = false;
+                                });
+                                if (res.statusCode == 200) {
+                                  print(res.body);
+                                  jwtTokenSet = json.decode(res.body)['token'];
+                                  setName = json.decode(res.body)['name'];
+                                  setUserRole = json.decode(res.body)['role'];
+                                  setDateRegistered =
+                                      json.decode(res.body)['dateRegistered'];
+                                  setEmailID = json.decode(res.body)['email'];
+
+                                  print(await getName);
+                                  print(await getEmailID);
+                                  print(await getUserRole);
+                                  print(await getDateRegistered);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const HomePage()));
+                                } else {
+                                  setState(() {
+                                    error = json.decode(res.body)['message'];
+                                  });
+                                }
+                              }
+                            },
                             child: Text(
                               'SIGN IN',
                               style: GoogleFonts.nunito(
