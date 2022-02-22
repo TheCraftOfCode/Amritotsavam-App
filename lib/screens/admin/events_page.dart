@@ -1,9 +1,18 @@
+import 'dart:convert';
+
+import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/admin/add_event.dart';
+import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
+import 'package:http/http.dart' as http;
+
+import '../event_page.dart';
 
 class EventsList extends StatefulWidget {
   const EventsList({Key? key}) : super(key: key);
@@ -13,12 +22,7 @@ class EventsList extends StatefulWidget {
 }
 
 class _EventsListState extends State<EventsList> {
-
-  final listUpcoming = ["EVENT", "EVENT", "EVENT", "EVENT", "EVENT", "EVENT"];
-  final listRSVP = ["EVENT", "EVENT", "EVENT", "EVENT", "EVENT", "EVENT"];
-  final allEventsList = ["Event", "Event", "Event", "Event", "Event", "Event"];
-
-  String chosenOption = "ALL EVENTS";
+  final List<EventData> allEventsList = [];
   int focusedPage = 0;
 
   @override
@@ -26,86 +30,173 @@ class _EventsListState extends State<EventsList> {
     super.initState();
   }
 
+  getListData(http.Response data, bool reloadPage) {
+    if (data.statusCode != 200) {
+      return;
+    }
+
+    Map<String, dynamic> decodedData = jsonDecode(data.body);
+
+    allEventsList.clear();
+    for (var i in decodedData['data']) {
+      var givenDate = DateTime.now();
+
+      List<ResultsModel> resultData = [];
+      if (i['results'] != null || i['results'].length != 0) {
+        for (var result in i['results']) {
+          resultData.add(ResultsModel(
+              name: result['name'],
+              rollNumber: result['rollNumber'],
+              position: result['position'],
+              house: result['house']));
+        }
+      }
+      EventData data = EventData(
+          id: i['_id'],
+          eventName: i['eventName'],
+          eventDate: i['date'],
+          time: i['time'],
+          location: i['location'],
+          rules: i['rules'],
+          judgingCriteria: i['judgingCriteria'],
+          eventType: i['eventType'],
+          registrationLink: i['registrationLink'],
+          submissionLink: i['submissionLink'],
+          eventOver: i['eventOver'],
+          results: resultData);
+
+      allEventsList.add(data);
+    }
+    if (reloadPage) {
+      setState(() {});
+    }
+  }
+
   Future<void> _refreshRandomNumbers() =>
       Future.delayed(const Duration(seconds: 2), () {});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: RefreshIndicator(
-      color: colors.accentColor,
-      onRefresh: () {
-        //TODO: Refresh page on pull
-        return _refreshRandomNumbers();
-      },
-      child: Container(
-        decoration: constants.gradientDecoration,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //TODO: Add appbar with search and notifications
-              Padding(
-                padding: const EdgeInsets.only(
-                    top: 70.0, bottom: 20, left: 15),
-                child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Events (admin)',
-                          style: GoogleFonts.nunito(
-                              fontSize: 30,
-                              color: colors.primaryTextColor,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Text('Choose an event to edit it\'s details.', style: GoogleFonts.nunito(fontSize: 17, color: colors.primaryTextColor),),
-                      ],
-                    )),
+      body: FutureBuilder(
+          future:
+              makePostRequest(null, "/getEvents", null, true, context: context),
+          builder: (context, AsyncSnapshot<http.Response> data) {
+            if (data.hasData) {
+              getListData(data.requireData, false);
+            }
+            return RefreshIndicator(
+              color: colors.accentColor,
+              onRefresh: () async {
+                http.Response data = await makePostRequest(
+                    null, "/getEvents", null, true,
+                    context: context);
+                getListData(data, true);
+              },
+              child: Container(
+                decoration: constants.gradientDecoration,
+                height: double.maxFinite,
+                child: SingleChildScrollView(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //TODO: Add appbar with search and notifications
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 70.0, bottom: 20, left: 15),
+                        child: Align(
+                            alignment: Alignment.topLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Events (admin)',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 30,
+                                      color: colors.primaryTextColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  'Choose an event to edit it\'s details.',
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 17,
+                                      color: colors.primaryTextColor),
+                                ),
+                              ],
+                            )),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      if (allEventsList.isNotEmpty)
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: allEventsList.length,
+                          itemBuilder: (_, i) {
+                            return _MainContentCardWidget(
+                              cardTitle: allEventsList[i].eventName,
+                              cardSubTitle:
+                                  'Event type - ${allEventsList[i].eventType}',
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => EventsPage(
+                                              eventData: allEventsList[i],
+                                            )));
+                              },
+                              cardDate: allEventsList[i].eventDate,
+                              removeData: () {
+                                setState(() {
+                                  allEventsList.removeAt(i);
+                                });
+                              },
+                              id: allEventsList[i].id,
+                            );
+                          },
+                        )
+                      else
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Center(
+                            child: Text(
+                              "No results have been published so far",
+                              style: GoogleFonts.nunito(
+                                fontSize: 17,
+                                color: colors.primaryTextColor,
+                              ),
+                            ),
+                          ),
+                        )
+                    ],
+                  ),
+                ),
               ),
-              const SizedBox(height: 20,),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: allEventsList.length,
-                itemBuilder: (_, i) {
-                  return _MainContentCardWidget(
-                    cardTitle: 'Some Festival Name Here',
-                    cardSubTitle: 'This is some festival on some date',
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => AddEvent()));
-                    },
-                    cardDate: 'Feb 2 2022',
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
-    ),
+            );
+          }),
     );
   }
 }
 
 class _MainContentCardWidget extends StatefulWidget {
-  const _MainContentCardWidget({
-    Key? key,
-    required this.cardSubTitle,
-    required this.cardTitle,
-    required this.cardDate,
-    required this.onTap,
-  }) : super(key: key);
+  const _MainContentCardWidget(
+      {Key? key,
+      required this.cardSubTitle,
+      required this.cardTitle,
+      required this.cardDate,
+      required this.onTap,
+      required this.id,
+      required this.removeData})
+      : super(key: key);
   final String cardTitle;
   final String cardSubTitle;
   final String cardDate;
   final VoidCallback onTap;
-
+  final VoidCallback removeData;
+  final String id;
 
   @override
   _MainContentCardWidgetState createState() => _MainContentCardWidgetState();
@@ -176,7 +267,7 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                       margin: const EdgeInsets.only(top: 4),
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(10),
+                                              BorderRadius.circular(10),
                                           color: colors.dividerColor),
                                       height: 4.0,
                                       width: 32.0,
@@ -204,7 +295,22 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                 ),
                                 onPressed: () {
                                   setState(() {
-
+                                    displayDialog(context, "Yes", "No",
+                                        () async {
+                                      Navigator.of(context).pop();
+                                      final response = await makePostRequest(
+                                          json.encode({"id": widget.id}),
+                                          "/deleteEvent",
+                                          null,
+                                          true,
+                                          context: context);
+                                      print(response.body);
+                                      if (response.statusCode == 200) {
+                                        widget.removeData();
+                                        //TODO: Toast on success
+                                      }
+                                    }, "Delete Event",
+                                        "Are you sure you want to delete this event?");
                                   });
                                 },
                               ),
@@ -217,10 +323,10 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                 ),
                 Positioned(
                     child: Image.asset(
-                      'assets/mask.png',
-                      width: horizontalCenteredDisplacement,
-                      fit: BoxFit.fill,
-                    ))
+                  'assets/mask.png',
+                  width: horizontalCenteredDisplacement,
+                  fit: BoxFit.fill,
+                ))
               ],
             );
           },
