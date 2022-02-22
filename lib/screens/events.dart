@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
@@ -46,6 +47,17 @@ class _EventsState extends State<Events> {
     listUpcoming.clear();
     for (var i in decodedData['data']) {
       var givenDate = DateTime.now();
+
+      List<ResultsModel> resultData = [];
+      if (i['results'] != null || i['results'].length != 0) {
+        for (var result in i['results']) {
+          resultData.add(ResultsModel(
+              name: result['name'],
+              rollNumber: result['rollNumber'],
+              position: result['position'],
+              house: result['house']));
+        }
+      }
       EventData data = EventData(
           id: i['_id'],
           eventName: i['eventName'],
@@ -57,7 +69,8 @@ class _EventsState extends State<Events> {
           eventType: i['eventType'],
           registrationLink: i['registrationLink'],
           submissionLink: i['submissionLink'],
-          eventOver: i['eventOver']);
+          eventOver: i['eventOver'],
+          results: resultData);
       if (DateFormat("dd/MM/yyyy").parse(i['date']).isAfter(givenDate)) {
         listUpcoming.add(data);
       }

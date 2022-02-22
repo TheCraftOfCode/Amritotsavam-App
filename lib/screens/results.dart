@@ -63,10 +63,10 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
                     cardTitle: 'Some Festival Name Here',
                     cardSubTitle: 'This is some festival on some date',
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => ResultPage()));
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => ResultPage(List<>)));
                     }, cardDate: 'date',
                   );
                 },

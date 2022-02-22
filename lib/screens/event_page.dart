@@ -1,4 +1,6 @@
 import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/screens/result_page.dart';
+import 'package:amritotsavam_app/screens/results.dart';
 import 'package:amritotsavam_app/widgets/unordered_list.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -239,7 +241,7 @@ class _EventsPageState extends State<EventsPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 40, horizontal: 20),
-                    child: Row(
+                    child: !widget.eventData.eventOver ? Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(
@@ -269,7 +271,23 @@ class _EventsPageState extends State<EventsPage> {
                           ),
                         ),
                       ],
-                    ),
+                    ) : widget.eventData.results != null? ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          primary: colors.primaryTextColor),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ResultPage(results: widget.eventData.results,)));
+                      },
+                      child: Text(
+                        'Show Results',
+                        style: GoogleFonts.nunito(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                            color: colors.gradientEndColor),
+                      ),
+                    ) : Text("Waiting For Results to Publish"),
                   ),
                 ],
               ),
