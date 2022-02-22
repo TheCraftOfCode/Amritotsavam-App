@@ -1,11 +1,11 @@
 import 'package:amritotsavam_app/screens/welcome_page.dart';
+import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:amritotsavam_app/utils/colors.dart' as colors;
-import 'package:amritotsavam_app/utils/constants.dart' as constants;
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -185,8 +185,25 @@ class ProfilePage extends StatelessWidget {
                       ),
                     ));
               } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Container(
+                  decoration: constants.gradientDecoration,
+                  child: Column(
+                    children: [
+                      const Center(child: CircularProgressIndicator()),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Center(
+                          child: Text(
+                            'Please wait...',
+                            style: GoogleFonts.nunito(
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 );
               }
             }));
