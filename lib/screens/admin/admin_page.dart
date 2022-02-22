@@ -1,5 +1,6 @@
 import 'package:amritotsavam_app/screens/admin/events_page.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results.dart';
+import 'package:amritotsavam_app/screens/admin/publish_results_page.dart';
 import 'package:amritotsavam_app/screens/admin/user_management.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +44,7 @@ class _AdminPageState extends State<AdminPage> {
                   DataCard('Manage Events', 'assets/svg/events.svg',
                       const EventsList()),
                   DataCard('Publish Results', 'assets/svg/events.svg',
-                      PublishResults()),
+                      const PublishResultsPage()),
                 ],
               ),
             )));

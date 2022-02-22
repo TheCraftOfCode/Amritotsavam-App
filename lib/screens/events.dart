@@ -167,7 +167,7 @@ class _EventsState extends State<Events> {
                             padding: const EdgeInsets.only(top: 50),
                             child: Center(
                               child: Text(
-                                "No results have been published so far",
+                                "No events have been created so far",
                                 style: GoogleFonts.nunito(
                                   fontSize: 17,
                                   color: colors.primaryTextColor,
@@ -242,7 +242,14 @@ class _HorizontalListViewState extends State<_HorizontalListView> {
                 return _horizontalWidgetCard(
                     widget.list[index].eventName,
                     widget.list[index].eventDate,
-                    () {},
+                    () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventsPage(
+                                eventData: widget.list[index],
+                              )));
+                    },
                     currentPagePosition == index);
               },
             ),

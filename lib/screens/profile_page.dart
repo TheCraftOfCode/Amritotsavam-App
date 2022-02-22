@@ -1,4 +1,5 @@
 import 'package:amritotsavam_app/screens/welcome_page.dart';
+import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:flutter/material.dart';
@@ -126,10 +127,12 @@ class ProfilePage extends StatelessWidget {
                                   displayDialog(context, "Yes", "No", () {
                                     clearAllData();
                                     Navigator.of(context).pushAndRemoveUntil(
-                                        MaterialPageRoute(builder: (context) => const WelcomePage()),
-                                            (Route<dynamic> route) => false);
-                                  },
-                                      "Are you sure you want to sign out?", "You will be signed out and all data will be lost");
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const WelcomePage()),
+                                        (Route<dynamic> route) => false);
+                                  }, "Are you sure you want to sign out?",
+                                      "You will be signed out and all data will be lost");
                                 },
                                 child: Padding(
                                     padding: const EdgeInsets.all(12),
@@ -137,6 +140,43 @@ class ProfilePage extends StatelessWidget {
                                       "Sign Out",
                                       style: GoogleFonts.nunito(
                                           fontSize: 18, color: Colors.blueGrey),
+                                    )),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.red,
+                                  onPrimary: colors.buttonColor,
+                                ),
+                                onPressed: () {
+                                  displayDialog(context, "Yes", "No", () async {
+                                    var res = await makePostRequest(
+                                        null, "/deleteSelf", null, true,
+                                        context: context);
+                                    if (res.statusCode == 200) {
+                                      Navigator.of(context).pushAndRemoveUntil(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const WelcomePage()),
+                                          (Route<dynamic> route) => false);
+                                      clearAllData();
+                                    } else {
+                                      //TODO: Display Failure
+                                    }
+                                  }, "Are you sure you want to delete your account?",
+                                      "Your account will be deleted and all data will be lost");
+                                },
+                                child: Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Text(
+                                      "Delete Account",
+                                      style: GoogleFonts.nunito(
+                                          fontSize: 18, color: Colors.white),
                                     )),
                               ),
                             ),

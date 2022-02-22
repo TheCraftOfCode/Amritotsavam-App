@@ -39,7 +39,6 @@ class _EventsListState extends State<EventsList> {
 
     allEventsList.clear();
     for (var i in decodedData['data']) {
-      var givenDate = DateTime.now();
 
       List<ResultsModel> resultData = [];
       if (i['results'] != null || i['results'].length != 0) {
@@ -71,9 +70,6 @@ class _EventsListState extends State<EventsList> {
       setState(() {});
     }
   }
-
-  Future<void> _refreshRandomNumbers() =>
-      Future.delayed(const Duration(seconds: 2), () {});
 
   @override
   Widget build(BuildContext context) {
