@@ -96,35 +96,29 @@ class ProfilePage extends StatelessWidget {
                                     color: colors.primaryTextColor)),
                           ),
                           Expanded(child: Container()),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 5),
-                                  child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text(
-                                        "Change User Name",
-                                        textAlign: TextAlign.center,
-                                      )),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  onPrimary: colors.buttonColor,
                                 ),
+                                onPressed: () {
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                          const ChangeName()));
+                                },
+                                child: Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Text(
+                                      "Change Password",
+                                      style: GoogleFonts.nunito(
+                                          fontSize: 18, color: Colors.white),
+                                    )),
                               ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 5),
-                                  child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const ChangeName()));
-                                      },
-                                      child: const Text("CHANGE PASSWORD",
-                                          textAlign: TextAlign.center)),
-                                ),
-                              )
-                            ],
+                            ),
                           ),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),
