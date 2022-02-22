@@ -5,18 +5,30 @@ import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
-class UserManagement extends StatelessWidget {
-  const UserManagement({Key? key}) : super(key: key);
+import 'add_admin.dart';
 
+class UserManagement extends StatelessWidget {
+  const UserManagement({Key? key, required this.role}) : super(key: key);
+  final String role;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarBackButton(''),
+        appBar: const AppBarBackButton(''),
+        floatingActionButton: role == constants.superAdmin
+            ? FloatingActionButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AddAdmin()));
+                },
+                child: const Icon(Icons.person_add_alt_1_sharp),
+              )
+            : Container(),
         body: Container(
           decoration: constants.gradientDecoration,
           child: const AdminUserList(),
-        )
-    );
+        ));
   }
 }

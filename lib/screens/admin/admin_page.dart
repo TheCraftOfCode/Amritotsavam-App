@@ -8,7 +8,8 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 
 class AdminPage extends StatefulWidget {
-  const AdminPage({Key? key}) : super(key: key);
+  const AdminPage({Key? key, required this.role}) : super(key: key);
+  final String role;
 
   @override
   _AdminPageState createState() => _AdminPageState();
@@ -17,38 +18,37 @@ class AdminPage extends StatefulWidget {
 class _AdminPageState extends State<AdminPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container(
-      decoration: constants.gradientDecoration,
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 20.0, bottom: 20, left: 10),
-              child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Admin',
-                    style: GoogleFonts.nunito(
-                        fontSize: 30,
-                        color: colors.primaryTextColor,
-                        fontWeight: FontWeight.bold),
-                  )),
-            ),
-            DataCard('Manage Accounts',
-                'assets/svg/events.svg', const UserManagement()),
-            DataCard('Manage Events',
-                'assets/svg/events.svg', const EventsList()),
-            DataCard('Publish Results',
-                'assets/svg/events.svg', PublishResults()),
-          ],
-        ),
-      )
-    ));
+    return Scaffold(
+        body: Container(
+            decoration: constants.gradientDecoration,
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(top: 20.0, bottom: 20, left: 10),
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Admin',
+                          style: GoogleFonts.nunito(
+                              fontSize: 30,
+                              color: colors.primaryTextColor,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                  DataCard('Manage Accounts', 'assets/svg/events.svg',
+                      UserManagement(role: widget.role)),
+                  DataCard('Manage Events', 'assets/svg/events.svg',
+                      const EventsList()),
+                  DataCard('Publish Results', 'assets/svg/events.svg',
+                      PublishResults()),
+                ],
+              ),
+            )));
   }
 }
-
 
 //TODO: Be able to add / delete admin accounts - super admins
 //TODO: Everyone can delete users

@@ -24,76 +24,73 @@ class DropDownFormField extends FormField<dynamic> {
       initialValue: defaultValue,
       autovalidateMode: autoValidateMode,
       builder: (FormFieldState<dynamic> state) {
-        return Padding(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8),
-                child: Text(title,
-                    style: GoogleFonts.nunito(
-                        fontSize: 15,
-                        color: colors.primaryTextColor)),
-              ),
-              Card(
-                color: colors.textBoxFill,
-                elevation: 1,
-                margin: const EdgeInsets.only(bottom: 4),
-                child: DropdownButtonHideUnderline(
-                  child: ButtonTheme(
-                    alignedDropdown: true,
-                    child: DropdownButton<dynamic>(
-                      dropdownColor: colors.textBoxFill,
-                      value: state.value,
-                      isExpanded: true,
-                      items: list.map<DropdownMenuItem>((value) {
-                        return DropdownMenuItem(
-                          value: value,
-                          child: Text(
-                            value,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        state.didChange(newValue);
-                      },
-                      hint: Container(
-                        color: colors.textBoxFill,
-                        padding: const EdgeInsets.all(8),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(title,
+                  style: GoogleFonts.nunito(
+                      fontSize: 15,
+                      color: colors.primaryTextColor)),
+            ),
+            Card(
+              color: colors.textBoxFill,
+              elevation: 1,
+              margin: const EdgeInsets.only(bottom: 4),
+              child: DropdownButtonHideUnderline(
+                child: ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton<dynamic>(
+                    dropdownColor: colors.textBoxFill,
+                    value: state.value,
+                    isExpanded: true,
+                    items: list.map<DropdownMenuItem>((value) {
+                      return DropdownMenuItem(
+                        value: value,
                         child: Text(
-                          hint,
+                          value,
                           overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.nunito(
-                            fontSize: 17,
-                              color: state.hasError
-                                  ? Colors.red
-                                  : Colors.grey),
-                          textAlign: TextAlign.end,
                         ),
+                      );
+                    }).toList(),
+                    onChanged: (newValue) {
+                      state.didChange(newValue);
+                    },
+                    hint: Container(
+                      color: colors.textBoxFill,
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        hint,
+                        overflow: TextOverflow.ellipsis,
+                        style: GoogleFonts.nunito(
+                            fontSize: 17,
+                            color: state.hasError
+                                ? Colors.red
+                                : Colors.grey),
+                        textAlign: TextAlign.end,
                       ),
-                      style: GoogleFonts.nunito(
-                          fontSize: 17,
-                          color: colors.primaryTextColor,
-                          decorationColor: Colors.red),
                     ),
+                    style: GoogleFonts.nunito(
+                        fontSize: 17,
+                        color: colors.primaryTextColor,
+                        decorationColor: Colors.red),
                   ),
                 ),
               ),
-              state.hasError
-                  ? Container(
-                padding: const EdgeInsets.all(10),
-                child: Text(
-                  state.errorText ?? "error",
-                  style: GoogleFonts.nunito(
-                      color: Colors.red, fontSize: 10),
-                ),
-              )
-                  : Container()
-            ],
-          ),
+            ),
+            state.hasError
+                ? Container(
+              padding: const EdgeInsets.all(10),
+              child: Text(
+                state.errorText ?? "error",
+                style: GoogleFonts.nunito(
+                    color: Colors.red, fontSize: 10),
+              ),
+            )
+                : Container()
+          ],
         );
       });
 }

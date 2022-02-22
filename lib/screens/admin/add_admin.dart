@@ -1,18 +1,31 @@
+import 'dart:convert';
+
+import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/widgets/alert_dialog.dart';
+import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
+import 'package:amritotsavam_app/widgets/error_box.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 class AddAdmin extends StatefulWidget {
+  const AddAdmin({Key? key}) : super(key: key);
 
   @override
   _AddAdminState createState() => _AddAdminState();
 }
 
 class _AddAdminState extends State<AddAdmin> {
-
- List<String> _roles = ['admin','super_admin'];
+  final List<String> _roles = ['admin', 'super_admin', 'user'];
+  final _formKey = GlobalKey<FormState>();
+  final _nameController = TextEditingController();
+  final _emailController = TextEditingController();
+  String error = "";
+  bool showProgress = false;
+  var roleData = "";
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +34,152 @@ class _AddAdminState extends State<AddAdmin> {
         decoration: constants.gradientDecoration,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
-          child: Column(
-            children: [
-              Container(height: 60,),
-              Padding(
-                padding: const EdgeInsets.only(top: 20.0, bottom: 20),
-                child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Add user',
-                      style: GoogleFonts.nunito(
-                          fontSize: 30,
-                          color: colors.primaryTextColor,
-                          fontWeight: FontWeight.bold),
-                    )),
-              ),
-              DropDownFormField(list: _roles, title: 'Pick role', hint: 'Pick an appropriate role'),
-              //TODO: Find out user model and collect relevant details
-            ],
+          child: Form(
+            key: _formKey,
+            child: CustomSliverView(
+              columnList: [
+                Container(
+                  height: 60,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+                  child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'Add user',
+                        style: GoogleFonts.nunito(
+                            fontSize: 30,
+                            color: colors.primaryTextColor,
+                            fontWeight: FontWeight.bold),
+                      )),
+                ),
+                Expanded(child: Container()),
+                Padding(
+                  padding: constants.textFieldPadding,
+                  child: DropDownFormField(
+                    list: _roles,
+                    title: 'Pick role',
+                    hint: 'Pick an appropriate role',
+                    onSaved: (data) {
+                      print(data);
+                      roleData = data;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: constants.textFieldPadding,
+                  child: TextFormField(
+                      controller: _nameController,
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
+                      validator: (value) {
+                        if (value == "" || value == null) {
+                          return "Please enter name";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        label: Text('Name',
+                            style: GoogleFonts.raleway(
+                                color: colors.textBoxTextColor, fontSize: 12)),
+                        filled: true,
+                        hintText: 'Please enter your name',
+                        hintStyle: GoogleFonts.poppins(
+                            color: colors.primaryTextColor.withOpacity(0.7)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(5)),
+                        fillColor: colors.textBoxFill,
+                        focusColor: colors.textBoxFill,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(5)),
+                      )),
+                ),
+                Padding(
+                  padding: constants.textFieldPadding,
+                  child: TextFormField(
+                      controller: _emailController,
+                      validator: (value) {
+                        if (value == "" || value == null) {
+                          return "Please enter E-Mail";
+                        } else if (!EmailValidator.validate(value)) {
+                          return "Invalid Email";
+                        } else {
+                          return null;
+                        }
+                      },
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
+                      decoration: InputDecoration(
+                        label: Text('Email',
+                            style: GoogleFonts.raleway(
+                                color: colors.textBoxTextColor, fontSize: 12)),
+                        filled: true,
+                        hintText: 'Please enter your amrita email id',
+                        hintStyle: GoogleFonts.poppins(
+                            color: colors.primaryTextColor.withOpacity(0.7)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(5)),
+                        fillColor: colors.textBoxFill,
+                        focusColor: colors.textBoxFill,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(5)),
+                      )),
+                ),
+                Padding(
+                  padding: constants.textFieldPadding,
+                  child: error == "" ? Container() : ErrorBox(error),
+                ),
+                Expanded(child: Container()),
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0, left: 20),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState?.save();
+                          var res = await makePostRequest(
+                              json.encode({
+                                "name": _nameController.text,
+                                "email": _emailController.text,
+                                "role": roleData
+                              }),
+                              "/registerAdminUser", //TODO: Change
+                              null,
+                              true,
+                              context: context);
+                          setState(() {
+                            showProgress = false;
+                          });
+                          print(json.decode(res.body)['message']);
+                          if (res.statusCode == 200) {
+                            error = '';
+                            displayDialog(context, "Continue", null, () {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            }, "Account has been created",
+                                "An account has been created and password has been sent to the mail ID");
+                          } else {
+                            setState(() {
+                              error = json.decode(res.body)['message'];
+                            });
+                          }
+                        }
+                      },
+                      child: Text(
+                        'CREATE USER',
+                        style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
