@@ -28,7 +28,6 @@ class _EventsState extends State<Events> {
   final List<EventData> listUpcoming = [];
   final List<EventData> allEventsList = [];
 
-  String chosenOption = "ALL EVENTS";
   int focusedPage = 0;
 
   @override
@@ -91,85 +90,101 @@ class _EventsState extends State<Events> {
             if (data.hasData) {
               getListData(data.requireData, false);
             }
-            return data.hasData
-                ? RefreshIndicator(
-                    color: colors.accentColor,
-                    onRefresh: () async {
-                      http.Response data = await makePostRequest(
-                          null, "/getEvents", null, true,
-                          context: context);
-                      getListData(data, true);
-                    },
-                    child: Container(
-                      decoration: constants.gradientDecoration,
-                      child: SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            //TODO: Add appbar with search and notifications
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 70.0, bottom: 20, left: 15),
-                              child: Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    'Home',
-                                    style: GoogleFonts.nunito(
-                                        fontSize: 30,
-                                        color: colors.primaryTextColor,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                            ),
-                            if (listUpcoming.isNotEmpty)
-                              _HorizontalListView(
-                                  context: context,
-                                  list: listUpcoming,
-                                  title: "Upcoming Events"),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 15.0),
+            if (data.hasData) {
+              return RefreshIndicator(
+                color: colors.accentColor,
+                onRefresh: () async {
+                  http.Response data = await makePostRequest(
+                      null, "/getEvents", null, true,
+                      context: context);
+                  getListData(data, true);
+                },
+                child: Container(
+                  decoration: constants.gradientDecoration,
+                  height: double.maxFinite,
+                  child: SingleChildScrollView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //TODO: Add appbar with search and notifications
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              top: 70.0, bottom: 20, left: 15),
+                          child: Align(
+                              alignment: Alignment.topLeft,
                               child: Text(
-                                'All Events',
+                                'Home',
                                 style: GoogleFonts.nunito(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20,
-                                    color: colors.primaryTextColor),
+                                    fontSize: 30,
+                                    color: colors.primaryTextColor,
+                                    fontWeight: FontWeight.bold),
+                              )),
+                        ),
+                        if (listUpcoming.isNotEmpty)
+                          _HorizontalListView(
+                              context: context,
+                              list: listUpcoming,
+                              title: "Upcoming Events"),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                          child: Text(
+                            'All Events',
+                            style: GoogleFonts.nunito(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: colors.primaryTextColor),
+                          ),
+                        ),
+                        if (allEventsList.isNotEmpty)
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: allEventsList.length,
+                            itemBuilder: (_, i) {
+                              return MainContentCardWidget(
+                                cardTitle: allEventsList[i].eventName,
+                                cardSubTitle:
+                                    'Event type - ${allEventsList[i].eventType}',
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EventsPage(
+                                                eventData: allEventsList[i],
+                                              )));
+                                },
+                                cardDate: allEventsList[i].eventDate,
+                              );
+                            },
+                          )
+                        else
+                          Padding(
+                            padding: const EdgeInsets.only(top: 50),
+                            child: Center(
+                              child: Text(
+                                "No results have been published so far",
+                                style: GoogleFonts.nunito(
+                                  fontSize: 17,
+                                  color: colors.primaryTextColor,
+                                ),
                               ),
                             ),
-                            ListView.builder(
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemCount: allEventsList.length,
-                              itemBuilder: (_, i) {
-                                return MainContentCardWidget(
-                                  cardTitle: allEventsList[i].eventName,
-                                  cardSubTitle:
-                                      'Event type - ${allEventsList[i].eventType}',
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => EventsPage(
-                                                  eventData: allEventsList[i],
-                                                )));
-                                  },
-                                  cardDate: allEventsList[i].eventDate,
-                                );
-                              },
-                            )
-                          ],
-                        ),
-                      ),
+                          )
+                      ],
                     ),
-                  )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  ),
+                ),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
           }),
     );
   }

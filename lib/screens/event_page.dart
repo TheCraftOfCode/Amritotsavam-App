@@ -287,7 +287,7 @@ class _EventsPageState extends State<EventsPage> {
                             fontSize: 17,
                             color: colors.gradientEndColor),
                       ),
-                    ) : Text("Waiting For Results to Publish"),
+                    ) : const Text("Waiting For Results to Publish"),
                   ),
                 ],
               ),
