@@ -51,7 +51,3 @@ class _AdminPageState extends State<AdminPage> {
   }
 }
 
-//TODO: Be able to add / delete admin accounts - super admins
-//TODO: Everyone can delete users
-//TODO: CRUD on events
-//TODO: Publish results

@@ -26,7 +26,6 @@ class VerticalCard extends StatefulWidget {
   _VerticalCardState createState() => _VerticalCardState();
 }
 
-//TODO: Change Color? Add icon and change Text to AutoText thingey?
 class _VerticalCardState extends State<VerticalCard> {
   @override
   Widget build(BuildContext context) {

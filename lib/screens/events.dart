@@ -27,7 +27,6 @@ class Events extends StatefulWidget {
 /// in android
 
 class _EventsState extends State<Events> {
-  //TODO: Update lists with model
   final List<EventData> listUpcoming = [];
   final List<EventData> allEventsList = [];
 

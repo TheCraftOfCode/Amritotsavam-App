@@ -195,7 +195,6 @@ class _EventsPageState extends State<EventsPage> {
                       },
                     ),
                   ),
-                  //TODO: Style ExpansionPanelList
                   Padding(
                     padding: const EdgeInsets.only(
                       top: 10,

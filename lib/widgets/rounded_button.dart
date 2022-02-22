@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 
-//TODO: Add styling
 class RoundedButton extends StatefulWidget {
   const RoundedButton({Key? key, required this.onPressed, required this.title})
       : super(key: key);

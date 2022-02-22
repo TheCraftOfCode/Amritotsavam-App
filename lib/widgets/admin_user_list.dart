@@ -5,6 +5,7 @@ import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 import 'alert_dialog.dart';
 
@@ -159,11 +160,11 @@ class _AdminUserListState extends State<AdminUserList> {
                                     true,
                                     context: context);
                                 if (response.statusCode == 200) {
+                                  showToast(
+                                      "Deleted User Successfully! Refresh in case if changes have not been reflected");
                                   setState(() {
                                     listData?.removeAt(index);
                                   });
-                                  //TODO: Toast on success
-
                                 }
                               }, "Delete Admin",
                                   "Are you sure you want to delete this admin?");
@@ -177,11 +178,11 @@ class _AdminUserListState extends State<AdminUserList> {
                                     true,
                                     context: context);
                                 if (response.statusCode == 200) {
+                                  showToast(
+                                      "Deleted User Successfully! Refresh in case if changes have not been reflected");
                                   setState(() {
                                     listData?.removeAt(index);
                                   });
-                                  //TODO: Toast on success
-
                                 }
                               }, "Delete User",
                                   "Are you sure you want to delete this user?");

@@ -30,7 +30,7 @@ class _AddEvent extends State<AddEvent> {
                           fontWeight: FontWeight.bold),
                     )),
               ),
-              //TODO: Find out user model and collect relevant details
+
             ],
           ),
       ),

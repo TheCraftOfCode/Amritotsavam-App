@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 import '../event_page.dart';
 
@@ -309,7 +310,10 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                       print(response.body);
                                       if (response.statusCode == 200) {
                                         widget.removeData();
-                                        //TODO: Toast on success
+                                        showToast("Deleted event successfully!");
+                                      }
+                                      else{
+                                        showToast("Could not delete event!");
                                       }
                                     }, "Delete Event",
                                         "Are you sure you want to delete this event?");

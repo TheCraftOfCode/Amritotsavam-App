@@ -4,8 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:flutter/material.dart';
 
-//TODO: Change color to a darker background
-///Logo blends in with current color
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
 
