@@ -8,6 +8,8 @@ import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'change_password.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -102,15 +104,24 @@ class ProfilePage extends StatelessWidget {
                                   padding: const EdgeInsets.only(right: 5),
                                   child: ElevatedButton(
                                       onPressed: () {},
-                                      child: const Text("Change User Name", textAlign: TextAlign.center,)),
+                                      child: const Text(
+                                        "Change User Name",
+                                        textAlign: TextAlign.center,
+                                      )),
                                 ),
                               ),
                               Expanded(
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: ElevatedButton(
-                                      onPressed: () {},
-                                      child: const Text("Change Password", textAlign: TextAlign.center)),
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const ChangeName()));
+                                      },
+                                      child: const Text("CHANGE PASSWORD",
+                                          textAlign: TextAlign.center)),
                                 ),
                               )
                             ],
