@@ -50,7 +50,7 @@ class DataCard extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             AutoSizeText(heading,
-                                maxLines: 3,
+                                maxLines: 2,
                                 style: GoogleFonts.nunito(
                                   fontWeight: FontWeight.bold,
                                     fontSize: (heading.length>15) ? 20 : 25,

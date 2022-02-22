@@ -4,6 +4,7 @@ import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
+import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,8 +32,8 @@ class ProfilePage extends StatelessWidget {
                     decoration: constants.gradientDecoration,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Column(
-                        children: [
+                      child: CustomSliverView(
+                        columnList: [
                           Padding(
                             padding: const EdgeInsets.only(
                                 top: 20.0, bottom: 20, left: 10),

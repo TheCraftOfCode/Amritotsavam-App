@@ -151,7 +151,7 @@ class _EventsState extends State<Events> {
                               return MainContentCardWidget(
                                 cardTitle: allEventsList[i].eventName,
                                 cardSubTitle:
-                                    'Event type - ${allEventsList[i].eventType}',
+                                allEventsList[i].eventType,
                                 onTap: () {
                                   Navigator.push(
                                       context,

@@ -125,7 +125,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
                               return MainContentCardWidget(
                                 cardTitle: allEventsList[i].eventName,
                                 cardSubTitle:
-                                    'Event Type - ${allEventsList[i].eventType}',
+                                allEventsList[i].eventType,
                                 onTap: () {
                                   Navigator.push(
                                       context,
