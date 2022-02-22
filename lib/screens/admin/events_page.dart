@@ -39,7 +39,6 @@ class _EventsListState extends State<EventsList> {
 
     allEventsList.clear();
     for (var i in decodedData['data']) {
-
       List<ResultsModel> resultData = [];
       if (i['results'] != null || i['results'].length != 0) {
         for (var result in i['results']) {
@@ -74,6 +73,13 @@ class _EventsListState extends State<EventsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const AddEvent()));
+        },
+        child: const Icon(Icons.add),
+      ),
       body: FutureBuilder(
           future:
               makePostRequest(null, "/getEvents", null, true, context: context),
@@ -101,7 +107,7 @@ class _EventsListState extends State<EventsList> {
                       //TODO: Add appbar with search and notifications
                       Padding(
                         padding: const EdgeInsets.only(
-                            top: 70.0, bottom: 20, left: 15),
+                            top: 70.0, bottom: 20, left: 30),
                         child: Align(
                             alignment: Alignment.topLeft,
                             child: Column(
