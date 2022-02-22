@@ -197,8 +197,26 @@ class _EventsState extends State<Events> {
                 ),
               );
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Container(
+                decoration: constants.gradientDecoration,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Center(child: CircularProgressIndicator()),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Center(
+                        child: Text(
+                          'Please wait...',
+                          style: GoogleFonts.nunito(
+                              color: colors.primaryTextColor,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 17),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               );
             }
           }),
