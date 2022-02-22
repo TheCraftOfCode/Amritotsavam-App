@@ -102,7 +102,7 @@ class ProfilePage extends StatelessWidget {
                                   padding: const EdgeInsets.only(right: 5),
                                   child: ElevatedButton(
                                       onPressed: () {},
-                                      child: const Text("Change User Name")),
+                                      child: const Text("Change User Name", textAlign: TextAlign.center,)),
                                 ),
                               ),
                               Expanded(
@@ -110,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                                   padding: const EdgeInsets.only(left: 5),
                                   child: ElevatedButton(
                                       onPressed: () {},
-                                      child: const Text("Change Password")),
+                                      child: const Text("Change Password", textAlign: TextAlign.center)),
                                 ),
                               )
                             ],
