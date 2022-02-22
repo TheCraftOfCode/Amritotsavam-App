@@ -1,3 +1,6 @@
+import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/widgets/unordered_list.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
@@ -5,17 +8,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 
 class EventsPage extends StatefulWidget {
-  const EventsPage({Key? key}) : super(key: key);
+  const EventsPage({Key? key, required this.eventData}) : super(key: key);
+  final EventData eventData;
 
   @override
   _EventsPageState createState() => _EventsPageState();
 }
 
 class _EventsPageState extends State<EventsPage> {
-  final _url =
-      "https://forms.office.com/Pages/ResponsePage.aspx?id=o835AF4H5USqC6ujrdZTn0SCTfFMedVCpsWxs5LS-T9UMEFFUVkyMlM5OEVTODFJN0dTU1ExSlJTRi4u";
-  final testText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum";
-  void _launchURL() async {
+  void _launchURL(_url) async {
     if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
@@ -33,88 +34,120 @@ class _EventsPageState extends State<EventsPage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20.0, vertical: 20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(height: 60,),
+                        Container(
+                          height: 60,
+                        ),
                         Row(
                           children: [
                             Expanded(
                               flex: 4,
                               child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('This is an event',style: GoogleFonts.nunito(color: colors.primaryTextColor, fontSize: 30, fontWeight: FontWeight.bold),),
-                                    Text('Venue', style: GoogleFonts.nunito(color: colors.primaryTextColor, fontSize: 18.0),),
-                                  ],
-                                ),
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: AutoSizeText(
+                                      widget.eventData.eventName,
+                                      maxLines: 1,
+                                      style: GoogleFonts.nunito(
+                                          color: colors.primaryTextColor,
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  Text(
+                                    widget.eventData.location,
+                                    style: GoogleFonts.nunito(
+                                        color: colors.primaryTextColor,
+                                        fontSize: 18.0),
+                                  ),
+                                ],
                               ),
+                            ),
                             Expanded(
                                 flex: 2,
                                 child: Column(
-                              children: [
-                                Card(
-                                  elevation: 5,
-                                  color: colors.dateCardColor,
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 10.0),
-                                    child: Text('31st May 22', style: GoogleFonts.nunito(color: colors.primaryTextColor, fontSize: 17),),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 4.0),
-                                  child: Text('LAST DATE', style: GoogleFonts.nunito(color: colors.primaryTextColor, fontSize: 12),),
-                                )
-                              ],
-                            ))
+                                  children: [
+                                    Card(
+                                      elevation: 5,
+                                      color: colors.dateCardColor,
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 6.0, vertical: 10.0),
+                                        child: Text(
+                                          widget.eventData.eventDate,
+                                          style: GoogleFonts.nunito(
+                                              color: colors.primaryTextColor,
+                                              fontSize: 17),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 4.0),
+                                      child: Text(
+                                        'LAST DATE',
+                                        style: GoogleFonts.nunito(
+                                            color: colors.primaryTextColor,
+                                            fontSize: 12),
+                                      ),
+                                    )
+                                  ],
+                                ))
                           ],
                         ),
-
                         Padding(
                           padding: const EdgeInsets.only(top: 40.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(19),
                             child: const Image(
-                                image: AssetImage('assets/background_image.png'),
+                                image:
+                                    AssetImage('assets/background_image.png'),
                                 width: double.infinity,
                                 fit: BoxFit.fill),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20),
+                          padding: const EdgeInsets.only(top: 20, bottom: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Remaining time: ",
+                              Text("Event time: ",
                                   style: GoogleFonts.nunito(
-                                      color: Colors.white,
-                                  fontSize: 20)),
-                              //TODO: Add remaining time widget
+                                      color: Colors.white, fontSize: 20)),
                             ],
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2),
-                          child: Text("5:30 PM IST",
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: Text("${widget.eventData.time} IST",
                               style: GoogleFonts.nunito(
                                 color: Colors.white70,
                                 fontSize: 18,
                               )),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20),
-                          child: Text(
-                            testText,
-                            textAlign: TextAlign.justify,
-                            style: GoogleFonts.nunito(
-                              color: Colors.white,
-                              fontSize: 18,
-                            ),
+                          padding: const EdgeInsets.only(top: 20, bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Event type: ",
+                                  style: GoogleFonts.nunito(
+                                      color: Colors.white, fontSize: 20)),
+                            ],
                           ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 2),
+                          child: Text(widget.eventData.eventType,
+                              style: GoogleFonts.nunito(
+                                color: Colors.white70,
+                                fontSize: 18,
+                              )),
                         ),
                       ],
                     ),
@@ -136,7 +169,9 @@ class _EventsPageState extends State<EventsPage> {
                               iconColor: colors.primaryTextColor,
                               title: Text(
                                 'Rules',
-                                style: GoogleFonts.nunito(color: colors.primaryTextColor,fontSize: 17),
+                                style: GoogleFonts.nunito(
+                                    color: colors.primaryTextColor,
+                                    fontSize: 17),
                               ),
                             );
                           },
@@ -144,8 +179,7 @@ class _EventsPageState extends State<EventsPage> {
                             tileColor: colors.dateCardColor,
                             title: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(testText,
-                                  style: GoogleFonts.nunito(color: colors.primaryTextColor)),
+                              child: UnorderedList(widget.eventData.rules),
                             ),
                           ),
                           isExpanded: _rulesExpanded,
@@ -177,7 +211,9 @@ class _EventsPageState extends State<EventsPage> {
                               iconColor: colors.primaryTextColor,
                               title: Text(
                                 'Judgement Criteria',
-                                style: GoogleFonts.nunito(color: colors.primaryTextColor, fontSize: 17),
+                                style: GoogleFonts.nunito(
+                                    color: colors.primaryTextColor,
+                                    fontSize: 17),
                               ),
                             );
                           },
@@ -185,8 +221,8 @@ class _EventsPageState extends State<EventsPage> {
                             tileColor: colors.dateCardColor,
                             title: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Text(testText,
-                                  style: GoogleFonts.nunito(color: colors.primaryTextColor)),
+                              child: UnorderedList(
+                                  widget.eventData.judgingCriteria),
                             ),
                           ),
                           isExpanded: _judgementExpanded,
@@ -201,18 +237,36 @@ class _EventsPageState extends State<EventsPage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 40, horizontal: 20),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        ElevatedButton(onPressed: _launchURL, child: Text('Submit', style: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 17),)),
-                        const SizedBox(width: 20,),
+                        ElevatedButton(
+                            onPressed: () {
+                              _launchURL(widget.eventData.submissionLink);
+                            },
+                            child: Text(
+                              'Submit',
+                              style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
+                            )),
+                        const SizedBox(
+                          width: 20,
+                        ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: colors.primaryTextColor
+                              primary: colors.primaryTextColor),
+                          onPressed: () {
+                            _launchURL(widget.eventData.registrationLink);
+                          },
+                          child: Text(
+                            'Register',
+                            style: GoogleFonts.nunito(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17,
+                                color: colors.gradientEndColor),
                           ),
-                          onPressed: _launchURL,
-                          child: Text('Register', style: GoogleFonts.nunito(fontWeight: FontWeight.bold, fontSize: 17, color: colors.gradientEndColor),),
                         ),
                       ],
                     ),

@@ -11,7 +11,6 @@ import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart' as http;
 
 //makePostRequest(null, "/getEvents", null, true,
 //                 context: context)
