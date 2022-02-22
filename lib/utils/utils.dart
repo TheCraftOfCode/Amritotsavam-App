@@ -3,6 +3,10 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 const storage = FlutterSecureStorage();
 
+clearAllData()
+{
+  storage.deleteAll();
+}
 ///JWT
 Future<String> get jwtTokenGet async {
   var jwt = await storage.read(key: storageJWTKey);
@@ -57,4 +61,14 @@ Future<String> get getEmailID async {
 
 set setEmailID(String email) {
   storage.write(key: emailIdKey, value: email);
+}
+
+Future<String> get getUserId async {
+  var userId = await storage.read(key: userIdKey);
+  if (userId == null) return "";
+  return userId;
+}
+
+set setUserId(String userId) {
+  storage.write(key: userIdKey, value: userId);
 }

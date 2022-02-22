@@ -157,16 +157,10 @@ class _SignInPageState extends State<SignInPage> {
                                   setDateRegistered =
                                       json.decode(res.body)['dateRegistered'];
                                   setEmailID = json.decode(res.body)['email'];
-
-                                  print(await getName);
-                                  print(await getEmailID);
-                                  print(await getUserRole);
-                                  print(await getDateRegistered);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePage()));
+                                  setUserId = json.decode(res.body)['userId'];
+                                  Navigator.of(context).pushAndRemoveUntil(
+                                      MaterialPageRoute(builder: (context) => const HomePage()),
+                                          (Route<dynamic> route) => false);
                                 } else {
                                   setState(() {
                                     error = json.decode(res.body)['message'];
