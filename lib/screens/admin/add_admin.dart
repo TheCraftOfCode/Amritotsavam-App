@@ -149,7 +149,7 @@ class _AddAdminState extends State<AddAdmin> {
                                 "email": _emailController.text,
                                 "role": roleData
                               }),
-                              "/registerAdminUser", //TODO: Change
+                              "/registerAdminUser",
                               null,
                               true,
                               context: context);

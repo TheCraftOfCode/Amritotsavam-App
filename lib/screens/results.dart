@@ -178,7 +178,7 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
                   children: [
                     const Center(child: CircularProgressIndicator()),
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Center(
                         child: Text(
                           'Please wait...',

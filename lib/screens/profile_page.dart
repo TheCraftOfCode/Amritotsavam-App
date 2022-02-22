@@ -7,6 +7,7 @@ import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'change_password.dart';
 
@@ -132,6 +133,7 @@ class ProfilePage extends StatelessWidget {
                                 onPressed: () {
                                   displayDialog(context, "Yes", "No", () {
                                     clearAllData();
+                                    showToast("Signed out successfully!");
                                     Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) =>
@@ -172,7 +174,7 @@ class ProfilePage extends StatelessWidget {
                                           (Route<dynamic> route) => false);
                                       clearAllData();
                                     } else {
-                                      //TODO: Display Failure
+                                      showToast("Something went wrong, could not delete account!");
                                     }
                                   }, "Are you sure you want to delete your account?",
                                       "Your account will be deleted and all data will be lost");

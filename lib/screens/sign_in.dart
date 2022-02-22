@@ -11,6 +11,7 @@ import 'package:amritotsavam_app/widgets/password_widget.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 import 'forgot_password_email.dart';
 
@@ -166,6 +167,7 @@ class _SignInPageState extends State<SignInPage> {
                                   showProgress = false;
                                 });
                                 if (res.statusCode == 200) {
+                                  showToast("Signed in successfully!");
                                   jwtTokenSet = json.decode(res.body)['token'];
                                   setName = json.decode(res.body)['name'];
                                   setUserRole = json.decode(res.body)['role'];

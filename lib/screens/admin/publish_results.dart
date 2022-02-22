@@ -9,6 +9,7 @@ import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 class PublishResults extends StatefulWidget {
   const PublishResults(
@@ -367,9 +368,9 @@ class _PublishResultsState extends State<PublishResults> {
                               null,
                               true,
                               context: context);
-                          print(res.body);
                           if (res.statusCode == 200) {
                             error = '';
+                            showToast("Results published successfully!");
                             Navigator.of(context).pop();
                             widget.onPublishSuccess();
                           } else {

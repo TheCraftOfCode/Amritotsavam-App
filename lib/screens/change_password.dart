@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 class ChangeName extends StatefulWidget {
   const ChangeName({Key? key}) : super(key: key);
@@ -106,8 +107,10 @@ class _ChangePasswordState extends State<ChangeName> {
                           });
                           if (res.statusCode == 200) {
                             jwtTokenSet = json.decode(res.body)['token'];
+                            showToast("Password changes successfully");
                             Navigator.of(context).pop();
                           } else {
+                            showToast("Failed to change password");
                             setState(() {
                               error = json.decode(res.body)['message'];
                             });

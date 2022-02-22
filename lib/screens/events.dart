@@ -13,6 +13,7 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:http/http.dart' as http;
+import 'package:oktoast/oktoast.dart';
 
 class Events extends StatefulWidget {
   const Events({Key? key}) : super(key: key);
@@ -96,6 +97,7 @@ class _EventsState extends State<Events> {
               return RefreshIndicator(
                 color: colors.accentColor,
                 onRefresh: () async {
+                  showToast("Refreshing page");
                   http.Response data = await makePostRequest(
                       null, "/getEvents", null, true,
                       context: context);

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 class ForgotPasswordChange extends StatefulWidget {
   const ForgotPasswordChange({Key? key, required this.email}) : super(key: key);
@@ -62,7 +63,8 @@ class _ForgotPasswordChange extends State<ForgotPasswordChange> {
                         return null;
                       }
                     },
-                    style: GoogleFonts.montserrat(color: colors.primaryTextColor),
+                    style:
+                        GoogleFonts.montserrat(color: colors.primaryTextColor),
                   ),
                 ),
                 Padding(
@@ -78,7 +80,8 @@ class _ForgotPasswordChange extends State<ForgotPasswordChange> {
                         return null;
                       }
                     },
-                    style: GoogleFonts.montserrat(color: colors.primaryTextColor),
+                    style:
+                        GoogleFonts.montserrat(color: colors.primaryTextColor),
                   ),
                 ),
                 Padding(
@@ -106,6 +109,7 @@ class _ForgotPasswordChange extends State<ForgotPasswordChange> {
                             //showProgress = false;
                           });
                           if (res.statusCode == 200) {
+                            showToast("Password changed successfully!");
                             Navigator.of(context).pop();
                           } else {
                             setState(() {

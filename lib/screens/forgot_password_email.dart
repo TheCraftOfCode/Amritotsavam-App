@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:oktoast/oktoast.dart';
 
 class ForgotPasswordEmailField extends StatefulWidget {
   const ForgotPasswordEmailField({Key? key}) : super(key: key);
@@ -102,6 +103,7 @@ class _ForgotPasswordEmailFieldState extends State<ForgotPasswordEmailField> {
                           //showProgress = false;
                         });
                         if (res.statusCode == 200) {
+                          showToast("Verification ID has been sent!");
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
                                   builder: (context) => ForgotPasswordChange(
