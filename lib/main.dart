@@ -6,6 +6,10 @@ import 'package:flutter/services.dart';
 import 'package:oktoast/oktoast.dart';
 import 'screens/welcome_page.dart';
 
+//TODO: Change Icons in each tiles in home page
+//TODO: Fill about pages
+//TODO: Add widget to generate list
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
