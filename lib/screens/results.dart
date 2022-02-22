@@ -92,7 +92,7 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              top: 50.0, bottom: 20, left: 30),
+                              top: 70.0, bottom: 20, left: 30),
                           child: Align(
                               alignment: Alignment.topLeft,
                               child: Column(
