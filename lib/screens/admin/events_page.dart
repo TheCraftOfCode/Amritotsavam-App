@@ -164,8 +164,8 @@ class _EventsListState extends State<EventsList> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => EventsPage(
-                                              eventData: allEventsList[i],
+                                        builder: (context) => AddEvent(
+                                              eventData: allEventsList[i], eventUpdate: true,
                                             )));
                               },
                               cardDate: allEventsList[i].eventDate,

@@ -59,7 +59,7 @@ class _AddEvent extends State<AddEvent> {
                 child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      'Add Event',
+                      widget.eventUpdate ? 'Update Event' : 'Add Event',
                       style: GoogleFonts.nunito(
                           fontSize: 30,
                           color: colors.primaryTextColor,
@@ -70,6 +70,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
+                    initialValue: widget.eventData.eventName,
                     style:
                         GoogleFonts.montserrat(color: colors.primaryTextColor),
                     validator: (value) {
@@ -103,6 +104,10 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                   padding: constants.textFieldPadding,
                   child: DatePickerWidget(
+                    defaultDate: widget.eventData.eventDate != ""
+                        ? DateFormat("dd/MM/yyyy")
+                            .parse(widget.eventData.eventDate)
+                        : null,
                     context: context,
                     onSaved: (value) {
                       widget.eventData.eventDate =
@@ -112,6 +117,11 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                   padding: constants.textFieldPadding,
                   child: TimePickerWidget(
+                      initialValue: widget.eventData.time != ""
+                          ? TimeOfDay.fromDateTime(DateFormat("h:mm a").parse(
+                              widget.eventData.time,
+                            ))
+                          : null,
                       context: context,
                       onSaved: (value) {
                         widget.eventData.time = formatTimeOfDay(value!);
@@ -119,6 +129,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                   padding: constants.textFieldPadding,
                   child: StringListGenerator(
+                      initialValue: widget.eventData.rules,
                       title: "Rules",
                       onSaved: (value) {
                         widget.eventData.rules = value!;
@@ -126,6 +137,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                   padding: constants.textFieldPadding,
                   child: StringListGenerator(
+                      initialValue: widget.eventData.judgingCriteria,
                       title: "Judgement Criteria",
                       onSaved: (value) {
                         widget.eventData.judgingCriteria = value!;
@@ -133,6 +145,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
+                    initialValue: widget.eventData.location,
                     onSaved: (value) {
                       widget.eventData.location = value!;
                     },
@@ -166,6 +179,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
+                    initialValue: widget.eventData.registrationLink,
                     onSaved: (value) {
                       widget.eventData.registrationLink = value!;
                     },
@@ -203,6 +217,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
+                    initialValue: widget.eventData.submissionLink,
                     onSaved: (value) {
                       widget.eventData.submissionLink = value!;
                     },
@@ -240,6 +255,9 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: DropDownFormField(
+                  defaultValue: widget.eventData.eventType == ""
+                      ? null
+                      : widget.eventData.eventType,
                   list: _eventType,
                   title: 'Pick Event Type',
                   hint: 'Pick an appropriate event type',
@@ -251,6 +269,7 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
+                    initialValue: widget.eventData.eventDescription,
                     onSaved: (value) {
                       widget.eventData.eventDescription = value!;
                     },
@@ -295,16 +314,24 @@ class _AddEvent extends State<AddEvent> {
                       _formKey.currentState?.save();
                       if (_formKey.currentState!.validate()) {
                         print(widget.eventData.toJSON);
-                        var res = await makePostRequest(
-                            widget.eventData.toJSON, "/addEvent", null, true,
-                            context: context);
+                        var res;
+                        if (!widget.eventUpdate) {
+                          res = await makePostRequest(
+                              widget.eventData.toJSON, "/addEvent", null, true,
+                              context: context);
+                        } else {
+                          res = await makePostRequest(widget.eventData.toJSON,
+                              "/updateEvent", null, true,
+                              context: context);
+                        }
                         setState(() {
                           showProgress = false;
                         });
-                        print(json.decode(res.body)['message']);
                         if (res.statusCode == 200) {
                           error = '';
-                          showToast("Event created successfully");
+                          showToast(widget.eventUpdate
+                              ? "Event updated successfully"
+                              : "Event created successfully");
                           Navigator.of(context).pop();
                         } else {
                           setState(() {
@@ -314,7 +341,7 @@ class _AddEvent extends State<AddEvent> {
                       }
                     },
                     child: Text(
-                      'CREATE EVENT',
+                      widget.eventUpdate ? 'UPDATE EVENT' : 'CREATE EVENT',
                       style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
                     ),
                   ),
