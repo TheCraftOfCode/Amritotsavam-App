@@ -10,6 +10,7 @@ class EventData {
   List<dynamic> judgingCriteria;
   String eventType;
   String registrationLink;
+  String eventDescription;
   String submissionLink;
   bool eventOver;
   List<ResultsModel>? results;
@@ -26,5 +27,6 @@ class EventData {
       required this.registrationLink,
       required this.submissionLink,
       required this.eventOver,
+      required this.eventDescription,
       this.results});
 }

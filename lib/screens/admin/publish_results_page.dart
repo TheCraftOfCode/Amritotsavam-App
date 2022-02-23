@@ -54,6 +54,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
           registrationLink: i['registrationLink'],
           submissionLink: i['submissionLink'],
           eventOver: i['eventOver'],
+          eventDescription: i['eventDescription'],
           results: resultData);
       allEventsList.add(data);
     }

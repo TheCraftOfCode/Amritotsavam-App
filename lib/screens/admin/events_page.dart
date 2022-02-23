@@ -62,6 +62,7 @@ class _EventsListState extends State<EventsList> {
           registrationLink: i['registrationLink'],
           submissionLink: i['submissionLink'],
           eventOver: i['eventOver'],
+          eventDescription: i['eventDescription'],
           results: resultData);
 
       allEventsList.add(data);

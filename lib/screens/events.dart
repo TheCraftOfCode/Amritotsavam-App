@@ -71,6 +71,7 @@ class _EventsState extends State<Events> {
           registrationLink: i['registrationLink'],
           submissionLink: i['submissionLink'],
           eventOver: i['eventOver'],
+          eventDescription: i['eventDescription'],
           results: resultData);
       if (DateFormat("dd/MM/yyyy").parse(i['date']).isAfter(givenDate)) {
         listUpcoming.add(data);

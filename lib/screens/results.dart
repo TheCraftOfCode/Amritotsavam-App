@@ -53,6 +53,7 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
           registrationLink: i['registrationLink'],
           submissionLink: i['submissionLink'],
           eventOver: i['eventOver'],
+          eventDescription: i['eventDescription'],
           results: resultData);
       allEventsList.add(data);
     }
@@ -123,8 +124,7 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
                             itemBuilder: (_, i) {
                               return MainContentCardWidget(
                                 cardTitle: allEventsList[i].eventName,
-                                cardSubTitle:
-                                allEventsList[i].eventType,
+                                cardSubTitle: allEventsList[i].eventType,
                                 onTap: () {
                                   Navigator.push(
                                       context,
@@ -140,28 +140,51 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
                           )
                         else
                           Padding(
-                            padding: const EdgeInsets.only(top: 30, left: 15, right: 20),
+                            padding: const EdgeInsets.only(
+                                top: 30, left: 15, right: 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Center(child: Image.asset('assets/events_empty.png', fit: BoxFit.contain,)),
-                                Text("Nothing to see here", style: GoogleFonts.nunito(fontSize: 25, color: colors.primaryTextColor, fontWeight: FontWeight.bold),),
+                                Center(
+                                    child: Image.asset(
+                                  'assets/events_empty.png',
+                                  fit: BoxFit.contain,
+                                )),
+                                Text(
+                                  "Nothing to see here",
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      color: colors.primaryTextColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 20.0, bottom: 40, left: 30, right: 35),
+                                  padding: const EdgeInsets.only(
+                                      top: 20.0,
+                                      bottom: 40,
+                                      left: 30,
+                                      right: 35),
                                   child: Text(
                                     "No results have been published so far, do check in later. Cheers!",
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.nunito(
                                       fontSize: 17,
                                       color: colors.primaryTextColor,
-
                                     ),
                                   ),
                                 ),
-                                Align(alignment: Alignment.topRight,child: ElevatedButton(onPressed: (){
-                                  Navigator.pop(context);
-                                }, child: Text('TAKE ME BACK', style: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.bold),)))
+                                Align(
+                                    alignment: Alignment.topRight,
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          'TAKE ME BACK',
+                                          style: GoogleFonts.nunito(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        )))
                               ],
                             ),
                           ),

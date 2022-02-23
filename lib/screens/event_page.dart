@@ -151,6 +151,18 @@ class _EventsPageState extends State<EventsPage> {
                                 fontSize: 18,
                               )),
                         ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 20),
+                          child: Text(
+                            widget.eventData.eventDescription,
+                            textAlign: TextAlign.justify,
+                            style: GoogleFonts.nunito(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
