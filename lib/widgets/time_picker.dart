@@ -1,17 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
-class DatePickerWidget extends FormField<DateTime> {
-  DatePickerWidget(
+class TimePickerWidget extends FormField<TimeOfDay> {
+  TimePickerWidget(
       {Key? key,
-      FormFieldSetter<DateTime>? onSaved,
-      FormFieldValidator<DateTime>? validator,
-      DateTime? defaultDate,
+      FormFieldSetter<TimeOfDay>? onSaved,
+      FormFieldValidator<TimeOfDay>? validator,
+      TimeOfDay? initialValue,
       required context,
-      hint = 'Please choose a date',
+      hint = 'Please choose event time',
       title,
       AutovalidateMode autoValidateMode = AutovalidateMode.disabled})
       : super(
@@ -19,33 +17,19 @@ class DatePickerWidget extends FormField<DateTime> {
             onSaved: onSaved,
             validator: validator ??
                 (data) {
-                  if (data == null) return "Please choose date";
+                  if (data == null) return "Please choose event time";
                   return null;
                 },
-            initialValue: defaultDate ?? null,
+            initialValue: initialValue ?? TimeOfDay.now(),
             autovalidateMode: autoValidateMode,
-            builder: (FormFieldState<DateTime> state) {
-              Future pickDate(BuildContext context) async {
-                await CupertinoRoundedDatePicker.show(context,
-                    background: colors.textBoxFill,
-                    textColor: colors.primaryTextColor,
-                    initialDate: state.value ?? DateTime.now(),
-                    minimumYear: DateTime.now().year,
-                    minimumDate: DateTime.now(),
-                    maximumYear: DateTime.now().year + 5,
-                    initialDatePickerMode: CupertinoDatePickerMode.date,
-                    borderRadius: 16, onDateTimeChanged: (date) {
-                  state.didChange(date);
-                });
-              }
-
+            builder: (FormFieldState<TimeOfDay> state) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 8),
-                    child: Text(title ?? 'Choose date',
+                    child: Text(title ?? 'Choose time',
                         style: GoogleFonts.montserrat(
                             fontSize: 15, color: Colors.white)),
                   ),
@@ -54,8 +38,12 @@ class DatePickerWidget extends FormField<DateTime> {
                     elevation: 6,
                     margin: const EdgeInsets.only(bottom: 4),
                     child: InkWell(
-                      onTap: () {
-                        pickDate(context);
+                      onTap: () async {
+                        TimeOfDay? pickedTime = await showTimePicker(
+                          context: context,
+                          initialTime: state.value ?? TimeOfDay.now(),
+                        );
+                        state.didChange(pickedTime ?? state.value);
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(
@@ -75,7 +63,7 @@ class DatePickerWidget extends FormField<DateTime> {
                               child: Text(
                                   state.value == null
                                       ? hint
-                                      : '${state.value!.day} / ${state.value!.month} / ${state.value!.year}',
+                                      : "${state.value!.hour} : ${state.value!.minute} ${state.value!.period.name.toUpperCase()}", //TODO: Add time string
                                   style: GoogleFonts.montserrat(
                                       fontSize: 15,
                                       color: state.hasError

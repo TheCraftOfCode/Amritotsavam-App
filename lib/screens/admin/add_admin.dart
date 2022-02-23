@@ -136,7 +136,7 @@ class _AddAdminState extends State<AddAdmin> {
                 ),
                 Expanded(child: Container()),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0, left: 20),
+                  padding: const EdgeInsets.only(top: 50.0, left: 20, bottom: 20),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: ElevatedButton(
