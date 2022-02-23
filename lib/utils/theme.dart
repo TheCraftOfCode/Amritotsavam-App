@@ -45,6 +45,8 @@ class darkTheme {
       dialTextColor: colors.primaryTextColor,
       dialHandColor: colors.buttonColor,
       helpTextStyle: GoogleFonts.nunito(color: colors.primaryTextColor,),),
+      accentColor: colors.buttonColor,
+      focusColor: colors.buttonColor
     );
   }
 }
