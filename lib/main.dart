@@ -139,10 +139,13 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-//TODO: Add forgot password
-//TODO: Re-enable verification
-//TODO: Redesign login, sign up
-//TODO: Change color scheme
-//TODO: ExpansionPanel add
+
+
+
+
 //TODO: Change home page nav bar
-//TODO: Add admin console
+//TODO: Change pictures - generate SVGs
+//TODO: Find event type vectors
+//TODO: Dialogue asking lose changes blah blah using alert_dialog widget
+//TODO: Change FAB colors (all secondary colors - focus colors)
+//TODO: Replace admin page empty states (with different text)

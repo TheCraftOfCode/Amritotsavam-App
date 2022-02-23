@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results.dart';
-import 'package:amritotsavam_app/screens/result_page.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
 import 'package:http/http.dart' as http;

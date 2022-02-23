@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/screens/admin/add_event.dart';
 import 'package:amritotsavam_app/screens/admin/admin_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/profile_page.dart';

@@ -36,6 +36,15 @@ class darkTheme {
             ),
             textStyle: MaterialStateProperty.all(GoogleFonts.nunito(color: colors.accentColor)),
           )),
+      timePickerTheme: TimePickerThemeData(backgroundColor: colors.gradientEndColor,
+      hourMinuteColor: colors.buttonColor,
+      hourMinuteTextColor: colors.primaryTextColor,
+      dayPeriodTextColor: colors.primaryTextColor,
+      entryModeIconColor: colors.primaryTextColor,
+      dialBackgroundColor: colors.gradientBeginColor,
+      dialTextColor: colors.primaryTextColor,
+      dialHandColor: colors.buttonColor,
+      helpTextStyle: GoogleFonts.nunito(color: colors.primaryTextColor,),),
     );
   }
 }
