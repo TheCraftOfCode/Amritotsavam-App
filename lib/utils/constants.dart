@@ -11,6 +11,9 @@ const String emailIdKey = "USER_EMAIL";
 const String userIdKey = "USER_ID";
 const textFieldPadding =
     EdgeInsets.only(left: 20, right: 20, top: 15, bottom: 10);
+const String urlPattern =
+    r'^((?:.|\n)*?)((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?)';
+
 
 const user = "user";
 const admin = "admin";
