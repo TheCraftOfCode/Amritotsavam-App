@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "899131591839",
+    "project_id": "amritotsavam-console",
+    "storage_bucket": "amritotsavam-console.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:899131591839:android:3fca339f883ebe621426aa",
+        "android_client_info": {
+          "package_name": "com.example.amritotsavam_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "899131591839-6st4huj3mhf7ev322b1slu3h9qinuvuf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLrLmycj78ovuVOPCZBkt6iLIgP0PWq8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "899131591839-6st4huj3mhf7ev322b1slu3h9qinuvuf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
