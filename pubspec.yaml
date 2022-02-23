@@ -48,6 +48,9 @@ dependencies:
   intl: ^0.17.0
   flutter_rounded_date_picker: ^2.0.2
   lottie:
+  firebase_core: ^1.12.0
+  firebase_messaging: ^11.2.6
+  flutter_local_notifications: ^9.3.2
 
 
 dev_dependencies:
