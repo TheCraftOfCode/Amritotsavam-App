@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:intl/intl.dart';
 
 class TimePickerWidget extends FormField<TimeOfDay> {
   TimePickerWidget(
@@ -23,6 +24,12 @@ class TimePickerWidget extends FormField<TimeOfDay> {
             initialValue: initialValue ?? TimeOfDay.now(),
             autovalidateMode: autoValidateMode,
             builder: (FormFieldState<TimeOfDay> state) {
+              String formatTimeOfDay(TimeOfDay tod) {
+                final now = DateTime.now();
+                final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+                final format = DateFormat.jm();  //"6:00 AM"
+                return format.format(dt);
+              }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -63,7 +70,7 @@ class TimePickerWidget extends FormField<TimeOfDay> {
                               child: Text(
                                   state.value == null
                                       ? hint
-                                      : "${state.value!.hour} : ${state.value!.minute} ${state.value!.period.name.toUpperCase()}", //TODO: Add time string
+                                      : formatTimeOfDay(state.value!), //TODO: Add time string
                                   style: GoogleFonts.montserrat(
                                       fontSize: 15,
                                       color: state.hasError

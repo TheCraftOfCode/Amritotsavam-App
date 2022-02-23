@@ -38,15 +38,6 @@ class UnorderedListItem extends StatelessWidget {
             style: GoogleFonts.nunito(color: colors.primaryTextColor),
           ),
         ),
-        Material(
-          color: Colors.transparent,
-          child: IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-
-            },
-          ),
-        )
       ],
     );
   }

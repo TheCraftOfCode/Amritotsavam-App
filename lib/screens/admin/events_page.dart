@@ -77,8 +77,25 @@ class _EventsListState extends State<EventsList> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddEvent()));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => AddEvent(
+                        eventUpdate: false,
+                        eventData: EventData(
+                            time: '',
+                            registrationLink: '',
+                            eventDescription: '',
+                            eventDate: '',
+                            eventName: '',
+                            rules: [],
+                            eventOver: false,
+                            id: '',
+                            eventType: '',
+                            judgingCriteria: [],
+                            location: '',
+                            submissionLink: ''),
+                      )));
         },
         child: const Icon(Icons.add),
       ),
@@ -142,8 +159,7 @@ class _EventsListState extends State<EventsList> {
                           itemBuilder: (_, i) {
                             return _MainContentCardWidget(
                               cardTitle: allEventsList[i].eventName,
-                              cardSubTitle:
-                              allEventsList[i].eventType,
+                              cardSubTitle: allEventsList[i].eventType,
                               onTap: () {
                                 Navigator.push(
                                     context,
@@ -311,9 +327,9 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                       print(response.body);
                                       if (response.statusCode == 200) {
                                         widget.removeData();
-                                        showToast("Deleted event successfully!");
-                                      }
-                                      else{
+                                        showToast(
+                                            "Deleted event successfully!");
+                                      } else {
                                         showToast("Could not delete event!");
                                       }
                                     }, "Delete Event",

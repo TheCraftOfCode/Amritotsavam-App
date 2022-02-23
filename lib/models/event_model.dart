@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amritotsavam_app/models/results_model.dart';
 
 class EventData {
@@ -29,4 +31,20 @@ class EventData {
       required this.eventOver,
       required this.eventDescription,
       this.results});
+
+  get toJSON {
+    return json.encode({
+      "id": id,
+      "eventName": eventName,
+      "date": eventDate,
+      "time": time,
+      "location": location,
+      "rules": rules,
+      "registrationLink": registrationLink,
+      "submissionLink": submissionLink,
+      "judgingCriteria": judgingCriteria,
+      "eventType": eventType,
+      "eventDescription": eventDescription
+    });
+  }
 }

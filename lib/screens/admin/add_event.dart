@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/date_picker.dart';
 import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
@@ -8,20 +12,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
+import 'package:intl/intl.dart';
+import 'package:oktoast/oktoast.dart';
 
 class AddEvent extends StatefulWidget {
-  const AddEvent({Key? key}) : super(key: key);
+  const AddEvent({Key? key, required this.eventUpdate, required this.eventData})
+      : super(key: key);
+  final bool eventUpdate;
+  final EventData eventData;
 
   @override
   _AddEvent createState() => _AddEvent();
 }
 
 class _AddEvent extends State<AddEvent> {
-  final _eventNameController = TextEditingController();
-  final _eventLocationController = TextEditingController();
-  final _registrationLinkController = TextEditingController();
-  final _submissionLinkController = TextEditingController();
-  final _eventDescriptionController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String error = "";
   bool showProgress = false;
@@ -33,6 +37,13 @@ class _AddEvent extends State<AddEvent> {
     'THEATRE',
     'INFORMALS'
   ];
+
+  String formatTimeOfDay(TimeOfDay tod) {
+    final now = DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+    final format = DateFormat.jm(); //"6:00 AM"
+    return format.format(dt);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +70,6 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
-                    controller: _eventNameController,
                     style:
                         GoogleFonts.montserrat(color: colors.primaryTextColor),
                     validator: (value) {
@@ -68,6 +78,9 @@ class _AddEvent extends State<AddEvent> {
                       } else {
                         return null;
                       }
+                    },
+                    onSaved: (value) {
+                      widget.eventData.eventName = value!;
                     },
                     decoration: InputDecoration(
                       label: Text('Event Name',
@@ -87,32 +100,42 @@ class _AddEvent extends State<AddEvent> {
                           borderRadius: BorderRadius.circular(5)),
                     )),
               ),
-              //TODO: Add Date Picker
               Padding(
                   padding: constants.textFieldPadding,
-                  child: DatePickerWidget(context: context)),
+                  child: DatePickerWidget(
+                    context: context,
+                    onSaved: (value) {
+                      widget.eventData.eventDate =
+                          DateFormat('dd/MM/yyyy').format(value!);
+                    },
+                  )),
               Padding(
                   padding: constants.textFieldPadding,
-                  child: TimePickerWidget(context: context)),
+                  child: TimePickerWidget(
+                      context: context,
+                      onSaved: (value) {
+                        widget.eventData.time = formatTimeOfDay(value!);
+                      })),
               Padding(
                   padding: constants.textFieldPadding,
                   child: StringListGenerator(
                       title: "Rules",
                       onSaved: (value) {
-                        print(value);
+                        widget.eventData.rules = value!;
                       })),
               Padding(
                   padding: constants.textFieldPadding,
                   child: StringListGenerator(
                       title: "Judgement Criteria",
                       onSaved: (value) {
-                        print(value);
+                        widget.eventData.judgingCriteria = value!;
                       })),
-              //TODO: Add Time Picker
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
-                    controller: _eventLocationController,
+                    onSaved: (value) {
+                      widget.eventData.location = value!;
+                    },
                     style:
                         GoogleFonts.montserrat(color: colors.primaryTextColor),
                     validator: (value) {
@@ -143,17 +166,19 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
-                    controller: _registrationLinkController,
+                    onSaved: (value) {
+                      widget.eventData.registrationLink = value!;
+                    },
                     style:
                         GoogleFonts.montserrat(color: colors.primaryTextColor),
                     validator: (value) {
                       if (value == "" || value == null) {
                         return "Please enter registration URL";
                       } else {
-                        RegExp regExp = RegExp(constants.urlPattern);
-                        if (!(regExp.hasMatch(value))) {
-                          return 'Please enter valid url';
-                        }
+                        // RegExp regExp = RegExp(constants.urlPattern);
+                        // if (!(regExp.hasMatch(value))) {
+                        //   return 'Please enter valid url';
+                        // }
                         return null;
                       }
                     },
@@ -178,17 +203,19 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
-                    controller: _submissionLinkController,
+                    onSaved: (value) {
+                      widget.eventData.submissionLink = value!;
+                    },
                     style:
                         GoogleFonts.montserrat(color: colors.primaryTextColor),
                     validator: (value) {
                       if (value == "" || value == null) {
                         return "Please enter submission URL";
                       } else {
-                        RegExp regExp = RegExp(constants.urlPattern);
-                        if (!(regExp.hasMatch(value))) {
-                          return 'Please enter valid url';
-                        }
+                        // RegExp regExp = RegExp(constants.urlPattern);
+                        // if (!(regExp.hasMatch(value))) {
+                        //   return 'Please enter valid url';
+                        // }
                         return null;
                       }
                     },
@@ -217,17 +244,16 @@ class _AddEvent extends State<AddEvent> {
                   title: 'Pick Event Type',
                   hint: 'Pick an appropriate event type',
                   onSaved: (data) {
-                    print(data);
-                    //roleData = data;
-
-                    //TODO: Save
+                    widget.eventData.eventType = data;
                   },
                 ),
               ),
               Padding(
                 padding: constants.textFieldPadding,
                 child: TextFormField(
-                    controller: _eventDescriptionController,
+                    onSaved: (value) {
+                      widget.eventData.eventDescription = value!;
+                    },
                     style:
                         GoogleFonts.montserrat(color: colors.primaryTextColor),
                     validator: (value) {
@@ -266,8 +292,25 @@ class _AddEvent extends State<AddEvent> {
                   alignment: Alignment.bottomLeft,
                   child: ElevatedButton(
                     onPressed: () async {
+                      _formKey.currentState?.save();
                       if (_formKey.currentState!.validate()) {
-                        _formKey.currentState?.save();
+                        print(widget.eventData.toJSON);
+                        var res = await makePostRequest(
+                            widget.eventData.toJSON, "/addEvent", null, true,
+                            context: context);
+                        setState(() {
+                          showProgress = false;
+                        });
+                        print(json.decode(res.body)['message']);
+                        if (res.statusCode == 200) {
+                          error = '';
+                          showToast("Event created successfully");
+                          Navigator.of(context).pop();
+                        } else {
+                          setState(() {
+                            error = json.decode(res.body)['message'];
+                          });
+                        }
                       }
                     },
                     child: Text(
