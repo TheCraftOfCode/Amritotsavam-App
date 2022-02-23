@@ -180,17 +180,31 @@ class _EventsListState extends State<EventsList> {
                         )
                       else
                         Padding(
-                          padding: const EdgeInsets.only(top: 50),
-                          child: Center(
-                            child: Text(
-                              "No results have been published so far",
-                              style: GoogleFonts.nunito(
-                                fontSize: 17,
-                                color: colors.primaryTextColor,
+                          padding: const EdgeInsets.only(top: 30, left: 15, right: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Center(child: Image.asset('assets/events_empty.png', fit: BoxFit.contain,)),
+                              Text("Nothing to see here", style: GoogleFonts.nunito(fontSize: 25, color: colors.primaryTextColor, fontWeight: FontWeight.bold),),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 20.0, bottom: 50, left: 30, right: 35),
+                                child: Text(
+                                  "No events have been published so far, do check in later (or create some!). Cheers!",
+                                  textAlign: TextAlign.center,
+                                  style: GoogleFonts.nunito(
+                                    fontSize: 17,
+                                    color: colors.primaryTextColor,
+
+                                  ),
+                                ),
                               ),
-                            ),
+                              Align(alignment: Alignment.topLeft,child: ElevatedButton(onPressed: (){
+                                Navigator.pop(context);
+                              }, child: Text('TAKE ME BACK', style: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.bold),)))
+                            ],
                           ),
-                        )
+                        ),
                     ],
                   ),
                 ),
