@@ -2,6 +2,7 @@ import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/date_picker.dart';
 import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
+import 'package:amritotsavam_app/widgets/string_list_generator.dart';
 import 'package:amritotsavam_app/widgets/time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -93,6 +94,20 @@ class _AddEvent extends State<AddEvent> {
               Padding(
                   padding: constants.textFieldPadding,
                   child: TimePickerWidget(context: context)),
+              Padding(
+                  padding: constants.textFieldPadding,
+                  child: StringListGenerator(
+                      title: "Rules",
+                      onSaved: (value) {
+                        print(value);
+                      })),
+              Padding(
+                  padding: constants.textFieldPadding,
+                  child: StringListGenerator(
+                      title: "Judgement Criteria",
+                      onSaved: (value) {
+                        print(value);
+                      })),
               //TODO: Add Time Picker
               Padding(
                 padding: constants.textFieldPadding,

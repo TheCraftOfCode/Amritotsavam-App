@@ -4,12 +4,13 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 class UnorderedList extends StatelessWidget {
   const UnorderedList(this.texts, {Key? key}) : super(key: key);
-  final List texts;
+  final List? texts;
+
 
   @override
   Widget build(BuildContext context) {
     var widgetList = <Widget>[];
-    for (var text in texts) {
+    for (var text in texts!) {
       // Add list item
       widgetList.add(UnorderedListItem(text));
       // Add space between items
@@ -21,14 +22,14 @@ class UnorderedList extends StatelessWidget {
 }
 
 class UnorderedListItem extends StatelessWidget {
-  const UnorderedListItem(this.text);
+  const UnorderedListItem(this.text, {Key? key}) : super(key: key);
 
   final String text;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         Text("• ", style: GoogleFonts.nunito(color: colors.primaryTextColor)),
         Expanded(
@@ -37,6 +38,15 @@ class UnorderedListItem extends StatelessWidget {
             style: GoogleFonts.nunito(color: colors.primaryTextColor),
           ),
         ),
+        Material(
+          color: Colors.transparent,
+          child: IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+
+            },
+          ),
+        )
       ],
     );
   }

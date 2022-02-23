@@ -1,6 +1,5 @@
 import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/screens/result_page.dart';
-import 'package:amritotsavam_app/screens/results.dart';
 import 'package:amritotsavam_app/widgets/unordered_list.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
