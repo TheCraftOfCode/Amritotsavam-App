@@ -1,4 +1,5 @@
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
+import 'package:amritotsavam_app/widgets/date_picker.dart';
 import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
 import 'package:flutter/material.dart';
@@ -85,6 +86,9 @@ class _AddEvent extends State<AddEvent> {
                     )),
               ),
               //TODO: Add Date Picker
+              Padding(
+                  padding: constants.textFieldPadding,
+                  child: DatePickerWidget(context: context)),
               //TODO: Add Time Picker
               Padding(
                 padding: constants.textFieldPadding,
