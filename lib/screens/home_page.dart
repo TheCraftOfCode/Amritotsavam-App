@@ -10,6 +10,8 @@ import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:amritotsavam_app/widgets/u_nav_bar.dart';
+import 'package:amritotsavam_app/widgets/u_nav_bar_item.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -51,44 +53,44 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
             return data.hasData
                 ? Scaffold(
-                    bottomNavigationBar: BottomNavigationBar(
-                      currentIndex: currentIndex,
-                      onTap: (int index) {
-                        setState(() {
-                          currentIndex = index;
-                        });
-                        pageController.animateToPage(
-                          index,
-                          duration: const Duration(
-                            milliseconds: 200,
-                          ),
-                          curve: Curves.easeIn,
-                        );
-                      },
-                      backgroundColor: const Color(0xff302B62),
-                      unselectedItemColor: Colors.white,
-                      type: BottomNavigationBarType.fixed,
-                      items: [
-                        const BottomNavigationBarItem(
-                          icon: Icon(Icons.home),
-                          label: 'Home',
-                        ),
-                        const BottomNavigationBarItem(
-                          icon: Icon(Icons.info_outline),
-                          label: 'About',
-                        ),
-                        const BottomNavigationBarItem(
-                          icon: Icon(Icons.person),
-                          label: 'Profile',
-                        ),
-                        if (data.data == constants.admin ||
-                            data.data == constants.superAdmin)
-                          const BottomNavigationBarItem(
-                            icon: Icon(Icons.admin_panel_settings_outlined),
-                            label: 'Admin',
-                          ),
-                      ],
+              bottomNavigationBar: BottomNavigationBar(
+                currentIndex: currentIndex,
+                onTap: (int index) {
+                  setState(() {
+                    currentIndex = index;
+                  });
+                  pageController.animateToPage(
+                    index,
+                    duration: const Duration(
+                      milliseconds: 200,
                     ),
+                    curve: Curves.easeIn,
+                  );
+                },
+                backgroundColor: const Color(0xff302B62),
+                unselectedItemColor: Colors.white,
+                type: BottomNavigationBarType.fixed,
+                items: [
+                  const BottomNavigationBarItem(
+                    icon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  const BottomNavigationBarItem(
+                    icon: Icon(Icons.info_outline),
+                    label: 'About',
+                  ),
+                  const BottomNavigationBarItem(
+                    icon: Icon(Icons.person),
+                    label: 'Profile',
+                  ),
+                  if (data.data == constants.admin ||
+                      data.data == constants.superAdmin)
+                    const BottomNavigationBarItem(
+                      icon: Icon(Icons.admin_panel_settings_outlined),
+                      label: 'Admin',
+                    ),
+                ],
+              ),
                     body: PageView(
                       controller: pageController,
                       onPageChanged: (index) {
@@ -168,9 +170,27 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   )
-                : const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                : Container(
+              decoration: constants.gradientDecoration,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Center(child: CircularProgressIndicator()),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    child: Center(
+                      child: Text(
+                        'Please wait...',
+                        style: GoogleFonts.nunito(
+                            color: colors.primaryTextColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 17),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            );
           }),
     );
   }
