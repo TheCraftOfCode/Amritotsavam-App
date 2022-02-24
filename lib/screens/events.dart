@@ -4,6 +4,7 @@ import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/screens/home_page.dart';
+import 'package:amritotsavam_app/utils/get_event_svg.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -152,8 +153,7 @@ class _EventsState extends State<Events> {
                             itemBuilder: (_, i) {
                               return MainContentCardWidget(
                                 cardTitle: allEventsList[i].eventName,
-                                cardSubTitle:
-                                allEventsList[i].eventType,
+                                cardSubTitle: allEventsList[i].eventType,
                                 onTap: () {
                                   Navigator.push(
                                       context,
@@ -168,31 +168,54 @@ class _EventsState extends State<Events> {
                           )
                         else
                           Padding(
-                            padding: const EdgeInsets.only(top: 30, left: 15, right: 20),
+                            padding: const EdgeInsets.only(
+                                top: 30, left: 15, right: 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Center(child: Image.asset('assets/events_empty.png', fit: BoxFit.contain,)),
-                                  Text("Nothing to see here", style: GoogleFonts.nunito(fontSize: 25, color: colors.primaryTextColor, fontWeight: FontWeight.bold),),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 20.0, bottom: 40, left: 30, right: 35),
-                                    child: Text(
-                                      "No events have been published so far, do check in later. Cheers!",
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.nunito(
-                                        fontSize: 17,
-                                        color: colors.primaryTextColor,
-
-                                      ),
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Center(
+                                    child: Image.asset(
+                                  'assets/events_empty.png',
+                                  fit: BoxFit.contain,
+                                )),
+                                Text(
+                                  "Nothing to see here",
+                                  style: GoogleFonts.nunito(
+                                      fontSize: 25,
+                                      color: colors.primaryTextColor,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 20.0,
+                                      bottom: 40,
+                                      left: 30,
+                                      right: 35),
+                                  child: Text(
+                                    "No events have been published so far, do check in later. Cheers!",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.nunito(
+                                      fontSize: 17,
+                                      color: colors.primaryTextColor,
                                     ),
                                   ),
-                                  Align(alignment: Alignment.topRight,child: ElevatedButton(onPressed: (){
-                                    Navigator.pop(context);
-                                  }, child: Text('TAKE ME BACK', style: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.bold),)))
-                                ],
-                              ),
+                                ),
+                                Align(
+                                    alignment: Alignment.topRight,
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text(
+                                          'TAKE ME BACK',
+                                          style: GoogleFonts.nunito(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        )))
+                              ],
                             ),
+                          ),
                       ],
                     ),
                   ),
@@ -279,7 +302,8 @@ class _HorizontalListViewState extends State<_HorizontalListView> {
                     widget.list[index].eventName,
                     widget.list[index].eventDate,
                     () {},
-                    currentPagePosition == index);
+                    currentPagePosition == index,
+                    widget.list[index].eventType);
               },
             ),
           )
@@ -289,7 +313,7 @@ class _HorizontalListViewState extends State<_HorizontalListView> {
   }
 }
 
-Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus) {
+Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus, eventType) {
   return Padding(
       padding: const EdgeInsets.only(bottom: 20, left: 15),
       child: Card(
@@ -308,13 +332,8 @@ Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus) {
             Positioned(
                 right: 0,
                 child: Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Image.asset(
-                    'assets/mask.png',
-                    fit: BoxFit.fill,
-                    width: 70,
-                  ),
-                )),
+                    padding: const EdgeInsets.all(10),
+                    child: getEventImage(eventType, 70.0))),
             Padding(
               padding: const EdgeInsets.all(12),
               child: Column(

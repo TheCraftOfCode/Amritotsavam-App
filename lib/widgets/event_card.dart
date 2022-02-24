@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/utils/get_event_svg.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
@@ -103,11 +104,9 @@ class _MainContentCardWidgetState extends State<MainContentCardWidget> {
                   ),
                 ),
                 Positioned(
-                    child: Image.asset(
-                      'assets/mask.png',
-                      width: horizontalCenteredDisplacement,
-                      fit: BoxFit.fill,
-                    ))
+                  child: getEventImage(
+                      widget.cardSubTitle, horizontalCenteredDisplacement),
+                )
               ],
             );
           },

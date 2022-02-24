@@ -45,6 +45,6 @@ Future<http.Response> makePostRequest(
 
     return res;
   } catch (e) {
-    return http.Response('Could not connect to server', 408);
+    return http.Response('Could not connect to server: ${e}', 408);
   }
 }

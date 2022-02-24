@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/admin/add_event.dart';
+import 'package:amritotsavam_app/utils/get_event_svg.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -160,12 +161,14 @@ class _EventsListState extends State<EventsList> {
                             return _MainContentCardWidget(
                               cardTitle: allEventsList[i].eventName,
                               cardSubTitle: allEventsList[i].eventType,
+                              eventType: allEventsList[i].eventType,
                               onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => AddEvent(
-                                              eventData: allEventsList[i], eventUpdate: true,
+                                              eventData: allEventsList[i],
+                                              eventUpdate: true,
                                             )));
                               },
                               cardDate: allEventsList[i].eventDate,
@@ -180,28 +183,48 @@ class _EventsListState extends State<EventsList> {
                         )
                       else
                         Padding(
-                          padding: const EdgeInsets.only(top: 30, left: 15, right: 20),
+                          padding: const EdgeInsets.only(
+                              top: 30, left: 15, right: 20),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Center(child: Image.asset('assets/events_empty.png', fit: BoxFit.contain,)),
-                              Text("Nothing to see here", style: GoogleFonts.nunito(fontSize: 25, color: colors.primaryTextColor, fontWeight: FontWeight.bold),),
+                              Center(
+                                  child: Image.asset(
+                                'assets/events_empty.png',
+                                fit: BoxFit.contain,
+                              )),
+                              Text(
+                                "Nothing to see here",
+                                style: GoogleFonts.nunito(
+                                    fontSize: 25,
+                                    color: colors.primaryTextColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
                               Padding(
-                                padding: const EdgeInsets.only(top: 20.0, bottom: 50, left: 30, right: 35),
+                                padding: const EdgeInsets.only(
+                                    top: 20.0, bottom: 50, left: 30, right: 35),
                                 child: Text(
                                   "No events have been published so far, do check in later (or create some!). Cheers!",
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.nunito(
                                     fontSize: 17,
                                     color: colors.primaryTextColor,
-
                                   ),
                                 ),
                               ),
-                              Align(alignment: Alignment.topLeft,child: ElevatedButton(onPressed: (){
-                                Navigator.pop(context);
-                              }, child: Text('TAKE ME BACK', style: GoogleFonts.nunito(fontSize: 16, fontWeight: FontWeight.bold),)))
+                              Align(
+                                  alignment: Alignment.topLeft,
+                                  child: ElevatedButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'TAKE ME BACK',
+                                        style: GoogleFonts.nunito(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      )))
                             ],
                           ),
                         ),
@@ -223,7 +246,8 @@ class _MainContentCardWidget extends StatefulWidget {
       required this.cardDate,
       required this.onTap,
       required this.id,
-      required this.removeData})
+      required this.removeData,
+      required this.eventType})
       : super(key: key);
   final String cardTitle;
   final String cardSubTitle;
@@ -231,6 +255,7 @@ class _MainContentCardWidget extends StatefulWidget {
   final VoidCallback onTap;
   final VoidCallback removeData;
   final String id;
+  final String eventType;
 
   @override
   _MainContentCardWidgetState createState() => _MainContentCardWidgetState();
@@ -359,11 +384,9 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                   ),
                 ),
                 Positioned(
-                    child: Image.asset(
-                  'assets/mask.png',
-                  width: horizontalCenteredDisplacement,
-                  fit: BoxFit.fill,
-                ))
+                  child: getEventImage(
+                      widget.eventType, horizontalCenteredDisplacement),
+                )
               ],
             );
           },

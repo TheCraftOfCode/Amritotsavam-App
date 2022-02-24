@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
-const String networkAddress = 'amritotsavam-api.herokuapp.com';
-const bool isHTTPS = true;
+//const String networkAddress = 'amritotsavam-api.herokuapp.com';
+const String networkAddress = '10.0.2.2:8000';
+const bool isHTTPS = false;
 const String storageJWTKey = "USER_AUTH_JWT";
 const String nameKey = "USER_NAME";
 const String roleKey = "USER_ROLE";
@@ -14,7 +15,14 @@ const textFieldPadding =
 const String urlPattern =
     r'^((?:.|\n)*?)((http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)([-A-Z0-9.]+)(/[-A-Z0-9+&@#/%=~_|!:,.;]*)?(\?[A-Z0-9+&@#/%=~_|!:‌​,.;]*)?)';
 
-
+const List<String> eventType = [
+  'FINE ARTS',
+  'LITERARY',
+  'DANCE',
+  'MUSIC',
+  'THEATRE',
+  'INFORMALS'
+];
 const user = "user";
 const admin = "admin";
 const superAdmin = "super_admin";

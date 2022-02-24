@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/utils/constants.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/date_picker.dart';
@@ -29,14 +30,6 @@ class _AddEvent extends State<AddEvent> {
   final _formKey = GlobalKey<FormState>();
   String error = "";
   bool showProgress = false;
-  final List<String> _eventType = [
-    'FINE ARTS',
-    'LITERARY',
-    'DANCE',
-    'MUSIC',
-    'THEATRE',
-    'INFORMALS'
-  ];
 
   String formatTimeOfDay(TimeOfDay tod) {
     final now = DateTime.now();
@@ -110,9 +103,9 @@ class _AddEvent extends State<AddEvent> {
                         : null,
                     context: context,
                     onSaved: (value) {
-                      if(value != null) {
+                      if (value != null) {
                         widget.eventData.eventDate =
-                          DateFormat('dd/MM/yyyy').format(value);
+                            DateFormat('dd/MM/yyyy').format(value);
                       }
                     },
                   )),
@@ -260,7 +253,7 @@ class _AddEvent extends State<AddEvent> {
                   defaultValue: widget.eventData.eventType == ""
                       ? null
                       : widget.eventData.eventType,
-                  list: _eventType,
+                  list: eventType,
                   title: 'Pick Event Type',
                   hint: 'Pick an appropriate event type',
                   onSaved: (data) {
