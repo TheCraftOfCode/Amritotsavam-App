@@ -8,6 +8,7 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
+import 'package:amritotsavam_app/widgets/vertical_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/widgets/u_nav_bar.dart';
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
     height -= kToolbarHeight;
     height -= kBottomNavigationBarHeight;
     var aspectRatioOne = (width / 2) / ((height - 10) / 2);
-    var aspectRatioTwo = (width / 2) / ((height - 10) / 3);
+    var aspectRatioTwo = (width / 2) / ((height - 40) / 3);
     var appBarTitle = currentIndex == 0 ? "Home" : "About";
 
     ///(width / columnCount) / (height / minRowCountOnScreen)
@@ -56,44 +57,44 @@ class _HomePageState extends State<HomePage> {
           builder: (BuildContext context, AsyncSnapshot<dynamic> data) {
             return data.hasData
                 ? Scaffold(
-              bottomNavigationBar: BottomNavigationBar(
-                currentIndex: currentIndex,
-                onTap: (int index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                  pageController.animateToPage(
-                    index,
-                    duration: const Duration(
-                      milliseconds: 200,
+                    bottomNavigationBar: BottomNavigationBar(
+                      currentIndex: currentIndex,
+                      onTap: (int index) {
+                        setState(() {
+                          currentIndex = index;
+                        });
+                        pageController.animateToPage(
+                          index,
+                          duration: const Duration(
+                            milliseconds: 200,
+                          ),
+                          curve: Curves.easeIn,
+                        );
+                      },
+                      backgroundColor: const Color(0xff302B62),
+                      unselectedItemColor: Colors.white,
+                      type: BottomNavigationBarType.fixed,
+                      items: [
+                        const BottomNavigationBarItem(
+                          icon: Icon(Icons.home),
+                          label: 'Home',
+                        ),
+                        const BottomNavigationBarItem(
+                          icon: Icon(Icons.info_outline),
+                          label: 'About',
+                        ),
+                        const BottomNavigationBarItem(
+                          icon: Icon(Icons.person),
+                          label: 'Profile',
+                        ),
+                        if (data.data == constants.admin ||
+                            data.data == constants.superAdmin)
+                          const BottomNavigationBarItem(
+                            icon: Icon(Icons.admin_panel_settings_outlined),
+                            label: 'Admin',
+                          ),
+                      ],
                     ),
-                    curve: Curves.easeIn,
-                  );
-                },
-                backgroundColor: const Color(0xff302B62),
-                unselectedItemColor: Colors.white,
-                type: BottomNavigationBarType.fixed,
-                items: [
-                  const BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                  ),
-                  const BottomNavigationBarItem(
-                    icon: Icon(Icons.info_outline),
-                    label: 'About',
-                  ),
-                  const BottomNavigationBarItem(
-                    icon: Icon(Icons.person),
-                    label: 'Profile',
-                  ),
-                  if (data.data == constants.admin ||
-                      data.data == constants.superAdmin)
-                    const BottomNavigationBarItem(
-                      icon: Icon(Icons.admin_panel_settings_outlined),
-                      label: 'Admin',
-                    ),
-                ],
-              ),
                     body: PageView(
                       controller: pageController,
                       onPageChanged: (index) {
@@ -150,16 +151,86 @@ class _HomePageState extends State<HomePage> {
                                             fontWeight: FontWeight.bold),
                                       )),
                                 ),
-                                DataCard('Central Coordinators',
-                                    '', const CentralCoordinators()),
-                                DataCard(
-                                    'Faculty Coordinators',
-                                    'assets/svg/event_managers.svg',
-                                    const FacultyCoordinators()),
-                                DataCard(
-                                    'Team Members',
-                                    'assets/svg/team_members.svg',
-                                    const SignUpPage())
+                                // DataCard('Central Coordinators',
+                                //     '', const CentralCoordinators()),
+                                // DataCard(
+                                //     'Faculty Coordinators',
+                                //     'assets/svg/event_managers.svg',
+                                //     const FacultyCoordinators()),
+                                // DataCard(
+                                //     'Team Members',
+                                //     'assets/svg/team_members.svg',
+                                //     const SignUpPage())
+                                Expanded(
+                                  child: GridView.count(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: aspectRatioTwo,
+                                    crossAxisSpacing: 10,
+                                    mainAxisSpacing: 10,
+                                    children: [
+                                      VerticalCard(
+                                          title: "title",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                              colors.dataCardColor,
+                                          textAlign: TextAlign.center,
+                                          fontSize: 18,
+                                          route: HomePage(),
+                                          gradientEndingColor:
+                                              colors.dataCardColor),
+                                      VerticalCard(
+                                          title: "title",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                          colors.dataCardColor,
+                                          textAlign: TextAlign.center,
+                                          fontSize: 18,
+                                          route: HomePage(),
+                                          gradientEndingColor:
+                                          colors.dataCardColor),
+                                      VerticalCard(
+                                          title: "title",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                          colors.dataCardColor,
+                                          textAlign: TextAlign.center,
+                                          fontSize: 18,
+                                          route: HomePage(),
+                                          gradientEndingColor:
+                                          colors.dataCardColor),
+                                      VerticalCard(
+                                          title: "title",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                          colors.dataCardColor,
+                                          textAlign: TextAlign.center,
+                                          fontSize: 18,
+                                          route: HomePage(),
+                                          gradientEndingColor:
+                                          colors.dataCardColor),
+                                      VerticalCard(
+                                          title: "title",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                          colors.dataCardColor,
+                                          textAlign: TextAlign.center,
+                                          fontSize: 18,
+                                          route: HomePage(),
+                                          gradientEndingColor:
+                                          colors.dataCardColor),
+                                      VerticalCard(
+                                          title: "title",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                          colors.dataCardColor,
+                                          textAlign: TextAlign.center,
+                                          fontSize: 18,
+                                          route: HomePage(),
+                                          gradientEndingColor:
+                                          colors.dataCardColor)
+                                    ],
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -174,26 +245,26 @@ class _HomePageState extends State<HomePage> {
                     ),
                   )
                 : Container(
-              decoration: constants.gradientDecoration,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Center(child: CircularProgressIndicator()),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 20),
-                    child: Center(
-                      child: Text(
-                        'Please wait...',
-                        style: GoogleFonts.nunito(
-                            color: colors.primaryTextColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 17),
-                      ),
+                    decoration: constants.gradientDecoration,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Center(child: CircularProgressIndicator()),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Center(
+                            child: Text(
+                              'Please wait...',
+                              style: GoogleFonts.nunito(
+                                  color: colors.primaryTextColor,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 17),
+                            ),
+                          ),
+                        )
+                      ],
                     ),
-                  )
-                ],
-              ),
-            );
+                  );
           }),
     );
   }
