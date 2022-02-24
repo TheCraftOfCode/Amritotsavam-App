@@ -13,6 +13,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/widgets/u_nav_bar.dart';
 import 'package:amritotsavam_app/widgets/u_nav_bar_item.dart';
 
+import 'about_pages/central_coordinator_page.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -148,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                                       )),
                                 ),
                                 DataCard('About Amritotsavam',
-                                    'assets/svg/events.svg', const Events()),
+                                    'assets/svg/events.svg', const CentralCoordinators()),
                                 DataCard(
                                     'Event Managers',
                                     'assets/svg/event_managers.svg',
