@@ -169,23 +169,23 @@ class _HomePageState extends State<HomePage> {
                                     mainAxisSpacing: 10,
                                     children: [
                                       VerticalCard(
-                                          title: "title",
+                                          title: "Central Coordinators",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
                                               colors.dataCardColor,
                                           textAlign: TextAlign.center,
                                           fontSize: 18,
-                                          route: HomePage(),
+                                          route: CentralCoordinators(),
                                           gradientEndingColor:
                                               colors.dataCardColor),
                                       VerticalCard(
-                                          title: "title",
+                                          title: "Faculty Coordinators",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
                                           colors.dataCardColor,
                                           textAlign: TextAlign.center,
                                           fontSize: 18,
-                                          route: HomePage(),
+                                          route: FacultyCoordinators(),
                                           gradientEndingColor:
                                           colors.dataCardColor),
                                       VerticalCard(
