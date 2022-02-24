@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
-//const String networkAddress = 'amritotsavam-api.herokuapp.com';
-const String networkAddress = '10.0.2.2:8000';
-const bool isHTTPS = false;
+const String networkAddress = 'amritotsavam-api.herokuapp.com';
+const bool isHTTPS = true;
 const String storageJWTKey = "USER_AUTH_JWT";
 const String nameKey = "USER_NAME";
 const String roleKey = "USER_ROLE";
