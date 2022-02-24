@@ -149,8 +149,8 @@ class _HomePageState extends State<HomePage> {
                                             fontWeight: FontWeight.bold),
                                       )),
                                 ),
-                                DataCard('About Amritotsavam',
-                                    'assets/svg/events.svg', const CentralCoordinators()),
+                                DataCard('Central Coordinators',
+                                    '', const CentralCoordinators()),
                                 DataCard(
                                     'Event Managers',
                                     'assets/svg/event_managers.svg',
