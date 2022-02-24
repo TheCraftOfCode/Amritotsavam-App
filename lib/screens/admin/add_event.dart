@@ -110,8 +110,10 @@ class _AddEvent extends State<AddEvent> {
                         : null,
                     context: context,
                     onSaved: (value) {
-                      widget.eventData.eventDate =
-                          DateFormat('dd/MM/yyyy').format(value!);
+                      if(value != null) {
+                        widget.eventData.eventDate =
+                          DateFormat('dd/MM/yyyy').format(value);
+                      }
                     },
                   )),
               Padding(
@@ -262,7 +264,7 @@ class _AddEvent extends State<AddEvent> {
                   title: 'Pick Event Type',
                   hint: 'Pick an appropriate event type',
                   onSaved: (data) {
-                    widget.eventData.eventType = data;
+                    widget.eventData.eventType = data ?? "";
                   },
                 ),
               ),
