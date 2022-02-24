@@ -20,7 +20,6 @@ class CentralCoordinators extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //TODO: Add appbar with search and notifications
               Padding(
                 padding: const EdgeInsets.only(top: 70.0, bottom: 20, left: 30),
                 child: Align(
@@ -39,10 +38,7 @@ class CentralCoordinators extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: centralCoordinators.length,
                 itemBuilder: (_, i) {
-                  return Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 8),
-                      child: userCard(centralCoordinators[i]));
+                  return userCard(centralCoordinators[i]);
                 },
               )
             ],

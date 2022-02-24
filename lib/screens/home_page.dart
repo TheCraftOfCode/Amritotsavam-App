@@ -14,6 +14,7 @@ import 'package:amritotsavam_app/widgets/u_nav_bar.dart';
 import 'package:amritotsavam_app/widgets/u_nav_bar_item.dart';
 
 import 'about_pages/central_coordinator_page.dart';
+import 'about_pages/faculty_coordinators_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -152,9 +153,9 @@ class _HomePageState extends State<HomePage> {
                                 DataCard('Central Coordinators',
                                     '', const CentralCoordinators()),
                                 DataCard(
-                                    'Event Managers',
+                                    'Faculty Coordinators',
                                     'assets/svg/event_managers.svg',
-                                    const SignUpPage()),
+                                    const FacultyCoordinators()),
                                 DataCard(
                                     'Team Members',
                                     'assets/svg/team_members.svg',
