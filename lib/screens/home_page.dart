@@ -149,11 +149,11 @@ class _HomePageState extends State<HomePage> {
                                     'assets/svg/events.svg', const Events()),
                                 DataCard(
                                     'Event Managers',
-                                    'assets/svg/results.svg',
+                                    'assets/svg/event_managers.svg',
                                     const SignUpPage()),
                                 DataCard(
                                     'Team Members',
-                                    'assets/svg/results.svg',
+                                    'assets/svg/team_members.svg',
                                     const SignUpPage())
                               ],
                             ),
