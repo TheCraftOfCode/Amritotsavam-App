@@ -61,7 +61,7 @@ class TimePickerWidget extends FormField<TimeOfDay> {
                               padding:
                                   const EdgeInsets.only(right: 20, left: 10),
                               child: Icon(
-                                Icons.calendar_today,
+                                Icons.access_time_outlined,
                                 color: colors.primaryTextColor,
                               ),
                             ),
@@ -70,7 +70,7 @@ class TimePickerWidget extends FormField<TimeOfDay> {
                               child: Text(
                                   state.value == null
                                       ? hint
-                                      : formatTimeOfDay(state.value!), //TODO: Add time string
+                                      : formatTimeOfDay(state.value!),
                                   style: GoogleFonts.montserrat(
                                       fontSize: 15,
                                       color: state.hasError

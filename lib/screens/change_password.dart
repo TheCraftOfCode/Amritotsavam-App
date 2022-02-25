@@ -93,7 +93,10 @@ class _ChangePasswordState extends State<ChangeName> {
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: showProgress
-                        ? const CircularProgressIndicator()
+                        ? const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: CircularProgressIndicator(),
+                          )
                         : ElevatedButton(
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {

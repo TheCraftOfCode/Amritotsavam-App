@@ -184,8 +184,7 @@ class _EventsListState extends State<EventsList> {
                           )
                         else
                           Padding(
-                            padding: const EdgeInsets.only(
-                                top: 30, left: 15, right: 20),
+                            padding: const EdgeInsets.only(left: 15, right: 20),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.center,
