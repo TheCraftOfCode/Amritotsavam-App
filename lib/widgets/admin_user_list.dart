@@ -76,14 +76,14 @@ class _AdminUserListState extends State<AdminUserList> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Publish or Edit Results',
+                        'Manage Users',
                         style: GoogleFonts.nunito(
                             fontSize: 30,
                             color: colors.primaryTextColor,
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Click on an event to publish results',
+                        'Click on the + button to add new users',
                         style: GoogleFonts.nunito(
                           fontSize: 17,
                           color: colors.primaryTextColor,
