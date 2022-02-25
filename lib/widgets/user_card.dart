@@ -2,6 +2,7 @@ import 'package:amritotsavam_app/utils/data.dart';
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Widget userCard(PeopleData centralCoordinators) {
   return Padding(
@@ -35,7 +36,8 @@ Widget userCard(PeopleData centralCoordinators) {
                           fontSize: 17,
                           color: colors.primaryTextColor,
                           fontWeight: FontWeight.bold)),
-                  if (centralCoordinators.rollNo != "" && centralCoordinators.rollNo != null)
+                  if (centralCoordinators.rollNo != "" &&
+                      centralCoordinators.rollNo != null)
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: Text(centralCoordinators.rollNo ?? "",
@@ -43,10 +45,19 @@ Widget userCard(PeopleData centralCoordinators) {
                               fontSize: 17,
                               color: colors.primaryTextColor.withOpacity(0.7))),
                     ),
-                  Text(centralCoordinators.phoneNo,
-                      style: GoogleFonts.nunito(
-                          fontSize: 17,
-                          color: colors.primaryTextColor.withOpacity(0.7)))
+                  TextButton(
+                      style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size(0, 0),
+                          alignment: Alignment.centerLeft),
+                      onPressed: () async {
+                        print("click");
+                        await launch("tel://+91${centralCoordinators.phoneNo}");
+                      },
+                      child: Text(centralCoordinators.phoneNo,
+                          style: GoogleFonts.nunito(
+                              fontSize: 17,
+                              color: colors.primaryTextColor.withOpacity(0.7))))
                 ],
               ),
             ),
