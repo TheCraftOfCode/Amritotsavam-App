@@ -25,7 +25,7 @@ class DigitalTeam extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Multimedia Team',
+                    'Digital Content Team',
                     style: GoogleFonts.nunito(
                         fontSize: 30,
                         color: colors.primaryTextColor,

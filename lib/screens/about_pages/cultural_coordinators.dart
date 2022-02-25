@@ -25,7 +25,7 @@ class CulturalCentralCoordinators extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'Central Coordinators - Cultural',
+                    'Cultural Central Coordinators',
                     style: GoogleFonts.nunito(
                         fontSize: 30,
                         color: colors.primaryTextColor,
