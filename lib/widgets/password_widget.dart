@@ -43,6 +43,7 @@ class _PasswordFormFieldWidgetState extends State<PasswordFormFieldWidget> {
         suffixIcon: Material(
           color: Colors.transparent,
           child: IconButton(
+            color: colors.primaryTextColor,
             icon: Icon(
               setPasswordVisible ? Icons.visibility : Icons.visibility_off,
             ),
