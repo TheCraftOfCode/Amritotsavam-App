@@ -33,14 +33,145 @@ class ElectedRepresentatives extends StatelessWidget {
                   ),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 2,       //TODO: Find logic for displaying category wise
-                itemBuilder: (_, i) {
-                  return userCard(multimediaTeam[i]);
-                },
-              )
+
+              //AMRITAMAYI
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'AMRITAMAYI',
+                  style: GoogleFonts.nunito(
+                      fontSize: 22,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["sec"]![0]),
+              userCard(electedRepresentatives["girls"]!["sec"]![0]),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'JOINT SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["joint_sec"]![0]),
+              userCard(electedRepresentatives["girls"]!["joint_sec"]![0]),
+
+              //Second one
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'ANANDAMAYI',
+                  style: GoogleFonts.nunito(
+                      fontSize: 22,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["sec"]![1]),
+              userCard(electedRepresentatives["girls"]!["sec"]![1]),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'JOINT SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["joint_sec"]![1]),
+              userCard(electedRepresentatives["girls"]!["joint_sec"]![1]),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'CHINMAYI',
+                  style: GoogleFonts.nunito(
+                      fontSize: 22,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["sec"]![2]),
+              userCard(electedRepresentatives["girls"]!["sec"]![2]),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'JOINT SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["joint_sec"]![2]),
+              userCard(electedRepresentatives["girls"]!["joint_sec"]![2]),
+
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'JYOTHIRMAYI',
+                  style: GoogleFonts.nunito(
+                      fontSize: 22,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Text(
+                  'SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["sec"]![3]),
+              userCard(electedRepresentatives["girls"]!["sec"]![3]),
+
+              Padding(
+                padding: const EdgeInsets.only(left: 30, top: 30),
+                child: Text(
+                  'JOINT SECRETARY',
+                  style: GoogleFonts.nunito(
+                      fontSize: 18,
+                      color: colors.primaryTextColor.withOpacity(0.7)),
+                ),
+              ),
+              userCard(electedRepresentatives["boys"]!["joint_sec"]![3]),
+              userCard(electedRepresentatives["girls"]!["joint_sec"]![3]),
             ],
           ),
         ),

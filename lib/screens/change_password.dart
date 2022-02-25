@@ -115,7 +115,7 @@ class _ChangePasswordState extends State<ChangeName> {
                                 });
                                 if (res.statusCode == 200) {
                                   jwtTokenSet = json.decode(res.body)['token'];
-                                  showToast("Password changes successfully");
+                                  showToast("Password changed successfully");
                                   Navigator.of(context).pop();
                                 } else {
                                   showToast("Failed to change password");

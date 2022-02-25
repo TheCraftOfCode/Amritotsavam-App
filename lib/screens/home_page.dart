@@ -1,4 +1,3 @@
-import 'package:amritotsavam_app/screens/about_pages/cultural_coordinators.dart';
 import 'package:amritotsavam_app/screens/about_pages/digital.dart';
 import 'package:amritotsavam_app/screens/about_pages/elected_representatives.dart';
 import 'package:amritotsavam_app/screens/about_pages/multimedia.dart';
@@ -15,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'about_pages/central_coordinator_page.dart';
+import 'about_pages/contact_us.dart';
 import 'about_pages/faculty_coordinators_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -189,18 +189,6 @@ class _HomePageState extends State<HomePage> {
                                           gradientEndingColor:
                                               colors.dataCardColor),
                                       VerticalCard(
-                                          title:
-                                              "Cultural Central Coordinators",
-                                          svgLocation: "svgLocation",
-                                          gradientStartingColor:
-                                              colors.dataCardColor,
-                                          textAlign: TextAlign.start,
-                                          fontSize: 18,
-                                          route:
-                                              const CulturalCentralCoordinators(),
-                                          gradientEndingColor:
-                                              colors.dataCardColor),
-                                      VerticalCard(
                                           title: "Digital \nContent Team",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
@@ -219,7 +207,17 @@ class _HomePageState extends State<HomePage> {
                                           fontSize: 18,
                                           route: const MultiMediaTeam(),
                                           gradientEndingColor:
-                                              colors.dataCardColor)
+                                              colors.dataCardColor),
+                                      VerticalCard(
+                                          title: "Contact \nUs",
+                                          svgLocation: "svgLocation",
+                                          gradientStartingColor:
+                                          colors.dataCardColor,
+                                          textAlign: TextAlign.start,
+                                          fontSize: 18,
+                                          route: const ContactUs(),
+                                          gradientEndingColor:
+                                          colors.dataCardColor)
                                     ],
                                   ),
                                 )

@@ -31,9 +31,10 @@ class UnorderedListItem extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Text("• ", style: GoogleFonts.nunito(color: colors.primaryTextColor)),
+        //Enable if bullets needed
+        // Text("• ", style: GoogleFonts.nunito(color: colors.primaryTextColor)),
         Expanded(
-          child: Text(
+          child: SelectableText(
             text,
             style: GoogleFonts.nunito(color: colors.primaryTextColor),
           ),

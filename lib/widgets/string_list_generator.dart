@@ -196,12 +196,13 @@ class UnorderedListItem extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: Text("• ", style: GoogleFonts.nunito(color: colors.primaryTextColor)),
-        ),
+        //Enable if bullets are needed
+        // Padding(
+        //   padding: const EdgeInsets.only(right: 8),
+        //   child: Text("• ", style: GoogleFonts.nunito(color: colors.primaryTextColor)),
+        // ),
         Expanded(
-          child: Text(
+          child: SelectableText(
             text,
             textAlign: TextAlign.justify,
             style: GoogleFonts.nunito(color: colors.primaryTextColor),
@@ -209,7 +210,7 @@ class UnorderedListItem extends StatelessWidget {
         ),
         if (removeItemCallback != null)
           Padding(
-            padding: EdgeInsets.only(left: 8),
+            padding: const EdgeInsets.only(left: 8),
             child: Material(
               color: Colors.transparent,
               child: IconButton(

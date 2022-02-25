@@ -5,7 +5,6 @@ import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/http_modules.dart';
-import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
 import 'package:flutter/material.dart';

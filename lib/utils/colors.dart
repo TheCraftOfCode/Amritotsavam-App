@@ -27,6 +27,7 @@ var dateCardColor = const Color(0xff454166);
 var firstPlaceTextColor = const Color(0xffE07A16);
 var secondPlaceTextColor = const Color(0xff000000);
 var thirdPlaceTextColor = const Color(0xffFFF2E4);
+var textBoxColorLight = const Color(0xff585488);
 
 
 

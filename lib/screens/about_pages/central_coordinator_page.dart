@@ -40,7 +40,25 @@ class CentralCoordinators extends StatelessWidget {
                 itemBuilder: (_, i) {
                   return userCard(centralCoordinators[i]);
                 },
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 23, top: 30),
+                child: Text(
+                  'Cultural Central Coordinators',
+                  style: GoogleFonts.nunito(
+                      fontSize: 25,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: centralCoordinatorsCultural.length,
+                itemBuilder: (_, i) {
+                  return userCard(centralCoordinatorsCultural[i]);
+                },
+              ),
             ],
           ),
         ),
