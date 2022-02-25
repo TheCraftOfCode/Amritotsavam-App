@@ -77,23 +77,6 @@ class ProfilePage extends StatelessWidget {
                                     color: Colors.white70,
                                     fontWeight: FontWeight.bold)),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  const Icon(Icons.email),
-                                  Text(data.data![1],
-                                      style: GoogleFonts.nunito(
-                                          fontSize: 17,
-                                          color: colors.primaryTextColor)),
-                                ],
-                              ),
-                            ),
-                          ),
                           Expanded(child: Container()),
                           Padding(
                             padding: const EdgeInsets.only(top: 10),

@@ -18,13 +18,9 @@ Widget contactCard(PeopleData data) {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 15),
-              child: CircleAvatar(
-                backgroundColor: colors.activeCardColor,
-                maxRadius: 40,
-                child: Text(
-                  data.name[0],
-                  style: const TextStyle(fontSize: 35),
-                ),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.asset(data.pictureURL, width: 90,),
               ),
             ),
             Expanded(

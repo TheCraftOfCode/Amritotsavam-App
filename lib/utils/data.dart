@@ -237,7 +237,7 @@ var digitalContentTeam = [
       rollNo: "CB.EN.U4CSE19352",
       name: "SOORYA S",
       phoneNo: "9080336540",
-      pictureURL: "pictureURL",
+      pictureURL: "assets/developer_pictures/soorya.jpeg",
       mail: "soorya.s27@gmail.com",
       instagram: "https://www.instagram.com/the_convoluted_soul/"),
   PeopleData(
@@ -246,7 +246,7 @@ var digitalContentTeam = [
       instagram: "https://www.instagram.com/homenum_.revelio/",
       phoneNo: "8220589062",
       mail: "nirmalkarthikeyan1503@gmail.com",
-      pictureURL: "pictureURL"),
+      pictureURL: "assets/developer_pictures/nirmal.png"),
   PeopleData(
       rollNo: "CB.EN.U4EEE18133",
       name: "KIRUTHIK KARUN R",

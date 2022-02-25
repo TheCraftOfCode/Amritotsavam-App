@@ -5,6 +5,7 @@ import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:amritotsavam_app/widgets/dropdown_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
 import 'package:flutter/material.dart';
@@ -369,7 +370,10 @@ class _PublishResultsState extends State<PublishResults> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: showProgress
-                        ? const CircularProgressIndicator()
+                        ? const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: CircularProgressIndicator(),
+                        )
                         : Row(
                             children: [
                               ElevatedButton(
@@ -470,33 +474,37 @@ class _PublishResultsState extends State<PublishResults> {
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
                                           primary: colors.primaryTextColor),
-                                      onPressed: () async {
-                                        setState(() {
-                                          showProgress = true;
-                                        });
-                                        var res = await makePostRequest(
-                                            json.encode(
-                                                {"id": widget.eventData.id}),
-                                            "/revertResults",
-                                            null,
-                                            true,
-                                            context: context);
-                                        setState(() {
-                                          showProgress = false;
-                                        });
-                                        if (res.statusCode == 200) {
-                                          error = '';
-                                          showToast(
-                                              "Results removed successfully!");
-                                          widget.eventData.eventOver = false;
-                                          _initializeEmptyResults();
-                                          Navigator.of(context).pop();
-                                        } else {
+                                      onPressed: () {
+                                        displayDialog(context, "Continue", null, () async {
                                           setState(() {
-                                            error = json
-                                                .decode(res.body)['message'];
+                                            showProgress = true;
                                           });
-                                        }
+                                          var res = await makePostRequest(
+                                              json.encode(
+                                                  {"id": widget.eventData.id}),
+                                              "/revertResults",
+                                              null,
+                                              true,
+                                              context: context);
+                                          setState(() {
+                                            showProgress = false;
+                                          });
+                                          if (res.statusCode == 200) {
+                                            error = '';
+                                            showToast(
+                                                "Results removed successfully!");
+                                            widget.eventData.eventOver = false;
+                                            _initializeEmptyResults();
+                                            Navigator.of(context).pop();
+                                            Navigator.of(context).pop();
+                                          } else {
+                                            setState(() {
+                                              error = json
+                                                  .decode(res.body)['message'];
+                                            });
+                                          }
+                                        }, "Are you sure you want delete the results",
+                                            "Results for this event will be deleted");
                                       },
                                       child: Text(
                                         "REVERT RESULTS",
