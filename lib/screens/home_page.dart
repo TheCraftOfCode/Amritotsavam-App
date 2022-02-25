@@ -1,11 +1,11 @@
+import 'package:amritotsavam_app/screens/about_pages/cultural_coordinators.dart';
 import 'package:amritotsavam_app/screens/about_pages/digital.dart';
+import 'package:amritotsavam_app/screens/about_pages/elected_representatives.dart';
 import 'package:amritotsavam_app/screens/about_pages/multimedia.dart';
-import 'package:amritotsavam_app/screens/admin/add_event.dart';
 import 'package:amritotsavam_app/screens/admin/admin_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
 import 'package:amritotsavam_app/screens/profile_page.dart';
 import 'package:amritotsavam_app/screens/results.dart';
-import 'package:amritotsavam_app/screens/signup_page.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/utils.dart';
@@ -13,8 +13,6 @@ import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:amritotsavam_app/widgets/vertical_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:amritotsavam_app/widgets/u_nav_bar.dart';
-import 'package:amritotsavam_app/widgets/u_nav_bar_item.dart';
 
 import 'about_pages/central_coordinator_page.dart';
 import 'about_pages/faculty_coordinators_page.dart';
@@ -184,52 +182,54 @@ class _HomePageState extends State<HomePage> {
                                           title: "Faculty Coordinators",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
-                                          colors.dataCardColor,
+                                              colors.dataCardColor,
                                           textAlign: TextAlign.start,
                                           fontSize: 18,
-                                          route: FacultyCoordinators(),
+                                          route: const FacultyCoordinators(),
                                           gradientEndingColor:
-                                          colors.dataCardColor),
+                                              colors.dataCardColor),
                                       VerticalCard(
-                                          title: "title",
+                                          title: "Elected Representatives",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
-                                          colors.dataCardColor,
-                                          textAlign: TextAlign.center,
+                                              colors.dataCardColor,
+                                          textAlign: TextAlign.start,
                                           fontSize: 18,
-                                          route: HomePage(),
+                                          route: const ElectedRepresentatives(),
                                           gradientEndingColor:
-                                          colors.dataCardColor),
+                                              colors.dataCardColor),
                                       VerticalCard(
-                                          title: "title",
+                                          title:
+                                              "Cultural Central Coordinators",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
-                                          colors.dataCardColor,
-                                          textAlign: TextAlign.center,
+                                              colors.dataCardColor,
+                                          textAlign: TextAlign.start,
                                           fontSize: 18,
-                                          route: HomePage(),
+                                          route:
+                                              const CulturalCentralCoordinators(),
                                           gradientEndingColor:
-                                          colors.dataCardColor),
+                                              colors.dataCardColor),
                                       VerticalCard(
                                           title: "Digital \nContent Team",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
-                                          colors.dataCardColor,
+                                              colors.dataCardColor,
                                           textAlign: TextAlign.start,
                                           fontSize: 18,
                                           route: const DigitalTeam(),
                                           gradientEndingColor:
-                                          colors.dataCardColor),
+                                              colors.dataCardColor),
                                       VerticalCard(
                                           title: "Multimedia \nTeam",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
-                                          colors.dataCardColor,
+                                              colors.dataCardColor,
                                           textAlign: TextAlign.start,
                                           fontSize: 18,
                                           route: const MultiMediaTeam(),
                                           gradientEndingColor:
-                                          colors.dataCardColor)
+                                              colors.dataCardColor)
                                     ],
                                   ),
                                 )
