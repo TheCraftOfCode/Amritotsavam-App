@@ -26,7 +26,6 @@ class ContactUs extends StatelessWidget {
       );
 
       FlutterEmailSender.send(email)
-          .then((value) => showToast("Your query has been successfully sent"))
           .onError((error, stackTrace) =>
               showToast("Unable to send your query, please try again later!"));
     }
