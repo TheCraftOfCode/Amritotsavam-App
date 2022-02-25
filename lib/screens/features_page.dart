@@ -31,7 +31,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
     "Worried if you'll miss out on events? Not anymore! Set reminders in the app and get reminded when submissions are due.",
     "Found an interesting event that you'd like to share with your friends? You can do that right from the app, to any platform you wish to.",
     "Get to know more about the event's story, and the spirited team responsible for bringing it to you.",
-    "Its's time to begin your journey! Click on the sign up button and sign up using your Microsoft account with the amrita.edu domain.",
+    "It's time to begin your journey! Click on the sign up button and sign up using your Microsoft account with the amrita.edu domain.",
   ];
 
   var image_location = [
