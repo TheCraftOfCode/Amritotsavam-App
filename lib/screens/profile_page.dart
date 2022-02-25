@@ -160,9 +160,6 @@ class ProfilePage extends StatelessWidget {
                                                       (Route<dynamic> route) =>
                                                           false);
                                               clearAllData();
-                                            } else {
-                                              showToast(
-                                                  "Something went wrong, could not delete account!");
                                             }
                                           }, "Are you sure you want to delete your account?",
                                               "Your account will be deleted and all data will be lost");

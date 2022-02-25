@@ -83,7 +83,7 @@ class _AdminUserListState extends State<AdminUserList> {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        'Click on the + button to add new users',
+                        'Manage all users below your role here',
                         style: GoogleFonts.nunito(
                           fontSize: 17,
                           color: colors.primaryTextColor,
