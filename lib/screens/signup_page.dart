@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:amritotsavam_app/screens/sign_in.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
-import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:amritotsavam_app/widgets/custom_sliver_widget.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
@@ -12,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
-import 'package:amritotsavam_app/screens/home_page.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -177,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                       Padding(
                         padding: constants.textFieldPadding,
-                        child: error == "" ? Container() : ErrorBox(error),
+                        child: error == "" ? Container() : errorBox(error),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 50.0, left: 20),

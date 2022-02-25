@@ -1,6 +1,6 @@
 import 'package:amritotsavam_app/utils/data.dart';
 import 'package:amritotsavam_app/widgets/contact_card.dart';
-import 'package:amritotsavam_app/widgets/user_card.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -17,6 +17,11 @@ class ContactUs extends StatelessWidget {
     final _nameController = TextEditingController();
     final _queryController = TextEditingController();
 
+    clearFieldContent() {
+      _nameController.clear();
+      _queryController.clear();
+    }
+
     Future<void> sendEmail() async {
       final Email email = Email(
         body: _queryController.text,
@@ -26,8 +31,13 @@ class ContactUs extends StatelessWidget {
       );
 
       FlutterEmailSender.send(email)
-          .onError((error, stackTrace) =>
-              showToast("Unable to send your query, please try again later!"));
+          .then((value) => clearFieldContent())
+          .catchError((e) {
+        showToast("Unable to send your query, please try again later!");
+        if (kDebugMode) {
+          print(e);
+        }
+      });
     }
 
     return Scaffold(
@@ -201,8 +211,9 @@ class ContactUs extends StatelessWidget {
                         'Contact us for any technical queries',
                         textAlign: TextAlign.center,
                         style: GoogleFonts.nunito(
-                            fontSize: 18,
-                            color: colors.primaryTextColor.withOpacity(0.7),),
+                          fontSize: 18,
+                          color: colors.primaryTextColor.withOpacity(0.7),
+                        ),
                       ),
                     ),
                   )

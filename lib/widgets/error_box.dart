@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Widget ErrorBox(errorMessage) {
+Widget errorBox(errorMessage) {
   return errorMessage != null && errorMessage != ""
       ? Container(
           child: Center(

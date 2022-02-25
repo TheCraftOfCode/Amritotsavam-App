@@ -273,7 +273,7 @@ class _AdminUserListState extends State<AdminUserList> {
               )
             ],
           ),
-        );;
+        );
       },
     );
   }

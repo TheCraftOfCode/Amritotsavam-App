@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 class GradientButton extends StatefulWidget {
-  GradientButton({Key? key,required this.startingColor, required this.endingColor, required this.onPressed,required this.title}) : super(key: key);
+  const GradientButton({Key? key,required this.startingColor, required this.endingColor, required this.onPressed,required this.title}) : super(key: key);
 
   final Function()? onPressed;
   final Color startingColor;

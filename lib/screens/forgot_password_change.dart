@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/error_box.dart';
 import 'package:amritotsavam_app/widgets/password_widget.dart';
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
@@ -87,7 +86,7 @@ class _ForgotPasswordChange extends State<ForgotPasswordChange> {
                 ),
                 Padding(
                   padding: constants.textFieldPadding,
-                  child: error == "" ? Container() : ErrorBox(error),
+                  child: error == "" ? Container() : errorBox(error),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0, left: 20),

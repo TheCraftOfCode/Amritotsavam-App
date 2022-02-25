@@ -2,8 +2,8 @@ import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class darkTheme {
-  static ThemeData get DarkTheme {
+class DarkTheme {
+  static ThemeData get darkTheme {
     return ThemeData(
       primaryTextTheme: TextTheme(bodyText1: GoogleFonts.nunito(color: colors.primaryTextColor)),
       primaryColor: Colors.white,
@@ -45,8 +45,7 @@ class darkTheme {
       dialTextColor: colors.primaryTextColor,
       dialHandColor: colors.buttonColor,
       helpTextStyle: GoogleFonts.nunito(color: colors.primaryTextColor,),),
-      accentColor: colors.buttonColor,
-      focusColor: colors.buttonColor
+      focusColor: colors.buttonColor, colorScheme: ColorScheme.fromSwatch().copyWith(secondary: colors.buttonColor)
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:amritotsavam_app/screens/admin/events_page.dart';
-import 'package:amritotsavam_app/screens/admin/publish_results.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results_page.dart';
 import 'package:amritotsavam_app/screens/admin/user_management.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';

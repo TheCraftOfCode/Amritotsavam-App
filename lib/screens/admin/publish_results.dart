@@ -363,7 +363,7 @@ class _PublishResultsState extends State<PublishResults> {
                 Padding(
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                  child: error != "" ? Container() : ErrorBox(error),
+                  child: error != "" ? Container() : errorBox(error),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 30),

@@ -140,7 +140,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                       Padding(
                         padding: constants.textFieldPadding,
-                        child: error == "" ? Container() : ErrorBox(error),
+                        child: error == "" ? Container() : errorBox(error),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 50.0, left: 20),

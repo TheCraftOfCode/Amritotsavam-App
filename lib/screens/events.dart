@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
-import 'package:amritotsavam_app/screens/home_page.dart';
 import 'package:amritotsavam_app/utils/get_event_svg.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart'; //for date format
 import 'package:flutter/material.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;

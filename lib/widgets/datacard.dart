@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
 class DataCard extends StatelessWidget {
-  DataCard(this.heading, this.imageUrl, this.route);
+  const DataCard(this.heading, this.imageUrl, this.route, {Key? key}) : super(key: key);
 
   final String heading;
   final String imageUrl;

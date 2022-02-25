@@ -45,9 +45,7 @@ class _HomePageState extends State<HomePage> {
     var height = size.height;
     height -= kToolbarHeight;
     height -= kBottomNavigationBarHeight;
-    var aspectRatioOne = (width / 2) / ((height - 10) / 2);
     var aspectRatioTwo = (width / 2) / ((height - 40) / 3);
-    var appBarTitle = currentIndex == 0 ? "Home" : "About";
 
     ///(width / columnCount) / (height / minRowCountOnScreen)
 
@@ -165,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                                               colors.dataCardColor,
                                           textAlign: TextAlign.start,
                                           fontSize: 18,
-                                          route: CentralCoordinators(),
+                                          route: const CentralCoordinators(),
                                           gradientEndingColor:
                                               colors.dataCardColor),
                                       VerticalCard(

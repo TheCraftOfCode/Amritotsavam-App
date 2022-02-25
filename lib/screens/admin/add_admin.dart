@@ -132,7 +132,7 @@ class _AddAdminState extends State<AddAdmin> {
                 ),
                 Padding(
                   padding: constants.textFieldPadding,
-                  child: error == "" ? Container() : ErrorBox(error),
+                  child: error == "" ? Container() : errorBox(error),
                 ),
                 Expanded(child: Container()),
                 Padding(

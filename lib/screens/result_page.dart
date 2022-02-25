@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
-import 'package:lottie/lottie.dart';
 
 class ResultPage extends StatefulWidget {
   final List<ResultsModel>? results;

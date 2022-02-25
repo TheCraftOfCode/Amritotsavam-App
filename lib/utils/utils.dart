@@ -21,7 +21,6 @@ set jwtTokenSet(String jwt) {
 ///Name
 Future<String> get getName async {
   var name = await storage.read(key: nameKey);
-  print(name);
   if (name == null) return "";
   return name;
 }

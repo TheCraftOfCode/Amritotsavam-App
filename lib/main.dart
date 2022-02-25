@@ -1,11 +1,7 @@
 import 'package:amritotsavam_app/screens/home_page.dart';
 import 'package:amritotsavam_app/utils/theme.dart';
 import 'package:amritotsavam_app/widgets/load_valid_page_widget.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:oktoast/oktoast.dart';
 import 'screens/welcome_page.dart';
 
@@ -113,14 +109,14 @@ Future<void> main() async {
   //   }
  // });
 
-  runApp(OKToast(
+  runApp(const OKToast(
     position: ToastPosition.center,
     child: MyApp(),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -131,7 +127,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: darkTheme.DarkTheme,
+      theme: DarkTheme.darkTheme,
       home: const LoadValidPageWidget(WelcomePage(), HomePage()),
       debugShowCheckedModeBanner: false,
     );
