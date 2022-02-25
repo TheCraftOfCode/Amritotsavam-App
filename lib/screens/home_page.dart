@@ -246,27 +246,29 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   )
-                : Container(
-                    decoration: constants.gradientDecoration,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Center(child: CircularProgressIndicator()),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Center(
-                            child: Text(
-                              'Please wait...',
-                              style: GoogleFonts.nunito(
-                                  color: colors.primaryTextColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17),
+                : Scaffold(
+                  body: Container(
+                      decoration: constants.gradientDecoration,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Center(child: CircularProgressIndicator()),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Center(
+                              child: Text(
+                                'Please wait...',
+                                style: GoogleFonts.nunito(
+                                    color: colors.primaryTextColor,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 17),
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
-                  );
+                );
           }),
     );
   }

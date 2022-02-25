@@ -51,7 +51,6 @@ Widget userCard(PeopleData centralCoordinators) {
                           minimumSize: Size(0, 0),
                           alignment: Alignment.centerLeft),
                       onPressed: () async {
-                        print("click");
                         await launch("tel://+91${centralCoordinators.phoneNo}");
                       },
                       child: Text(centralCoordinators.phoneNo,

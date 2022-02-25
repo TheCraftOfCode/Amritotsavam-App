@@ -340,7 +340,6 @@ Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus, eventType) {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  //TODO: Add icon based on event category
                   Text(
                     cardTitle,
                     style: GoogleFonts.raleway(

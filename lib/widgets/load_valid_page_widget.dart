@@ -43,9 +43,22 @@ class LoadValidPageWidget extends StatelessWidget {
         future: getVerifiedJwt(context),
         builder: (context, data) {
           if (!data.hasData) {
-            return const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
+            return Scaffold(
+              body: Column(
+                children: [
+                  Expanded(child: Container()),
+                  const Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(40),
+                      child: Image(
+                          image:
+                              AssetImage('assets/amritotsavam_logo_mini.png')),
+                    ),
+                  ),
+                  const Expanded(child: Center(
+                    child: CircularProgressIndicator(),
+                  )),
+                ],
               ),
             );
           } else if (data.hasData && data.data == '') {
