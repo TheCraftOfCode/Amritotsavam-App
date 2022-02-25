@@ -80,8 +80,9 @@ class _EventsPageState extends State<EventsPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 6.0, vertical: 10.0),
-                                        child: Text(
+                                        child: AutoSizeText(
                                           widget.eventData.eventDate,
+                                          maxLines: 1,
                                           style: GoogleFonts.nunito(
                                               color: colors.primaryTextColor,
                                               fontWeight: FontWeight.bold,

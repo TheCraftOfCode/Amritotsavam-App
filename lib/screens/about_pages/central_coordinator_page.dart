@@ -33,14 +33,6 @@ class CentralCoordinators extends StatelessWidget {
                   ),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: centralCoordinators.length,
-                itemBuilder: (_, i) {
-                  return userCard(centralCoordinators[i]);
-                },
-              ),
               Padding(
                 padding: const EdgeInsets.only(left: 23, top: 30),
                 child: Text(
@@ -57,6 +49,24 @@ class CentralCoordinators extends StatelessWidget {
                 itemCount: centralCoordinatorsCultural.length,
                 itemBuilder: (_, i) {
                   return userCard(centralCoordinatorsCultural[i]);
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 23, top: 30),
+                child: Text(
+                  'Central Coordinators',
+                  style: GoogleFonts.nunito(
+                      fontSize: 25,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: centralCoordinators.length,
+                itemBuilder: (_, i) {
+                  return userCard(centralCoordinators[i]);
                 },
               ),
             ],
