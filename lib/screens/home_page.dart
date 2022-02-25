@@ -151,16 +151,6 @@ class _HomePageState extends State<HomePage> {
                                             fontWeight: FontWeight.bold),
                                       )),
                                 ),
-                                // DataCard('Central Coordinators',
-                                //     '', const CentralCoordinators()),
-                                // DataCard(
-                                //     'Faculty Coordinators',
-                                //     'assets/svg/event_managers.svg',
-                                //     const FacultyCoordinators()),
-                                // DataCard(
-                                //     'Team Members',
-                                //     'assets/svg/team_members.svg',
-                                //     const SignUpPage())
                                 Expanded(
                                   child: GridView.count(
                                     crossAxisCount: 2,
