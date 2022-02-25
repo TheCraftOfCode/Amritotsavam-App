@@ -71,7 +71,7 @@ var centralCoordinators = [
   PeopleData(rollNo: 'CB.SC.I5MAT20001', name: 'ABHIJITH B', phoneNo: '9207826353', pictureURL:" pictureURL"),
 ];
 
-var digitalContenTeam = [
+var digitalContentTeam = [
   PeopleData(rollNo: "CB.EN.U4EEE18133", name: "KIRUTHIK KARUN R", phoneNo: "9442940695", pictureURL: "pictureURL"),
   PeopleData(rollNo: "CB.EN.U4CSE19352", name: "SOORYA S", phoneNo: "9080336540", pictureURL: "pictureURL"),
   PeopleData(rollNo: "CB.EN.U4CSE19038", name: "NIRMAL K", phoneNo: "8220589062", pictureURL: "pictureURL"),

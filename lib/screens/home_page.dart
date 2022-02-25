@@ -1,3 +1,5 @@
+import 'package:amritotsavam_app/screens/about_pages/digital.dart';
+import 'package:amritotsavam_app/screens/about_pages/multimedia.dart';
 import 'package:amritotsavam_app/screens/admin/add_event.dart';
 import 'package:amritotsavam_app/screens/admin/admin_page.dart';
 import 'package:amritotsavam_app/screens/events.dart';
@@ -173,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
                                               colors.dataCardColor,
-                                          textAlign: TextAlign.center,
+                                          textAlign: TextAlign.start,
                                           fontSize: 18,
                                           route: CentralCoordinators(),
                                           gradientEndingColor:
@@ -183,7 +185,7 @@ class _HomePageState extends State<HomePage> {
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
                                           colors.dataCardColor,
-                                          textAlign: TextAlign.center,
+                                          textAlign: TextAlign.start,
                                           fontSize: 18,
                                           route: FacultyCoordinators(),
                                           gradientEndingColor:
@@ -209,23 +211,23 @@ class _HomePageState extends State<HomePage> {
                                           gradientEndingColor:
                                           colors.dataCardColor),
                                       VerticalCard(
-                                          title: "title",
+                                          title: "Digital \nContent Team",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
                                           colors.dataCardColor,
-                                          textAlign: TextAlign.center,
+                                          textAlign: TextAlign.start,
                                           fontSize: 18,
-                                          route: HomePage(),
+                                          route: const DigitalTeam(),
                                           gradientEndingColor:
                                           colors.dataCardColor),
                                       VerticalCard(
-                                          title: "title",
+                                          title: "Multimedia \nTeam",
                                           svgLocation: "svgLocation",
                                           gradientStartingColor:
                                           colors.dataCardColor,
-                                          textAlign: TextAlign.center,
+                                          textAlign: TextAlign.start,
                                           fontSize: 18,
-                                          route: HomePage(),
+                                          route: const MultiMediaTeam(),
                                           gradientEndingColor:
                                           colors.dataCardColor)
                                     ],
