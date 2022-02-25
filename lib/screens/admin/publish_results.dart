@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:amritotsavam_app/models/event_model.dart';
+import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/http_modules.dart';
@@ -25,10 +26,10 @@ class PublishResults extends StatefulWidget {
 
 class _PublishResultsState extends State<PublishResults> {
   final List<String> _houses = [
-    'Amritamayi',
-    'Anandamayi',
-    'Chinmayi',
-    'Jyothirmayi'
+    'AMRITAMAYI',
+    'ANANDAMAYI',
+    'CHINMAYI',
+    'JYOTHIRMAYI'
   ];
 
   final _formKey = GlobalKey<FormState>();
@@ -40,6 +41,34 @@ class _PublishResultsState extends State<PublishResults> {
 
   final _thirdPlaceNameController = TextEditingController();
   final _thirdPlaceRollNoController = TextEditingController();
+
+  @override
+  @protected
+  @mustCallSuper
+  void initState() {
+    super.initState();
+
+    if (widget.eventData.results != null &&
+        widget.eventData.results!.isNotEmpty) {
+      _firstPlaceNameController.text = widget.eventData.results![0].name;
+      _secondPlaceNameController.text = widget.eventData.results![1].name;
+      _thirdPlaceNameController.text = widget.eventData.results![2].name;
+
+      _firstPlaceRollNoController.text =
+          widget.eventData.results![0].rollNumber;
+      _secondPlaceRollNoController.text =
+          widget.eventData.results![1].rollNumber;
+      _thirdPlaceRollNoController.text =
+          widget.eventData.results![2].rollNumber;
+    } else {
+      //Initializes results if empty
+      widget.eventData.results = [
+        ResultsModel(name: "", rollNumber: "", position: 1, house: ""),
+        ResultsModel(name: "", rollNumber: "", position: 2, house: ""),
+        ResultsModel(name: "", rollNumber: "", position: 3, house: "")
+      ];
+    }
+  }
 
   String? _firstPlaceHouse, _secondPlaceHouse, _thirdPlaceHouse;
 
@@ -159,6 +188,9 @@ class _PublishResultsState extends State<PublishResults> {
                   padding:
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: DropDownFormField(
+                    defaultValue: widget.eventData.results![0].house != ""
+                        ? widget.eventData.results![0].house
+                        : null,
                     list: _houses,
                     title: 'House',
                     hint: 'Pick the house',
@@ -236,6 +268,9 @@ class _PublishResultsState extends State<PublishResults> {
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: DropDownFormField(
                       list: _houses,
+                      defaultValue: widget.eventData.results![1].house != ""
+                          ? widget.eventData.results![1].house
+                          : null,
                       title: 'House',
                       hint: 'Pick the house',
                       onSaved: (data) {
@@ -311,6 +346,9 @@ class _PublishResultsState extends State<PublishResults> {
                       const EdgeInsets.only(left: 10, right: 10, bottom: 10),
                   child: DropDownFormField(
                       list: _houses,
+                      defaultValue: widget.eventData.results![2].house != ""
+                          ? widget.eventData.results![2].house
+                          : null,
                       title: 'House',
                       hint: 'Pick the house',
                       onSaved: (data) {
@@ -326,60 +364,122 @@ class _PublishResultsState extends State<PublishResults> {
                   padding: const EdgeInsets.only(top: 30),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: ElevatedButton(
-                      child: Text(
-                        'PUBLISH',
-                        style: GoogleFonts.nunito(
-                            color: colors.primaryTextColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17),
-                      ),
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                    child: Row(
+                      children: [
+                        ElevatedButton(
+                          child: Text(
+                            widget.eventData.eventOver ? 'UPDATE' : 'PUBLISH',
+                            style: GoogleFonts.nunito(
+                                color: colors.primaryTextColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
 
-                          var resultData = {
-                            "id": widget.eventData.id,
-                            "results": [
-                              {
-                                "name": _firstPlaceNameController.text,
-                                "rollNumber": _firstPlaceRollNoController.text,
-                                "position": 1,
-                                "house": _firstPlaceHouse!.toUpperCase()
-                              },
-                              {
-                                "name": _secondPlaceNameController.text,
-                                "rollNumber": _secondPlaceRollNoController.text,
-                                "position": 2,
-                                "house": _secondPlaceHouse!.toUpperCase()
-                              },
-                              {
-                                "name": _thirdPlaceNameController.text,
-                                "rollNumber": _thirdPlaceRollNoController.text,
-                                "position": 3,
-                                "house": _thirdPlaceHouse!.toUpperCase()
+                              //Updates value back to model so that user will see updated values without refreshing
+                              widget.eventData.results![0].name =
+                                  _firstPlaceNameController.text;
+                              widget.eventData.results![0].rollNumber =
+                                  _firstPlaceRollNoController.text;
+                              widget.eventData.results![0].house =
+                                  _firstPlaceHouse!;
+
+                              widget.eventData.results![1].name =
+                                  _secondPlaceNameController.text;
+                              widget.eventData.results![1].rollNumber =
+                                  _secondPlaceRollNoController.text;
+                              widget.eventData.results![1].house =
+                                  _secondPlaceHouse!;
+
+                              widget.eventData.results![2].name =
+                                  _thirdPlaceNameController.text;
+                              widget.eventData.results![2].rollNumber =
+                                  _thirdPlaceRollNoController.text;
+                              widget.eventData.results![2].house =
+                                  _thirdPlaceHouse!;
+
+                              var resultData = {
+                                "id": widget.eventData.id,
+                                "results": [
+                                  {
+                                    "name": _firstPlaceNameController.text,
+                                    "rollNumber":
+                                        _firstPlaceRollNoController.text,
+                                    "position": 1,
+                                    "house": _firstPlaceHouse!
+                                  },
+                                  {
+                                    "name": _secondPlaceNameController.text,
+                                    "rollNumber":
+                                        _secondPlaceRollNoController.text,
+                                    "position": 2,
+                                    "house": _secondPlaceHouse!
+                                  },
+                                  {
+                                    "name": _thirdPlaceNameController.text,
+                                    "rollNumber":
+                                        _thirdPlaceRollNoController.text,
+                                    "position": 3,
+                                    "house": _thirdPlaceHouse!
+                                  }
+                                ]
+                              };
+
+                              var res = await makePostRequest(
+                                  json.encode(resultData),
+                                  "/publishResult",
+                                  null,
+                                  true,
+                                  context: context);
+                              if (res.statusCode == 200) {
+                                error = '';
+                                showToast("Results published successfully!");
+                                Navigator.of(context).pop();
+                                widget.onPublishSuccess();
+                              } else {
+                                setState(() {
+                                  error = json.decode(res.body)['message'];
+                                });
                               }
-                            ]
-                          };
-                          print(resultData);
-                          var res = await makePostRequest(
-                              json.encode(resultData),
-                              "/publishResult",
-                              null,
-                              true,
-                              context: context);
-                          if (res.statusCode == 200) {
-                            error = '';
-                            showToast("Results published successfully!");
-                            Navigator.of(context).pop();
-                            widget.onPublishSuccess();
-                          } else {
-                            setState(() {
-                              error = json.decode(res.body)['message'];
-                            });
-                          }
-                        }
-                      },
+                            }
+                          },
+                        ),
+                        if (widget.eventData.eventOver)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    primary: colors.primaryTextColor),
+                                onPressed: () async {
+                                  var res = await makePostRequest(
+                                      json.encode({"id": widget.eventData.id}),
+                                      "/revertResults",
+                                      null,
+                                      true,
+                                      context: context);
+                                  if (res.statusCode == 200) {
+                                    error = '';
+                                    showToast("Results removed successfully!");
+                                    Navigator.of(context).pop();
+                                    widget.eventData.eventOver = false;
+                                    widget.eventData.results!.clear();
+                                  } else {
+                                    setState(() {
+                                      error = json.decode(res.body)['message'];
+                                    });
+                                  }
+                                },
+                                child: Text(
+                                  "REVERT RESULTS",
+                                  style: GoogleFonts.nunito(
+                                      color: colors.buttonColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17),
+                                )),
+                          ),
+                      ],
                     ),
                   ),
                 )
@@ -390,35 +490,4 @@ class _PublishResultsState extends State<PublishResults> {
       ),
     ));
   }
-
-  AlertDialog alert = AlertDialog(
-    title: const Text("Wait!"),
-    content: const Text(
-        "Once entered, results cannot be modified. Are you sure you want to proceed?"),
-    actions: [
-      TextButton(
-        child: const Text("Cancel"),
-        onPressed: () {},
-      ),
-      TextButton(
-        child: const Text("Continue"),
-        onPressed: () {},
-      ),
-    ],
-  );
-
-  AlertDialog finalAlert = AlertDialog(
-    title: const Text("Publish?"),
-    content: const Text("Once entered, results cannot be modified."),
-    actions: [
-      TextButton(
-        child: const Text("Cancel"),
-        onPressed: () {},
-      ),
-      TextButton(
-        child: const Text("Continue"),
-        onPressed: () {},
-      ),
-    ],
-  );
 }

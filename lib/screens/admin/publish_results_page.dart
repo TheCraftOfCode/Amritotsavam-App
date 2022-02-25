@@ -32,6 +32,9 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
     allEventsList.clear();
     for (var i in decodedData['event']) {
       List<ResultsModel> resultData = [];
+      print(
+        i['eventOver'],
+      );
       if (i['results'] != null || i['results'].length != 0) {
         for (var result in i['results']) {
           resultData.add(ResultsModel(
@@ -66,7 +69,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-          future: makePostRequest(null, "/getPendingResults", null, true,
+          future: makePostRequest(null, "/getAllResults", null, true,
               context: context),
           builder: (context, AsyncSnapshot<http.Response> data) {
             if (data.hasData) {
@@ -77,7 +80,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
                 color: colors.accentColor,
                 onRefresh: () async {
                   http.Response data = await makePostRequest(
-                      null, "/getPendingResults", null, true,
+                      null, "/getAllResults", null, true,
                       context: context);
                   getListData(data, true);
                 },
@@ -97,7 +100,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Publish Results',
+                                    'Publish or Edit Results',
                                     style: GoogleFonts.nunito(
                                         fontSize: 30,
                                         color: colors.primaryTextColor,
@@ -121,19 +124,14 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
                             itemBuilder: (_, i) {
                               return MainContentCardWidget(
                                 cardTitle: allEventsList[i].eventName,
-                                cardSubTitle:
-                                allEventsList[i].eventType,
+                                cardSubTitle: allEventsList[i].eventType,
                                 onTap: () {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => PublishResults(
                                               eventData: allEventsList[i],
-                                              onPublishSuccess: () {
-                                                setState(() {
-                                                  allEventsList.removeAt(i);
-                                                });
-                                              })));
+                                              onPublishSuccess: () {})));
                                 },
                                 cardDate: allEventsList[i].eventDate,
                               );
@@ -144,7 +142,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
                             padding: const EdgeInsets.only(top: 50),
                             child: Center(
                               child: Text(
-                                "All results have been published",
+                                "No results to edit or publish",
                                 style: GoogleFonts.nunito(
                                   fontSize: 17,
                                   color: colors.primaryTextColor,
