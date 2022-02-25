@@ -76,7 +76,7 @@ class ContactUs extends StatelessWidget {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
-                                      'Event Queries',
+                                      'Technical Queries',
                                       style: GoogleFonts.nunito(
                                           fontSize: 25,
                                           color: colors.primaryTextColor,
