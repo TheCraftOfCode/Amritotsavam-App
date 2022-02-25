@@ -10,39 +10,37 @@ class CulturalCentralCoordinators extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var widgetList = <Widget>[];
+    for (var data in centralCoordinatorsCultural) {
+      widgetList.add(Expanded(child: userCard(data)));
+    }
     return Scaffold(
       body: Container(
         decoration: constants.gradientDecoration,
         height: double.maxFinite,
-        child: SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 70.0, bottom: 20, left: 30),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    'Cultural Central Coordinators',
-                    style: GoogleFonts.nunito(
-                        fontSize: 30,
-                        color: colors.primaryTextColor,
-                        fontWeight: FontWeight.bold),
-                  ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 70.0, bottom: 20, left: 30),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: Text(
+                  'Cultural Central Coordinators',
+                  style: GoogleFonts.nunito(
+                      fontSize: 30,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: centralCoordinatorsCultural.length,
-                itemBuilder: (_, i) {
-                  return userCard(centralCoordinatorsCultural[i]);
-                },
-              )
-            ],
-          ),
+            ),
+            Expanded(
+              child: Column(
+                children: widgetList,
+              ),
+            )
+          ],
         ),
       ),
     );
