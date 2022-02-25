@@ -14,7 +14,6 @@ class UserManagement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const AppBarBackButton(''),
         floatingActionButton: role == constants.superAdmin
             ? FloatingActionButton(
                 onPressed: () {
@@ -28,6 +27,7 @@ class UserManagement extends StatelessWidget {
             : Container(),
         body: Container(
           decoration: constants.gradientDecoration,
+          height: double.maxFinite,
           child: const AdminUserList(),
         ));
   }

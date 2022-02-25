@@ -63,17 +63,51 @@ class _AdminUserListState extends State<AdminUserList> {
 
   _userListView() {
     if (listData!.isNotEmpty) {
-      return ListView.builder(
-          itemCount: listData!.length,
-          itemBuilder: (context, index) {
-            return _tile(
-                context,
-                listData![index].name,
-                listData![index].username,
-                listData![index].email,
-                listData![index].role,
-                index);
-          });
+      return SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                  top: 70.0, bottom: 10, left: 20),
+              child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Publish or Edit Results',
+                        style: GoogleFonts.nunito(
+                            fontSize: 30,
+                            color: colors.primaryTextColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        'Click on an event to publish results',
+                        style: GoogleFonts.nunito(
+                          fontSize: 17,
+                          color: colors.primaryTextColor,
+                        ),
+                      )
+                    ],
+                  )),
+            ),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: listData!.length,
+                itemBuilder: (context, index) {
+                  return _tile(
+                      context,
+                      listData![index].name,
+                      listData![index].username,
+                      listData![index].email,
+                      listData![index].role,
+                      index);
+                }),
+          ],
+        ),
+      );
     } else {
       return CustomScrollView(
         slivers: <Widget>[

@@ -43,7 +43,7 @@ class _AdminPageState extends State<AdminPage> {
                       UserManagement(role: widget.role)),
                   DataCard('Manage Events', 'assets/svg/events.svg',
                       const EventsList()),
-                  DataCard('Publish Results', 'assets/svg/upload_results.svg',
+                  DataCard('Manage Results', 'assets/svg/upload_results.svg',
                       const PublishResultsPage()),
                 ],
               ),
