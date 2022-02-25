@@ -33,7 +33,7 @@ class LoadValidPageWidget extends StatelessWidget {
         context: context);
     print(res.statusCode);
     if (res.statusCode != 200 && res.statusCode != 412) {
-      showToast("Couldn't validate token, continuing in offline mode!");
+      showToast("Could not authenticate to server, continuing in offline mode!");
     }
     return jwt;
   }

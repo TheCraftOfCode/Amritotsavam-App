@@ -41,6 +41,16 @@ class _PublishResultsState extends State<PublishResults> {
 
   final _thirdPlaceNameController = TextEditingController();
   final _thirdPlaceRollNoController = TextEditingController();
+  bool showProgress = false;
+
+  _initializeEmptyResults(){
+    //Initializes results if empty
+    widget.eventData.results = [
+      ResultsModel(name: "", rollNumber: "", position: 1, house: ""),
+      ResultsModel(name: "", rollNumber: "", position: 2, house: ""),
+      ResultsModel(name: "", rollNumber: "", position: 3, house: "")
+    ];
+  }
 
   @override
   @protected
@@ -61,12 +71,7 @@ class _PublishResultsState extends State<PublishResults> {
       _thirdPlaceRollNoController.text =
           widget.eventData.results![2].rollNumber;
     } else {
-      //Initializes results if empty
-      widget.eventData.results = [
-        ResultsModel(name: "", rollNumber: "", position: 1, house: ""),
-        ResultsModel(name: "", rollNumber: "", position: 2, house: ""),
-        ResultsModel(name: "", rollNumber: "", position: 3, house: "")
-      ];
+      _initializeEmptyResults();
     }
   }
 
@@ -364,123 +369,146 @@ class _PublishResultsState extends State<PublishResults> {
                   padding: const EdgeInsets.only(top: 30),
                   child: Align(
                     alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: [
-                        ElevatedButton(
-                          child: Text(
-                            widget.eventData.eventOver ? 'UPDATE' : 'PUBLISH',
-                            style: GoogleFonts.nunito(
-                                color: colors.primaryTextColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17),
-                          ),
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              _formKey.currentState!.save();
-
-                              //Updates value back to model so that user will see updated values without refreshing
-                              widget.eventData.results![0].name =
-                                  _firstPlaceNameController.text;
-                              widget.eventData.results![0].rollNumber =
-                                  _firstPlaceRollNoController.text;
-                              widget.eventData.results![0].house =
-                                  _firstPlaceHouse!;
-
-                              widget.eventData.results![1].name =
-                                  _secondPlaceNameController.text;
-                              widget.eventData.results![1].rollNumber =
-                                  _secondPlaceRollNoController.text;
-                              widget.eventData.results![1].house =
-                                  _secondPlaceHouse!;
-
-                              widget.eventData.results![2].name =
-                                  _thirdPlaceNameController.text;
-                              widget.eventData.results![2].rollNumber =
-                                  _thirdPlaceRollNoController.text;
-                              widget.eventData.results![2].house =
-                                  _thirdPlaceHouse!;
-
-                              var resultData = {
-                                "id": widget.eventData.id,
-                                "results": [
-                                  {
-                                    "name": _firstPlaceNameController.text,
-                                    "rollNumber":
-                                        _firstPlaceRollNoController.text,
-                                    "position": 1,
-                                    "house": _firstPlaceHouse!
-                                  },
-                                  {
-                                    "name": _secondPlaceNameController.text,
-                                    "rollNumber":
-                                        _secondPlaceRollNoController.text,
-                                    "position": 2,
-                                    "house": _secondPlaceHouse!
-                                  },
-                                  {
-                                    "name": _thirdPlaceNameController.text,
-                                    "rollNumber":
-                                        _thirdPlaceRollNoController.text,
-                                    "position": 3,
-                                    "house": _thirdPlaceHouse!
-                                  }
-                                ]
-                              };
-
-                              var res = await makePostRequest(
-                                  json.encode(resultData),
-                                  "/publishResult",
-                                  null,
-                                  true,
-                                  context: context);
-                              if (res.statusCode == 200) {
-                                error = '';
-                                showToast("Results published successfully!");
-                                Navigator.of(context).pop();
-                                widget.onPublishSuccess();
-                              } else {
-                                setState(() {
-                                  error = json.decode(res.body)['message'];
-                                });
-                              }
-                            }
-                          },
-                        ),
-                        if (widget.eventData.eventOver)
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: colors.primaryTextColor),
-                                onPressed: () async {
-                                  var res = await makePostRequest(
-                                      json.encode({"id": widget.eventData.id}),
-                                      "/revertResults",
-                                      null,
-                                      true,
-                                      context: context);
-                                  if (res.statusCode == 200) {
-                                    error = '';
-                                    showToast("Results removed successfully!");
-                                    Navigator.of(context).pop();
-                                    widget.eventData.eventOver = false;
-                                    widget.eventData.results!.clear();
-                                  } else {
-                                    setState(() {
-                                      error = json.decode(res.body)['message'];
-                                    });
-                                  }
-                                },
+                    child: showProgress
+                        ? const CircularProgressIndicator()
+                        : Row(
+                            children: [
+                              ElevatedButton(
                                 child: Text(
-                                  "REVERT RESULTS",
+                                  widget.eventData.eventOver
+                                      ? 'UPDATE'
+                                      : 'PUBLISH',
                                   style: GoogleFonts.nunito(
-                                      color: colors.buttonColor,
+                                      color: colors.primaryTextColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 17),
-                                )),
+                                ),
+                                onPressed: () async {
+                                  if (_formKey.currentState!.validate()) {
+                                    _formKey.currentState!.save();
+
+                                    //Updates value back to model so that user will see updated values without refreshing
+                                    widget.eventData.results![0].name =
+                                        _firstPlaceNameController.text;
+                                    widget.eventData.results![0].rollNumber =
+                                        _firstPlaceRollNoController.text;
+                                    widget.eventData.results![0].house =
+                                        _firstPlaceHouse!;
+
+                                    widget.eventData.results![1].name =
+                                        _secondPlaceNameController.text;
+                                    widget.eventData.results![1].rollNumber =
+                                        _secondPlaceRollNoController.text;
+                                    widget.eventData.results![1].house =
+                                        _secondPlaceHouse!;
+
+                                    widget.eventData.results![2].name =
+                                        _thirdPlaceNameController.text;
+                                    widget.eventData.results![2].rollNumber =
+                                        _thirdPlaceRollNoController.text;
+                                    widget.eventData.results![2].house =
+                                        _thirdPlaceHouse!;
+
+                                    var resultData = {
+                                      "id": widget.eventData.id,
+                                      "results": [
+                                        {
+                                          "name":
+                                              _firstPlaceNameController.text,
+                                          "rollNumber":
+                                              _firstPlaceRollNoController.text,
+                                          "position": 1,
+                                          "house": _firstPlaceHouse!
+                                        },
+                                        {
+                                          "name":
+                                              _secondPlaceNameController.text,
+                                          "rollNumber":
+                                              _secondPlaceRollNoController.text,
+                                          "position": 2,
+                                          "house": _secondPlaceHouse!
+                                        },
+                                        {
+                                          "name":
+                                              _thirdPlaceNameController.text,
+                                          "rollNumber":
+                                              _thirdPlaceRollNoController.text,
+                                          "position": 3,
+                                          "house": _thirdPlaceHouse!
+                                        }
+                                      ]
+                                    };
+                                    setState(() {
+                                      showProgress = true;
+                                    });
+                                    var res = await makePostRequest(
+                                        json.encode(resultData),
+                                        "/publishResult",
+                                        null,
+                                        true,
+                                        context: context);
+                                    setState(() {
+                                      showProgress = false;
+                                    });
+                                    if (res.statusCode == 200) {
+                                      error = '';
+                                      showToast(
+                                          "Results published successfully!");
+                                      widget.eventData.eventOver = true;
+                                      Navigator.of(context).pop();
+                                    } else {
+                                      setState(() {
+                                        error =
+                                            json.decode(res.body)['message'];
+                                      });
+                                    }
+                                  }
+                                },
+                              ),
+                              if (widget.eventData.eventOver)
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                          primary: colors.primaryTextColor),
+                                      onPressed: () async {
+                                        setState(() {
+                                          showProgress = true;
+                                        });
+                                        var res = await makePostRequest(
+                                            json.encode(
+                                                {"id": widget.eventData.id}),
+                                            "/revertResults",
+                                            null,
+                                            true,
+                                            context: context);
+                                        setState(() {
+                                          showProgress = false;
+                                        });
+                                        if (res.statusCode == 200) {
+                                          error = '';
+                                          showToast(
+                                              "Results removed successfully!");
+                                          widget.eventData.eventOver = false;
+                                          _initializeEmptyResults();
+                                          Navigator.of(context).pop();
+                                        } else {
+                                          setState(() {
+                                            error = json
+                                                .decode(res.body)['message'];
+                                          });
+                                        }
+                                      },
+                                      child: Text(
+                                        "REVERT RESULTS",
+                                        style: GoogleFonts.nunito(
+                                            color: colors.buttonColor,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 17),
+                                      )),
+                                ),
+                            ],
                           ),
-                      ],
-                    ),
                   ),
                 )
               ],

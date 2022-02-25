@@ -22,6 +22,7 @@ class _ChangePasswordState extends State<ChangeName> {
   final _formKey = GlobalKey<FormState>();
   final _passwordController = TextEditingController();
   final _newPasswordController = TextEditingController();
+  bool showProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -91,37 +92,45 @@ class _ChangePasswordState extends State<ChangeName> {
                   padding: const EdgeInsets.only(top: 10.0, left: 20),
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          var res = await makePostRequest(
-                              json.encode({
-                                "newPassword": _newPasswordController.text,
-                                "currentPassword": _passwordController.text
-                              }),
-                              "/changePassword",
-                              null,
-                              true);
-                          setState(() {
-                            //showProgress = false;
-                          });
-                          if (res.statusCode == 200) {
-                            jwtTokenSet = json.decode(res.body)['token'];
-                            showToast("Password changes successfully");
-                            Navigator.of(context).pop();
-                          } else {
-                            showToast("Failed to change password");
-                            setState(() {
-                              error = json.decode(res.body)['message'];
-                            });
-                          }
-                        }
-                      },
-                      child: Text(
-                        'CHANGE PASSWORD',
-                        style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    child: showProgress
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  showProgress = true;
+                                });
+                                var res = await makePostRequest(
+                                    json.encode({
+                                      "newPassword":
+                                          _newPasswordController.text,
+                                      "currentPassword":
+                                          _passwordController.text
+                                    }),
+                                    "/changePassword",
+                                    null,
+                                    true);
+                                setState(() {
+                                  showProgress = false;
+                                });
+                                if (res.statusCode == 200) {
+                                  jwtTokenSet = json.decode(res.body)['token'];
+                                  showToast("Password changes successfully");
+                                  Navigator.of(context).pop();
+                                } else {
+                                  showToast("Failed to change password");
+                                  setState(() {
+                                    error = json.decode(res.body)['message'];
+                                  });
+                                }
+                              }
+                            },
+                            child: Text(
+                              'CHANGE PASSWORD',
+                              style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                   ),
                 )
               ],

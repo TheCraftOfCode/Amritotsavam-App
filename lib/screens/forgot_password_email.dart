@@ -22,6 +22,7 @@ class _ForgotPasswordEmailFieldState extends State<ForgotPasswordEmailField> {
   String error = "";
   final _formKey = GlobalKey<FormFieldState>();
   final _emailController = TextEditingController();
+  bool showProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -89,37 +90,44 @@ class _ForgotPasswordEmailFieldState extends State<ForgotPasswordEmailField> {
                 padding: const EdgeInsets.only(top: 10.0, left: 20),
                 child: Align(
                   alignment: Alignment.bottomLeft,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        var res = await makePostRequest(
-                            json.encode({
-                              "email": _emailController.text,
-                            }),
-                            "/forgotPassword",
-                            null,
-                            false);
-                        setState(() {
-                          //showProgress = false;
-                        });
-                        if (res.statusCode == 200) {
-                          showToast("Verification ID has been sent!");
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => ForgotPasswordChange(
-                                      email: _emailController.text)));
-                        } else {
-                          setState(() {
-                            error = json.decode(res.body)['message'];
-                          });
-                        }
-                      }
-                    },
-                    child: Text(
-                      'SEND VERIFICATION KEY',
-                      style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  child: showProgress
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                              setState(() {
+                                showProgress = true;
+                              });
+                              var res = await makePostRequest(
+                                  json.encode({
+                                    "email": _emailController.text,
+                                  }),
+                                  "/forgotPassword",
+                                  null,
+                                  false);
+                              setState(() {
+                                showProgress = false;
+                              });
+                              if (res.statusCode == 200) {
+                                showToast("Verification ID has been sent!");
+                                Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ForgotPasswordChange(
+                                                email: _emailController.text)));
+                              } else {
+                                setState(() {
+                                  error = json.decode(res.body)['message'];
+                                });
+                              }
+                            }
+                          },
+                          child: Text(
+                            'SEND VERIFICATION KEY',
+                            style:
+                                GoogleFonts.nunito(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                 ),
               )
             ],

@@ -23,6 +23,7 @@ class _ForgotPasswordChange extends State<ForgotPasswordChange> {
   final _formKey = GlobalKey<FormState>();
   final _verificationKeyController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool showProgress = false;
 
   @override
   Widget build(BuildContext context) {
@@ -92,37 +93,43 @@ class _ForgotPasswordChange extends State<ForgotPasswordChange> {
                   padding: const EdgeInsets.only(top: 10.0, left: 20),
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          var res = await makePostRequest(
-                              json.encode({
-                                "email": widget.email,
-                                "forgotPasswordCode":
-                                    _verificationKeyController.text,
-                                "password": _passwordController.text
-                              }),
-                              "/forgotPasswordVerify",
-                              null,
-                              false);
-                          setState(() {
-                            //showProgress = false;
-                          });
-                          if (res.statusCode == 200) {
-                            showToast("Password changed successfully!");
-                            Navigator.of(context).pop();
-                          } else {
-                            setState(() {
-                              error = json.decode(res.body)['message'];
-                            });
-                          }
-                        }
-                      },
-                      child: Text(
-                        'SEND VERIFICATION KEY',
-                        style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    child: showProgress
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                setState(() {
+                                  showProgress = true;
+                                });
+                                var res = await makePostRequest(
+                                    json.encode({
+                                      "email": widget.email,
+                                      "forgotPasswordCode":
+                                          _verificationKeyController.text,
+                                      "password": _passwordController.text
+                                    }),
+                                    "/forgotPasswordVerify",
+                                    null,
+                                    false);
+                                setState(() {
+                                  showProgress = false;
+                                });
+                                if (res.statusCode == 200) {
+                                  showToast("Password changed successfully!");
+                                  Navigator.of(context).pop();
+                                } else {
+                                  setState(() {
+                                    error = json.decode(res.body)['message'];
+                                  });
+                                }
+                              }
+                            },
+                            child: Text(
+                              'CHANGE PASSWORD',
+                              style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                   ),
                 )
               ],

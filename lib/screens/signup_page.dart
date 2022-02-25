@@ -74,13 +74,16 @@ class _SignUpPageState extends State<SignUpPage> {
                                   fontSize: 30,
                                 ),
                               ),
-                              Padding(padding: const EdgeInsets.only(top: 1, bottom: 20),
-                              child:  Text(
-                                  'Use your University e-mail',
-                                  style: GoogleFonts.nunito(
-                                    color: colors.primaryTextColor,
-                                    fontSize: 16,
-                                  ),))
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 1, bottom: 20),
+                                  child: Text(
+                                    'Use your University e-mail',
+                                    style: GoogleFonts.nunito(
+                                      color: colors.primaryTextColor,
+                                      fontSize: 16,
+                                    ),
+                                  ))
                             ],
                           ),
                         ),
@@ -180,45 +183,52 @@ class _SignUpPageState extends State<SignUpPage> {
                         padding: const EdgeInsets.only(top: 50.0, left: 20),
                         child: Align(
                           alignment: Alignment.bottomLeft,
-                          child: ElevatedButton(
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                var res = await makePostRequest(
-                                    json.encode({
-                                      "name": _nameController.text,
-                                      "email": _emailController.text,
-                                      "password": _passwordController.text
-                                    }),
-                                    "/registerUser",
-                                    null,
-                                    false);
-                                setState(() {
-                                  showProgress = false;
-                                });
-                                if (res.statusCode == 200) {
-                                  error = '';
-                                  displayDialog(context, "Continue", null, () {
-                                    Navigator.of(context).pop();
-                                    Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SignInPage()));
-                                  }, "Account has been registered",
-                                      "Please check your mail and open the verification link within the next 15 minutes to complete registration");
-                                } else {
-                                  setState(() {
-                                    error = json.decode(res.body)['message'];
-                                  });
-                                }
-                              }
-                            },
-                            child: Text(
-                              'SIGN UP',
-                              style: GoogleFonts.nunito(
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          child: showProgress
+                              ? const CircularProgressIndicator()
+                              : ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      setState(() {
+                                        showProgress = true;
+                                      });
+                                      var res = await makePostRequest(
+                                          json.encode({
+                                            "name": _nameController.text,
+                                            "email": _emailController.text,
+                                            "password": _passwordController.text
+                                          }),
+                                          "/registerUser",
+                                          null,
+                                          false);
+                                      setState(() {
+                                        showProgress = false;
+                                      });
+                                      if (res.statusCode == 200) {
+                                        error = '';
+                                        displayDialog(context, "Continue", null,
+                                            () {
+                                          Navigator.of(context).pop();
+                                          Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const SignInPage()));
+                                        }, "Account has been registered",
+                                            "Please check your mail and open the verification link within the next 15 minutes to complete registration");
+                                      } else {
+                                        setState(() {
+                                          error =
+                                              json.decode(res.body)['message'];
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: Text(
+                                    'SIGN UP',
+                                    style: GoogleFonts.nunito(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                         ),
                       ),
                     ],

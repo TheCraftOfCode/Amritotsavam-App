@@ -146,53 +146,60 @@ class _SignInPageState extends State<SignInPage> {
                         padding: const EdgeInsets.only(top: 50.0, left: 20),
                         child: Align(
                           alignment: Alignment.bottomLeft,
-                          child: ElevatedButton(
-                            // onPressed: () {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => const HomePage()));
-                            // },
-                            onPressed: () async {
-                              if (_formKey.currentState!.validate()) {
-                                var res = await makePostRequest(
-                                    json.encode({
-                                      "email": _emailController.text,
-                                      "password": _passwordController.text
-                                    }),
-                                    "/login",
-                                    null,
-                                    false);
-                                setState(() {
-                                  showProgress = false;
-                                });
-                                if (res.statusCode == 200) {
-                                  showToast("Signed in successfully!");
-                                  jwtTokenSet = json.decode(res.body)['token'];
-                                  setName = json.decode(res.body)['name'];
-                                  setUserRole = json.decode(res.body)['role'];
-                                  setDateRegistered =
-                                      json.decode(res.body)['dateRegistered'];
-                                  setEmailID = json.decode(res.body)['email'];
-                                  setUserId = json.decode(res.body)['userId'];
-                                  Navigator.of(context).pushAndRemoveUntil(
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomePage()),
-                                      (Route<dynamic> route) => false);
-                                } else {
-                                  setState(() {
-                                    error = json.decode(res.body)['message'];
-                                  });
-                                }
-                              }
-                            },
-                            child: Text(
-                              'SIGN IN',
-                              style: GoogleFonts.nunito(
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
+                          child: showProgress
+                              ? const CircularProgressIndicator()
+                              : ElevatedButton(
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      setState(() {
+                                        showProgress = true;
+                                      });
+                                      var res = await makePostRequest(
+                                          json.encode({
+                                            "email": _emailController.text,
+                                            "password": _passwordController.text
+                                          }),
+                                          "/login",
+                                          null,
+                                          false);
+                                      setState(() {
+                                        showProgress = false;
+                                      });
+                                      if (res.statusCode == 200) {
+                                        showToast("Signed in successfully!");
+                                        jwtTokenSet =
+                                            json.decode(res.body)['token'];
+                                        setName = json.decode(res.body)['name'];
+                                        setUserRole =
+                                            json.decode(res.body)['role'];
+                                        setDateRegistered = json
+                                            .decode(res.body)['dateRegistered'];
+                                        setEmailID =
+                                            json.decode(res.body)['email'];
+                                        setUserId =
+                                            json.decode(res.body)['userId'];
+                                        Navigator.of(context)
+                                            .pushAndRemoveUntil(
+                                                MaterialPageRoute(
+                                                    builder:
+                                                        (context) =>
+                                                            const HomePage()),
+                                                (Route<dynamic> route) =>
+                                                    false);
+                                      } else {
+                                        setState(() {
+                                          error =
+                                              json.decode(res.body)['message'];
+                                        });
+                                      }
+                                    }
+                                  },
+                                  child: Text(
+                                    'SIGN IN',
+                                    style: GoogleFonts.nunito(
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                         ),
                       ),
                     ],

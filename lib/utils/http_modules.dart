@@ -40,11 +40,12 @@ Future<http.Response> makePostRequest(
             MaterialPageRoute(builder: (context) => const WelcomePage()),
             (Route<dynamic> route) => false);
       }
-      showToast("Invalid or expired token, logging out");
+      showToast("Something has changes, logging out of account");
     }
 
     return res;
   } catch (e) {
-    return http.Response('Could not connect to server: ${e}', 408);
+    return http.Response(
+        json.encode({'message': 'Could not connect to server'}), 408);
   }
 }

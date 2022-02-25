@@ -143,5 +143,5 @@ class _MyAppState extends State<MyApp> {
 
 
 //TODO: Change home page nav bar
-//TODO: Find event type vectors
 //TODO: Dialogue asking lose changes blah blah using alert_dialog widget
+//TODO: Add progress wheels for buttons

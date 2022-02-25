@@ -4,9 +4,13 @@ Widget ErrorBox(errorMessage) {
   return errorMessage != null && errorMessage != ""
       ? Container(
           child: Center(
-            child: Text(
-              errorMessage,
-              style: const TextStyle(color: Colors.red, fontSize: 12),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                errorMessage,
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.red, fontSize: 12),
+              ),
             ),
           ),
           decoration: BoxDecoration(

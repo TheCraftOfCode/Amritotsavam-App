@@ -304,42 +304,56 @@ class _AddEvent extends State<AddEvent> {
                 padding: const EdgeInsets.only(top: 50.0, left: 20, bottom: 20),
                 child: Align(
                   alignment: Alignment.bottomLeft,
-                  child: ElevatedButton(
-                    onPressed: () async {
-                      _formKey.currentState?.save();
-                      if (_formKey.currentState!.validate()) {
-                        print(widget.eventData.toJSON);
-                        var res;
-                        if (!widget.eventUpdate) {
-                          res = await makePostRequest(
-                              widget.eventData.toJSON, "/addEvent", null, true,
-                              context: context);
-                        } else {
-                          res = await makePostRequest(widget.eventData.toJSON,
-                              "/updateEvent", null, true,
-                              context: context);
-                        }
-                        setState(() {
-                          showProgress = false;
-                        });
-                        if (res.statusCode == 200) {
-                          error = '';
-                          showToast(widget.eventUpdate
-                              ? "Event updated successfully"
-                              : "Event created successfully");
-                          Navigator.of(context).pop();
-                        } else {
-                          setState(() {
-                            error = json.decode(res.body)['message'];
-                          });
-                        }
-                      }
-                    },
-                    child: Text(
-                      widget.eventUpdate ? 'UPDATE EVENT' : 'CREATE EVENT',
-                      style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  child: showProgress
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: () async {
+                            _formKey.currentState?.save();
+                            if (_formKey.currentState!.validate()) {
+                              print(widget.eventData.toJSON);
+                              var res;
+                              setState(() {
+                                showProgress = true;
+                              });
+                              if (!widget.eventUpdate) {
+                                res = await makePostRequest(
+                                    widget.eventData.toJSON,
+                                    "/addEvent",
+                                    null,
+                                    true,
+                                    context: context);
+                              } else {
+                                res = await makePostRequest(
+                                    widget.eventData.toJSON,
+                                    "/updateEvent",
+                                    null,
+                                    true,
+                                    context: context);
+                              }
+                              setState(() {
+                                showProgress = false;
+                              });
+                              if (res.statusCode == 200) {
+                                error = '';
+                                showToast(widget.eventUpdate
+                                    ? "Event updated successfully"
+                                    : "Event created successfully");
+                                Navigator.of(context).pop();
+                              } else {
+                                setState(() {
+                                  error = json.decode(res.body)['message'];
+                                });
+                              }
+                            }
+                          },
+                          child: Text(
+                            widget.eventUpdate
+                                ? 'UPDATE EVENT'
+                                : 'CREATE EVENT',
+                            style:
+                                GoogleFonts.nunito(fontWeight: FontWeight.bold),
+                          ),
+                        ),
                 ),
               ),
               Expanded(child: Container()),

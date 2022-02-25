@@ -136,46 +136,53 @@ class _AddAdminState extends State<AddAdmin> {
                 ),
                 Expanded(child: Container()),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0, left: 20, bottom: 20),
+                  padding:
+                      const EdgeInsets.only(top: 50.0, left: 20, bottom: 20),
                   child: Align(
                     alignment: Alignment.bottomLeft,
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState?.save();
-                          var res = await makePostRequest(
-                              json.encode({
-                                "name": _nameController.text,
-                                "email": _emailController.text,
-                                "role": roleData
-                              }),
-                              "/registerAdminUser",
-                              null,
-                              true,
-                              context: context);
-                          setState(() {
-                            showProgress = false;
-                          });
-                          print(json.decode(res.body)['message']);
-                          if (res.statusCode == 200) {
-                            error = '';
-                            displayDialog(context, "Continue", null, () {
-                              Navigator.of(context).pop();
-                              Navigator.of(context).pop();
-                            }, "Account has been created",
-                                "An account has been created and password has been sent to the mail ID");
-                          } else {
-                            setState(() {
-                              error = json.decode(res.body)['message'];
-                            });
-                          }
-                        }
-                      },
-                      child: Text(
-                        'CREATE USER',
-                        style: GoogleFonts.nunito(fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    child: showProgress
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState?.save();
+                                setState(() {
+                                  showProgress = true;
+                                });
+                                var res = await makePostRequest(
+                                    json.encode({
+                                      "name": _nameController.text,
+                                      "email": _emailController.text,
+                                      "role": roleData
+                                    }),
+                                    "/registerAdminUser",
+                                    null,
+                                    true,
+                                    context: context);
+                                setState(() {
+                                  showProgress = false;
+                                });
+                                print(json.decode(res.body)['message']);
+                                if (res.statusCode == 200) {
+                                  error = '';
+                                  displayDialog(context, "Continue", null, () {
+                                    Navigator.of(context).pop();
+                                    Navigator.of(context).pop();
+                                  }, "Account has been created",
+                                      "An account has been created and password has been sent to the mail ID");
+                                } else {
+                                  setState(() {
+                                    error = json.decode(res.body)['message'];
+                                  });
+                                }
+                              }
+                            },
+                            child: Text(
+                              'CREATE USER',
+                              style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
                   ),
                 ),
               ],
