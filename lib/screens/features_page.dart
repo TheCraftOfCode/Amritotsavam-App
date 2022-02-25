@@ -19,19 +19,19 @@ class _FeaturesPageState extends State<FeaturesPage> {
   final controller = PageController(viewportFraction: 1.0, keepPage: true);
 
   var text = [
-    'Register with your phone number',
-    'View events',
-    'RSVP to events',
-    'Star your favorites',
-    'Get notified of updates'
+    'The all-in-one Amritotsavam companion',
+    'Get notified',
+    'Share events',
+    'Explore Amritotsavam',
+    'Sign in with your Microsoft account'
   ];
 
   var subText = [
-    'Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum',
-    'Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum',
-    'Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum',
-    'Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum',
-    'Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum Lorem impsum',
+    'Information at the tip of your finger - view event details, rules, judgement criteria and results all from one place.',
+    "Worried if you'll miss out on events? Not anymore! Set reminders in the app and get reminded when submissions are due.",
+    "Found an interesting event that you'd like to share with your friends? You can do that right from the app, to any platform you wish to.",
+    "Get to know more about the event's story, and the spirited team responsible for bringing it to you.",
+    "Its's time to begin your journey! Click on the sign up button and sign up using your Microsoft account with the amrita.edu domain.",
   ];
 
   var image_location = [

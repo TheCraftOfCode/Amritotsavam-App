@@ -37,7 +37,7 @@ class _PasswordFormFieldWidgetState extends State<PasswordFormFieldWidget> {
       style: widget.style,
       decoration: InputDecoration(
         label: Text(widget.label,
-            style: GoogleFonts.raleway(
+            style: GoogleFonts.nunito(
                 color: colors.textBoxTextColor, fontSize: 12)),
         hintText: widget.hintText,
         suffixIcon: Material(

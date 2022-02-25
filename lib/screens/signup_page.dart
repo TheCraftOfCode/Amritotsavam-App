@@ -63,12 +63,25 @@ class _SignUpPageState extends State<SignUpPage> {
                             const EdgeInsets.only(left: 20, right: 20, top: 80),
                         child: Align(
                           alignment: Alignment.topLeft,
-                          child: Text(
-                            'Sign Up',
-                            style: GoogleFonts.nunito(
-                              color: colors.primaryTextColor,
-                              fontSize: 30,
-                            ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Sign Up',
+                                style: GoogleFonts.nunito(
+                                  color: colors.primaryTextColor,
+                                  fontSize: 30,
+                                ),
+                              ),
+                              Padding(padding: const EdgeInsets.only(top: 1, bottom: 20),
+                              child:  Text(
+                                  'Use your University e-mail',
+                                  style: GoogleFonts.nunito(
+                                    color: colors.primaryTextColor,
+                                    fontSize: 16,
+                                  ),))
+                            ],
                           ),
                         ),
                       ),

@@ -84,6 +84,7 @@ class _EventsPageState extends State<EventsPage> {
                                           widget.eventData.eventDate,
                                           style: GoogleFonts.nunito(
                                               color: colors.primaryTextColor,
+                                              fontWeight: FontWeight.bold,
                                               fontSize: 17),
                                         ),
                                       ),
