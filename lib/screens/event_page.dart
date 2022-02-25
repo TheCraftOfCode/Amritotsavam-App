@@ -269,6 +269,7 @@ class _EventsPageState extends State<EventsPage> {
                         ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
+                              onPrimary: colors.buttonColor,
                               primary: colors.primaryTextColor),
                           onPressed: () {
                             _launchURL(widget.eventData.registrationLink);
@@ -284,6 +285,7 @@ class _EventsPageState extends State<EventsPage> {
                       ],
                     ) : widget.eventData.results != null? ElevatedButton(
                       style: ElevatedButton.styleFrom(
+                          onPrimary: colors.buttonColor,
                           primary: colors.primaryTextColor),
                       onPressed: () {
                         Navigator.push(

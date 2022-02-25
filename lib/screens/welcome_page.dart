@@ -96,6 +96,7 @@ class WelcomePage extends StatelessWidget {
                               ),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
+                                    onPrimary: colors.buttonColor,
                                     primary: colors.primaryTextColor),
                                 onPressed: () {
                                   Navigator.push(

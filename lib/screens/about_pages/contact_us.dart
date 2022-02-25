@@ -161,6 +161,7 @@ class ContactUs extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
+                                            onPrimary: colors.buttonColor,
                                             primary: colors.primaryTextColor),
                                         onPressed: () {
                                           if (_formKey.currentState!

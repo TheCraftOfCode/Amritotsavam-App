@@ -120,9 +120,6 @@ class ProfilePage extends StatelessWidget {
                                   child: Padding(
                                     padding: const EdgeInsets.only(right: 4),
                                     child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          onPrimary: colors.buttonColor,
-                                        ),
                                         onPressed: () {
                                           Navigator.of(context).push(
                                               MaterialPageRoute(

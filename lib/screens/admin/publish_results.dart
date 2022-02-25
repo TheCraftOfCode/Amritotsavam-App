@@ -473,6 +473,7 @@ class _PublishResultsState extends State<PublishResults> {
                                   padding: const EdgeInsets.only(left: 10),
                                   child: ElevatedButton(
                                       style: ElevatedButton.styleFrom(
+                                          onPrimary: colors.buttonColor,
                                           primary: colors.primaryTextColor),
                                       onPressed: () {
                                         displayDialog(context, "Continue", null, () async {
