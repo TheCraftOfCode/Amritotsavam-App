@@ -301,7 +301,14 @@ class _HorizontalListViewState extends State<_HorizontalListView> {
                 return _horizontalWidgetCard(
                     widget.list[index].eventName,
                     widget.list[index].eventDate,
-                    () {},
+                    () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EventsPage(
+                                eventData: widget.list[index],
+                              )));
+                    },
                     currentPagePosition == index,
                     widget.list[index].eventType);
               },
