@@ -2,6 +2,7 @@ import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:amritotsavam_app/utils/constants.dart' as constants;
 
 /// *
 /// This widget can be used between usual widgets to avoid rendering
@@ -44,21 +45,24 @@ class LoadValidPageWidget extends StatelessWidget {
         builder: (context, data) {
           if (!data.hasData) {
             return Scaffold(
-              body: Column(
-                children: [
-                  Expanded(child: Container()),
-                  const Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(40),
-                      child: Image(
-                          image:
-                              AssetImage('assets/amritotsavam_logo_mini.png')),
+              body: Container(
+                decoration: constants.gradientDecoration,
+                child: Column(
+                  children: [
+                    Expanded(child: Container()),
+                    const Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.all(40),
+                        child: Image(
+                            image:
+                                AssetImage('assets/amritotsavam_logo_mini.png')),
+                      ),
                     ),
-                  ),
-                  const Expanded(child: Center(
-                    child: CircularProgressIndicator(),
-                  )),
-                ],
+                    const Expanded(child: Center(
+                      child: CircularProgressIndicator(),
+                    )),
+                  ],
+                ),
               ),
             );
           } else if (data.hasData && data.data == '') {
