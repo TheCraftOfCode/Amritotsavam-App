@@ -120,7 +120,7 @@ class _EventsState extends State<Events> {
                           child: Align(
                               alignment: Alignment.topLeft,
                               child: Text(
-                                'Home',
+                                'Events',
                                 style: GoogleFonts.nunito(
                                     fontSize: 30,
                                     color: colors.primaryTextColor,

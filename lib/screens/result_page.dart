@@ -23,11 +23,8 @@ class _ResultPageState extends State<ResultPage> {
         decoration: constants.gradientDecoration,
         child: Column(
           children: [
-            Container(
-              height: 50,
-            ),
             Padding(
-                padding: const EdgeInsets.only(top: 50.0, bottom: 20, left: 30),
+                padding: const EdgeInsets.only(top: 70.0, bottom: 20, left: 20),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
