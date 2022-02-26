@@ -1,3 +1,4 @@
+import 'package:amritotsavam_app/screens/admin/broadcast_notifications.dart';
 import 'package:amritotsavam_app/screens/admin/events_page.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results_page.dart';
 import 'package:amritotsavam_app/screens/admin/user_management.dart';
@@ -40,10 +41,12 @@ class _AdminPageState extends State<AdminPage> {
                   ),
                   DataCard('Manage Accounts', 'assets/svg/manage_user.svg',
                       UserManagement(role: widget.role)),
-                  DataCard('Manage Events', 'assets/svg/events.svg',
-                      const EventsList()),
-                  DataCard('Manage Results', 'assets/svg/upload_results.svg',
-                      const PublishResultsPage()),
+                  const DataCard('Manage Events', 'assets/svg/events.svg',
+                      EventsList()),
+                  const DataCard('Manage Results', 'assets/svg/upload_results.svg',
+                      PublishResultsPage()),
+                  const DataCard('Broadcast Notifications', 'assets/svg/team_members.svg',
+                      BroadcastNotifications()),
                 ],
               ),
             )));

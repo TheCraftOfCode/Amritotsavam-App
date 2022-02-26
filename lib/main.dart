@@ -32,9 +32,9 @@ Future<void> main() async {
   );
 
   const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description: 'This channel is used for important notifications.',
+    'amritotsavam_notification_channel', // id
+    'Amritotsavam Notifications', // title
+    description: 'This channel is used for amritotsavam notifications.',
     // description
     importance: Importance.max,
   );
@@ -56,7 +56,6 @@ Future<void> main() async {
   FlutterLocalNotificationsPlugin().initialize(initializationSettings);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print(message.data);
     RemoteNotification? notification = message.notification;
     AndroidNotification? android = message.notification?.android;
     if (notification != null && android != null) {
@@ -104,10 +103,6 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
-
 
 //TODO: Change home page nav bar
 //TODO: Dialogue asking lose changes blah blah using alert_dialog widget
