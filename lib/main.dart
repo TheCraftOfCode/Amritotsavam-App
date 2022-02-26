@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:in_app_update/in_app_update.dart';
 import 'package:oktoast/oktoast.dart';
 import 'screens/welcome_page.dart';
 
@@ -23,7 +24,6 @@ Future<void> main() async {
   messaging.getToken().then((value) {
     print(value);
   });
-
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,
@@ -51,8 +51,8 @@ Future<void> main() async {
 
   var initializationSettingsAndroid =
       const AndroidInitializationSettings('@mipmap/ic_launcher');
-  var initializationSettings = InitializationSettings(
-      android: initializationSettingsAndroid);
+  var initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
   FlutterLocalNotificationsPlugin().initialize(initializationSettings);
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -72,7 +72,7 @@ Future<void> main() async {
             ),
           ));
     }
- });
+  });
 
   runApp(const OKToast(
     position: ToastPosition.center,
@@ -88,12 +88,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
+  Future<void> checkForUpdate() async {
+    InAppUpdate.checkForUpdate().then((info) {
+      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
+        InAppUpdate.performImmediateUpdate().catchError((e) {
+          showToast(e.toString());
+        });
+      }
+    }).catchError((e) {});
+  }
 
   @override
   void initState() {
     super.initState();
+    checkForUpdate();
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -104,6 +114,5 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-//TODO: Change home page nav bar
 //TODO: Dialogue asking lose changes blah blah using alert_dialog widget
 //TODO: Add progress wheels for buttons
