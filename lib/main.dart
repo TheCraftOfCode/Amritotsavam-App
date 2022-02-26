@@ -10,10 +10,6 @@ import 'package:in_app_update/in_app_update.dart';
 import 'package:oktoast/oktoast.dart';
 import 'screens/welcome_page.dart';
 
-//TODO: Change Icons in each tiles in home page
-//TODO: Fill about pages
-//TODO: Add widget to generate list
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
@@ -115,4 +111,3 @@ class _MyAppState extends State<MyApp> {
 }
 
 //TODO: Dialogue asking lose changes blah blah using alert_dialog widget
-//TODO: Add progress wheels for buttons
