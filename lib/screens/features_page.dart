@@ -18,24 +18,21 @@ class _FeaturesPageState extends State<FeaturesPage> {
 
   var text = [
     'The all-in-one Amritotsavam companion',
-    //  'Get notified',
-    //  'Share events',
+    'Get notified',
     'Explore Amritotsavam',
     'Sign in with your Microsoft account'
   ];
 
   var subText = [
     'Information at the tip of your finger - view event details, rules, judgement criteria and results all from one place.',
-    // "Worried if you'll miss out on events? Not anymore! Set reminders in the app and get reminded when submissions are due.",
-    // "Found an interesting event that you'd like to share with your friends? You can do that right from the app, to any platform you wish to.",
+    "Worried if you'll miss out on events? Not anymore! Get notifications from the app when new events and results are published.",
     "Get to know more about the event's story, and the spirited team responsible for bringing it to you.",
     "It's time to begin your journey! Click on the sign up button and sign up using your Microsoft account with the amrita.edu domain.",
   ];
 
   var image_location = [
     'assets/svg/register.svg',
-    //   'assets/svg/view_events.svg',
-    //   'assets/svg/rsvp_events.svg',
+    'assets/svg/update_events.svg',
     'assets/svg/view_events.svg',
     'assets/svg/rsvp_events.svg',
   ];
@@ -43,7 +40,7 @@ class _FeaturesPageState extends State<FeaturesPage> {
   @override
   Widget build(BuildContext context) {
     final pages = List.generate(
-      3,
+      text.length,
       (index) => Container(
         margin: const EdgeInsets.only(left: 10, right: 10),
         child: Padding(

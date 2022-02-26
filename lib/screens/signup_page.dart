@@ -215,7 +215,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                                   builder: (context) =>
                                                       const SignInPage()));
                                         }, "Account has been registered",
-                                            "Please check your mail and open the verification link within the next 15 minutes to complete registration");
+                                            "Please check your mail and open the verification link within the next 15 minutes to complete registration\n\n(Check your Junk Mail/Spam if you haven't received it yet)");
                                       } else {
                                         setState(() {
                                           error =
