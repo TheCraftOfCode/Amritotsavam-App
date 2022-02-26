@@ -19,8 +19,11 @@ Widget contactCard(PeopleData data) {
             Padding(
               padding: const EdgeInsets.only(right: 15),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.asset(data.pictureURL, width: 90,),
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  data.getImageDestination(),
+                  width: 90,
+                ),
               ),
             ),
             Expanded(
