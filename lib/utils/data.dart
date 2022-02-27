@@ -269,12 +269,12 @@ var digitalContentTeam = [
 
 var facultyCoordinators = [
   PeopleData(
-    name: "MR. Sri PRAKASH A S",
+    name: "Sri PRAKASH A S",
     phoneNo: "9443473725",
     pictureURL: "assets/profiles/mr_prakaash_a_s.jpg"
   ),
   PeopleData(
-    name: "MR. Sri PUSHPARAJ M",
+    name: "Sri PUSHPARAJ M",
     phoneNo: "9944685515",
     pictureURL: "assets/profiles/mr_pushparaj_m.jpg"
   ),

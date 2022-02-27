@@ -33,7 +33,34 @@ class ElectedRepresentatives extends StatelessWidget {
                   ),
                 ),
               ),
-
+              Padding(
+                padding: const EdgeInsets.only(left: 23, top: 30),
+                child: Text(
+                  'Cultural Central Coordinators',
+                  style: GoogleFonts.nunito(
+                      fontSize: 25,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: centralCoordinatorsCultural.length,
+                itemBuilder: (_, i) {
+                  return userCard(centralCoordinatorsCultural[i]);
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 23, top: 30),
+                child: Text(
+                  'House Representatives',
+                  style: GoogleFonts.nunito(
+                      fontSize: 25,
+                      color: colors.primaryTextColor,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
               //AMRITAMAYI
               Padding(
                 padding: const EdgeInsets.only(left: 30, top: 30),
