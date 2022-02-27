@@ -36,10 +36,10 @@ Future<Widget> getProfilePicture(PeopleData data) async {
   }
   return CircleAvatar(
       backgroundColor: colors.activeCardColor,
-      maxRadius: 40,
+      maxRadius: 50,
       child: Text(
         data.name[0],
-        style: const TextStyle(fontSize: 35),
+        style: const TextStyle(fontSize: 40),
       ));
 }
 
