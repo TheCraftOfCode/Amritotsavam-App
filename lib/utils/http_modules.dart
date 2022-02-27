@@ -40,7 +40,7 @@ Future<http.Response> makePostRequest(
             MaterialPageRoute(builder: (context) => const WelcomePage()),
             (Route<dynamic> route) => false);
       }
-      showToast("Something has changes, logging out of account");
+      showToast("Something has changed, logging out of account");
     }
 
     return res;
