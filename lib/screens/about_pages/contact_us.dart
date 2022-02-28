@@ -34,9 +34,6 @@ class ContactUs extends StatelessWidget {
           .then((value) => clearFieldContent())
           .catchError((e) {
         showToast("Unable to send your query, please try again later!");
-        if (kDebugMode) {
-          print(e);
-        }
       });
     }
 

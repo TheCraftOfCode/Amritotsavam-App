@@ -66,7 +66,6 @@ class _AddAdminState extends State<AddAdmin> {
                       title: 'Pick role',
                       hint: 'Pick an appropriate role',
                       onSaved: (data) {
-                        print(data);
                         roleData = data;
                       },
                     ),
@@ -170,7 +169,6 @@ class _AddAdminState extends State<AddAdmin> {
                                   setState(() {
                                     showProgress = false;
                                   });
-                                  print(json.decode(res.body)['message']);
                                   if (res.statusCode == 200) {
                                     error = '';
                                     displayDialog(context, "Continue", null, () {

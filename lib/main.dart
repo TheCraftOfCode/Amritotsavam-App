@@ -17,9 +17,6 @@ Future<void> main() async {
   await Firebase.initializeApp();
 
   final FirebaseMessaging messaging = FirebaseMessaging.instance;
-  messaging.getToken().then((value) {
-    print(value);
-  });
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true,

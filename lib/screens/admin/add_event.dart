@@ -319,7 +319,6 @@ class _AddEvent extends State<AddEvent> {
                             onPressed: () async {
                               _formKey.currentState?.save();
                               if (_formKey.currentState!.validate()) {
-                                print(widget.eventData.toJSON);
                                 var res;
                                 setState(() {
                                   showProgress = true;

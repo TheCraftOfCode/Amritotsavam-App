@@ -32,9 +32,6 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
     allEventsList.clear();
     for (var i in decodedData['event']) {
       List<ResultsModel> resultData = [];
-      print(
-        i['eventOver'],
-      );
       if (i['results'] != null || i['results'].length != 0) {
         for (var result in i['results']) {
           resultData.add(ResultsModel(

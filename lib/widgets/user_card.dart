@@ -18,7 +18,6 @@ Future<Widget> getProfilePicture(PeopleData data) async {
       ),
     );
   } catch (_) {
-    print(data.pictureURL);
     try {
       if (data.pictureURL != null) {
         await rootBundle.load(data.pictureURL!);

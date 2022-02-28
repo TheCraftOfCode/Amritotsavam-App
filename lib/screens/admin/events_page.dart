@@ -389,7 +389,6 @@ class _MainContentCardWidgetState extends State<_MainContentCardWidget> {
                                           null,
                                           true,
                                           context: context);
-                                      print(response.body);
                                       if (response.statusCode == 200) {
                                         widget.removeData();
                                         showToast(
