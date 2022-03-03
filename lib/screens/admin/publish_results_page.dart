@@ -58,7 +58,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
           results: resultData);
       allEventsList.add(data);
     }
-    sortEventDescending(allEventsList);
+    sortEventAscending(allEventsList);
     if (reloadPage) {
       setState(() {});
     }

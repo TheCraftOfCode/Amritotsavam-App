@@ -78,8 +78,8 @@ class _EventsState extends State<Events> {
       }
       allEventsList.add(data);
     }
-    sortEventDescending(allEventsList);
-    sortEventDescending(listUpcoming);
+    sortEventAscending(allEventsList);
+    sortEventAscending(listUpcoming);
     if (reloadPage) {
       setState(() {});
     }

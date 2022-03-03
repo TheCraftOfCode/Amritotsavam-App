@@ -74,10 +74,10 @@ set setUserId(String userId) {
   storage.write(key: userIdKey, value: userId);
 }
 
-sortEventDescending(List<EventData> data){
+sortEventAscending(List<EventData> data){
   data.sort((a, b){ //sorting in descending order
     var format = DateFormat("dd/MM/yyyy");
 
-    return format.parse(b.eventDate).compareTo(format.parse(a.eventDate));
+    return format.parse(a.eventDate).compareTo(format.parse(b.eventDate));
   });
 }

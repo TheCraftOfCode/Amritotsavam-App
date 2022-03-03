@@ -57,7 +57,7 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
           results: resultData);
       allEventsList.add(data);
     }
-    sortEventDescending(allEventsList);
+    sortEventAscending(allEventsList);
     if (reloadPage) {
       setState(() {});
     }
