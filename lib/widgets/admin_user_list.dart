@@ -245,7 +245,10 @@ class _AdminUserListState extends State<AdminUserList> {
             _putListData(snapshot.data!, false);
           }
           return RefreshIndicator(
-              child: _userListView(),
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 20),
+                child: _userListView(),
+              ),
               onRefresh: () async {
                 http.Response responseData = await _fetchUsers();
                 _putListData(responseData, true);
