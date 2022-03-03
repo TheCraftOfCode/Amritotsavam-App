@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:oktoast/oktoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactUs extends StatelessWidget {
   const ContactUs({Key? key}) : super(key: key);
@@ -190,7 +191,7 @@ class ContactUs extends StatelessWidget {
                             )),
                       )),
                   Padding(
-                    padding: const EdgeInsets.only(left: 23, top: 30),
+                    padding: const EdgeInsets.only(left: 23, top: 20),
                     child: Text(
                       'Designed and Maintained by',
                       style: GoogleFonts.nunito(
@@ -202,17 +203,24 @@ class ContactUs extends StatelessWidget {
                   Expanded(child: contactCard(digitalContentTeam[0])),
                   Expanded(child: contactCard(digitalContentTeam[1])),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 40, top: 10),
+                    padding: const EdgeInsets.only(bottom: 10, top: 10),
                     child: Center(
-                      child: Text(
-                        'Contact us for any technical queries',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.nunito(
-                          fontSize: 18,
-                          color: colors.primaryTextColor.withOpacity(0.7),
+                      child: TextButton(
+                        onPressed: () async {
+                          await launch("mailto:amritotsavam@cb.amrita.edu");
+                        },
+                        child: Text(
+                          'Official Mail ID: amritotsavam@cb.amrita.edu',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.nunito(
+                            fontSize: 14,
+                            color: colors.primaryTextColor.withOpacity(0.7),
+                          ),
                         ),
                       ),
                     ),
+                    //amritotsavam@cb.amrita.edu
+
                   )
                 ],
               ),
