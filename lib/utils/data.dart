@@ -294,7 +294,7 @@ var multimediaTeam = [
   PeopleData(
       name: "VEERAMANOHAR A",
       phoneNo: "9566899955",
-      rollNo: "CB. EN. U4EEE19145"),
+      rollNo: "CB.EN.U4EEE19145"),
   PeopleData(
       name: "VISHAL KARTHIKEYAN",
       phoneNo: "9176390702",

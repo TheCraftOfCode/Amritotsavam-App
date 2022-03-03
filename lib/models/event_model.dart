@@ -11,6 +11,7 @@ class EventData {
   List<dynamic> rules;
   List<dynamic> judgingCriteria;
   String eventType;
+  String? eventPosterURL;
   String registrationLink;
   String eventDescription;
   String submissionLink;
@@ -29,6 +30,7 @@ class EventData {
       required this.registrationLink,
       required this.submissionLink,
       required this.eventOver,
+      this.eventPosterURL,
       required this.eventDescription,
       this.results});
 
@@ -44,6 +46,7 @@ class EventData {
       "submissionLink": submissionLink,
       "judgingCriteria": judgingCriteria,
       "eventType": eventType,
+      "eventPosterURL": eventPosterURL,
       "eventDescription": eventDescription
     });
   }

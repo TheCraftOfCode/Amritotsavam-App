@@ -63,6 +63,7 @@ class _EventsListState extends State<EventsList> {
           eventType: i['eventType'],
           registrationLink: i['registrationLink'],
           submissionLink: i['submissionLink'],
+          eventPosterURL: i['eventPosterURL'] ?? "",
           eventOver: i['eventOver'],
           eventDescription: i['eventDescription'],
           results: resultData);

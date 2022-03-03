@@ -2,6 +2,7 @@ import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/screens/result_page.dart';
 import 'package:amritotsavam_app/widgets/unordered_list.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
@@ -107,11 +108,19 @@ class _EventsPageState extends State<EventsPage> {
                           padding: const EdgeInsets.only(top: 40.0),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(19),
-                            child: const Image(
+                            child: CachedNetworkImage(
+                              imageUrl:
+                                  widget.eventData.eventPosterURL ?? "",
+                              placeholder: (context, url) => const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Center(
+                                    child: CircularProgressIndicator()),
+                              ),
+                              errorWidget: (context, url, error) => const Image(
                                 image:
                                     AssetImage('assets/background_image.png'),
-                                width: double.infinity,
-                                fit: BoxFit.fill),
+                              ),
+                            ),
                           ),
                         ),
                         Padding(
@@ -153,8 +162,7 @@ class _EventsPageState extends State<EventsPage> {
                               )),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Text(
                             widget.eventData.eventDescription,
                             textAlign: TextAlign.justify,
@@ -253,55 +261,63 @@ class _EventsPageState extends State<EventsPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: 40, horizontal: 20),
-                    child: !widget.eventData.eventOver ? Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                            onPressed: () {
-                              _launchURL(widget.eventData.submissionLink);
-                            },
-                            child: Text(
-                              'Submit',
-                              style: GoogleFonts.nunito(
-                                  fontWeight: FontWeight.bold, fontSize: 17),
-                            )),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              onPrimary: colors.buttonColor,
-                              primary: colors.primaryTextColor),
-                          onPressed: () {
-                            _launchURL(widget.eventData.registrationLink);
-                          },
-                          child: Text(
-                            'Register',
-                            style: GoogleFonts.nunito(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 17,
-                                color: colors.gradientEndColor),
-                          ),
-                        ),
-                      ],
-                    ) : widget.eventData.results != null? ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          onPrimary: colors.buttonColor,
-                          primary: colors.primaryTextColor),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ResultPage(results: widget.eventData.results,)));
-                      },
-                      child: Text(
-                        'Show Results',
-                        style: GoogleFonts.nunito(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                            color: colors.gradientEndColor),
-                      ),
-                    ) : const Text("Waiting For Results to Publish"),
+                    child: !widget.eventData.eventOver
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                  onPressed: () {
+                                    _launchURL(widget.eventData.submissionLink);
+                                  },
+                                  child: Text(
+                                    'Submit',
+                                    style: GoogleFonts.nunito(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 17),
+                                  )),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    onPrimary: colors.buttonColor,
+                                    primary: colors.primaryTextColor),
+                                onPressed: () {
+                                  _launchURL(widget.eventData.registrationLink);
+                                },
+                                child: Text(
+                                  'Register',
+                                  style: GoogleFonts.nunito(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: colors.gradientEndColor),
+                                ),
+                              ),
+                            ],
+                          )
+                        : widget.eventData.results != null
+                            ? ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    onPrimary: colors.buttonColor,
+                                    primary: colors.primaryTextColor),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ResultPage(
+                                                results:
+                                                    widget.eventData.results,
+                                              )));
+                                },
+                                child: Text(
+                                  'Show Results',
+                                  style: GoogleFonts.nunito(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 17,
+                                      color: colors.gradientEndColor),
+                                ),
+                              )
+                            : const Text("Waiting For Results to Publish"),
                   ),
                 ],
               ),

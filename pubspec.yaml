@@ -54,6 +54,7 @@ dependencies:
   flutter_email_sender: ^5.1.0
   font_awesome_flutter: ^9.2.0
   in_app_update: ^3.0.0
+  cached_network_image: ^3.2.0
 
 
 dev_dependencies:

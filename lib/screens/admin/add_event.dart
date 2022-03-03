@@ -43,8 +43,8 @@ class _AddEvent extends State<AddEvent> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return await displayQuitDialog(
-            context, "Close Page?", "Are you sure you want to close this page? All data will be lost");
+        return await displayQuitDialog(context, "Close Page?",
+            "Are you sure you want to close this page? All data will be lost");
       },
       child: Scaffold(
         body: Container(
@@ -54,7 +54,8 @@ class _AddEvent extends State<AddEvent> {
             child: CustomSliverView(
               columnList: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 70.0, bottom: 20, left: 30),
+                  padding:
+                      const EdgeInsets.only(top: 70.0, bottom: 20, left: 30),
                   child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -70,8 +71,8 @@ class _AddEvent extends State<AddEvent> {
                   padding: constants.textFieldPadding,
                   child: TextFormField(
                       initialValue: widget.eventData.eventName,
-                      style:
-                          GoogleFonts.montserrat(color: colors.primaryTextColor),
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
                       validator: (value) {
                         if (value == "" || value == null) {
                           return "Please enter event name";
@@ -150,8 +151,8 @@ class _AddEvent extends State<AddEvent> {
                       onSaved: (value) {
                         widget.eventData.location = value!;
                       },
-                      style:
-                          GoogleFonts.montserrat(color: colors.primaryTextColor),
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
                       validator: (value) {
                         if (value == "" || value == null) {
                           return "Please enter event location";
@@ -184,16 +185,12 @@ class _AddEvent extends State<AddEvent> {
                       onSaved: (value) {
                         widget.eventData.registrationLink = value!;
                       },
-                      style:
-                          GoogleFonts.montserrat(color: colors.primaryTextColor),
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
                       validator: (value) {
                         if (value == "" || value == null) {
                           return "Please enter registration URL";
                         } else {
-                          // RegExp regExp = RegExp(constants.urlPattern);
-                          // if (!(regExp.hasMatch(value))) {
-                          //   return 'Please enter valid url';
-                          // }
                           return null;
                         }
                       },
@@ -222,8 +219,8 @@ class _AddEvent extends State<AddEvent> {
                       onSaved: (value) {
                         widget.eventData.submissionLink = value!;
                       },
-                      style:
-                          GoogleFonts.montserrat(color: colors.primaryTextColor),
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
                       validator: (value) {
                         if (value == "" || value == null) {
                           return "Please enter submission URL";
@@ -241,6 +238,33 @@ class _AddEvent extends State<AddEvent> {
                                 color: colors.textBoxTextColor, fontSize: 12)),
                         filled: true,
                         hintText: 'Enter submission URL',
+                        hintStyle: GoogleFonts.poppins(
+                            color: colors.primaryTextColor.withOpacity(0.7)),
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(5)),
+                        fillColor: colors.textBoxFill,
+                        focusColor: colors.textBoxFill,
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(5)),
+                      )),
+                ),
+                Padding(
+                  padding: constants.textFieldPadding,
+                  child: TextFormField(
+                      initialValue: widget.eventData.eventPosterURL,
+                      onSaved: (value) {
+                        widget.eventData.eventPosterURL = value ?? "";
+                      },
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
+                      decoration: InputDecoration(
+                        label: Text('Event Poster URL',
+                            style: GoogleFonts.raleway(
+                                color: colors.textBoxTextColor, fontSize: 12)),
+                        filled: true,
+                        hintText: 'Enter Event Poster URL',
                         hintStyle: GoogleFonts.poppins(
                             color: colors.primaryTextColor.withOpacity(0.7)),
                         focusedBorder: OutlineInputBorder(
@@ -274,8 +298,8 @@ class _AddEvent extends State<AddEvent> {
                       onSaved: (value) {
                         widget.eventData.eventDescription = value!;
                       },
-                      style:
-                          GoogleFonts.montserrat(color: colors.primaryTextColor),
+                      style: GoogleFonts.montserrat(
+                          color: colors.primaryTextColor),
                       validator: (value) {
                         if (value == "" || value == null) {
                           return "Please enter event description";
@@ -307,7 +331,8 @@ class _AddEvent extends State<AddEvent> {
                 ),
                 Expanded(child: Container()),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0, left: 20, bottom: 20),
+                  padding:
+                      const EdgeInsets.only(top: 50.0, left: 20, bottom: 20),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: showProgress
@@ -358,8 +383,8 @@ class _AddEvent extends State<AddEvent> {
                               widget.eventUpdate
                                   ? 'UPDATE EVENT'
                                   : 'CREATE EVENT',
-                              style:
-                                  GoogleFonts.nunito(fontWeight: FontWeight.bold),
+                              style: GoogleFonts.nunito(
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
                   ),

@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                                             gradientEndingColor:
                                                 colors.dataCardColor),
                                         VerticalCard(
-                                            title: "App\nDevelopment Team",
+                                            title: "Contact\nUs",
                                             svgLocation: "svgLocation",
                                             gradientStartingColor:
                                                 colors.dataCardColor,
