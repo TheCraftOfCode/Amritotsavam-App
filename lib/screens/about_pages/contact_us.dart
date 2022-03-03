@@ -219,8 +219,6 @@ class ContactUs extends StatelessWidget {
                         ),
                       ),
                     ),
-                    //amritotsavam@cb.amrita.edu
-
                   )
                 ],
               ),
