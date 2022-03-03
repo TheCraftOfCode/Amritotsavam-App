@@ -1,5 +1,7 @@
+import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/utils/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:intl/intl.dart';
 
 const storage = FlutterSecureStorage();
 
@@ -70,4 +72,12 @@ Future<String> get getUserId async {
 
 set setUserId(String userId) {
   storage.write(key: userIdKey, value: userId);
+}
+
+sortEventDescending(List<EventData> data){
+  data.sort((a, b){ //sorting in descending order
+    var format = DateFormat("dd/MM/yyyy");
+
+    return format.parse(b.eventDate).compareTo(format.parse(a.eventDate));
+  });
 }

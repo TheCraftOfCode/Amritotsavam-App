@@ -4,6 +4,7 @@ import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -57,6 +58,7 @@ class _PublishResultsPageState extends State<PublishResultsPage> {
           results: resultData);
       allEventsList.add(data);
     }
+    sortEventDescending(allEventsList);
     if (reloadPage) {
       setState(() {});
     }

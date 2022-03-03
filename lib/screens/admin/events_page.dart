@@ -5,6 +5,7 @@ import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/admin/add_event.dart';
 import 'package:amritotsavam_app/utils/get_event_svg.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -68,6 +69,7 @@ class _EventsListState extends State<EventsList> {
 
       allEventsList.add(data);
     }
+    sortEventDescending(allEventsList);
     if (reloadPage) {
       setState(() {});
     }

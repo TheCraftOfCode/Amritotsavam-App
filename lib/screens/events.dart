@@ -5,6 +5,7 @@ import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/event_page.dart';
 import 'package:amritotsavam_app/utils/get_event_svg.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
 import 'package:intl/intl.dart'; //for date format
 import 'package:flutter/material.dart';
@@ -77,6 +78,8 @@ class _EventsState extends State<Events> {
       }
       allEventsList.add(data);
     }
+    sortEventDescending(allEventsList);
+    sortEventDescending(listUpcoming);
     if (reloadPage) {
       setState(() {});
     }
@@ -297,18 +300,15 @@ class _HorizontalListViewState extends State<_HorizontalListView> {
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return _horizontalWidgetCard(
-                    widget.list[index].eventName,
-                    widget.list[index].eventDate,
+                    widget.list[index].eventName, widget.list[index].eventDate,
                     () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EventsPage(
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EventsPage(
                                 eventData: widget.list[index],
                               )));
-                    },
-                    currentPagePosition == index,
-                    widget.list[index].eventType);
+                }, currentPagePosition == index, widget.list[index].eventType);
               },
             ),
           )

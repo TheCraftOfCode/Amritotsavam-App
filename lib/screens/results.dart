@@ -4,6 +4,7 @@ import 'package:amritotsavam_app/models/event_model.dart';
 import 'package:amritotsavam_app/models/results_model.dart';
 import 'package:amritotsavam_app/screens/result_page.dart';
 import 'package:amritotsavam_app/utils/http_modules.dart';
+import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:amritotsavam_app/widgets/event_card.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -11,7 +12,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
 import 'package:amritotsavam_app/utils/colors.dart' as colors;
 
-//TODO: Replace mask image with different images depending on type of event
 class ResultsHomePage extends StatefulWidget {
   const ResultsHomePage({Key? key}) : super(key: key);
 
@@ -57,6 +57,7 @@ class _ResultsHomePageState extends State<ResultsHomePage> {
           results: resultData);
       allEventsList.add(data);
     }
+    sortEventDescending(allEventsList);
     if (reloadPage) {
       setState(() {});
     }
