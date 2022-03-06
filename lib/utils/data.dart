@@ -149,8 +149,6 @@ var centralCoordinators = [
     phoneNo: '8610558837',
   ),
   PeopleData(
-      name: "Roobin Raj S", phoneNo: "6383867604", rollNo: "CB.EN.U4EEE18144"),
-  PeopleData(
     rollNo: 'CB.EN.U4AEE18018',
     name: 'C HEMAVATHY AISSHWARYA',
     phoneNo: '7358307212',
@@ -165,6 +163,10 @@ var centralCoordinators = [
     name: 'PANKAJRISHIKESH M',
     phoneNo: '8778577214',
   ),
+  PeopleData(
+      name: "Roobin Raj S",
+      phoneNo: "6383867604",
+      rollNo: "CB.EN.U4EEE18144"),
   PeopleData(
     rollNo: 'CB.EN.U4ECE18154',
     name: 'SHARAN S',

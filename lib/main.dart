@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
   Future<void> initNotification() async {
     final FirebaseMessaging messaging = FirebaseMessaging.instance;
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    print(packageInfo.version );
 
     await FirebaseMessaging.instance
         .setForegroundNotificationPresentationOptions(
