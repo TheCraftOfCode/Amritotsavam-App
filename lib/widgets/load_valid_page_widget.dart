@@ -1,8 +1,15 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:amritotsavam_app/utils/constants.dart' as constants;
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import 'alert_dialog.dart';
 
 /// *
 /// This widget can be used between usual widgets to avoid rendering
@@ -26,13 +33,27 @@ class LoadValidPageWidget extends StatelessWidget {
   final Widget targetPage;
 
   Future<String> getVerifiedJwt(context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
     var jwt = await jwtTokenGet;
     if (jwt == '') return '';
 
     var res = await makePostRequest(null, "/validateToken", null, true,
         context: context);
     if (res.statusCode != 200 && res.statusCode != 412) {
-      showToast("Could not authenticate to server, continuing in offline mode!");
+      showToast(
+          "Could not authenticate to server, continuing in offline mode!");
+    } else {
+      var decodedVal = json.decode(res.body)['update'][0];
+      if (packageInfo.version != decodedVal['versionNumber']) {
+        displayDialog(context, "Update", null, () async {
+          if (!await launch(decodedVal['updateLink'])) {
+            throw 'Could not launch url';
+          }
+          exit(0);
+        }, "Update app",
+            "A new update is available to version ${decodedVal['versionNumber']}! Please update to avoid instabilities in application",
+            dismissDialog: false, willPop: false);
+      }
     }
     return jwt;
   }
@@ -53,11 +74,12 @@ class LoadValidPageWidget extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.all(40),
                         child: Image(
-                            image:
-                                AssetImage('assets/amritotsavam_logo_mini.png')),
+                            image: AssetImage(
+                                'assets/amritotsavam_logo_mini.png')),
                       ),
                     ),
-                    const Expanded(child: Center(
+                    const Expanded(
+                        child: Center(
                       child: CircularProgressIndicator(),
                     )),
                   ],
