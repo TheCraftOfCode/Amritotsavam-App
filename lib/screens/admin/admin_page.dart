@@ -1,6 +1,7 @@
 import 'package:amritotsavam_app/screens/admin/broadcast_notifications.dart';
 import 'package:amritotsavam_app/screens/admin/events_page.dart';
 import 'package:amritotsavam_app/screens/admin/publish_results_page.dart';
+import 'package:amritotsavam_app/screens/admin/update_app.dart';
 import 'package:amritotsavam_app/screens/admin/user_management.dart';
 import 'package:amritotsavam_app/widgets/datacard.dart';
 import 'package:flutter/material.dart';
@@ -41,15 +42,17 @@ class _AdminPageState extends State<AdminPage> {
                   ),
                   DataCard('Manage Accounts', 'assets/svg/manage_user.svg',
                       UserManagement(role: widget.role)),
-                  const DataCard('Manage Events', 'assets/svg/events.svg',
-                      EventsList()),
-                  const DataCard('Manage Results', 'assets/svg/upload_results.svg',
-                      PublishResultsPage()),
-                  const DataCard('Broadcast Notifications', 'assets/svg/team_members.svg',
-                      BroadcastNotifications()),
+                  const DataCard(
+                      'Manage Events', 'assets/svg/events.svg', EventsList()),
+                  const DataCard('Manage Results',
+                      'assets/svg/upload_results.svg', PublishResultsPage()),
+                  const DataCard('Broadcast Notifications',
+                      'assets/svg/team_members.svg', BroadcastNotifications()),
+                  if (widget.role == constants.superAdmin)
+                    const DataCard('Publish App Update',
+                        'assets/svg/event_managers.svg', UpdateApp()),
                 ],
               ),
             )));
   }
 }
-

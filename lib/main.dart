@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:amritotsavam_app/screens/home_page.dart';
+import 'package:amritotsavam_app/utils/http_modules.dart';
 import 'package:amritotsavam_app/utils/theme.dart';
 import 'package:amritotsavam_app/widgets/alert_dialog.dart';
 import 'package:amritotsavam_app/widgets/load_valid_page_widget.dart';
@@ -9,7 +11,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:in_app_update/in_app_update.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,6 +28,7 @@ Future<void> main() async {
   ));
 }
 
+
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -35,14 +37,22 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  Future<void> checkForUpdate() async {
-    InAppUpdate.checkForUpdate().then((info) {
-      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
-        InAppUpdate.performImmediateUpdate().catchError((e) {
-          showToast(e.toString());
-        });
-      }
-    }).catchError((e) {});
+
+  checkUpdate() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    var res = await makePostRequest(null, "/checkUpdate", null, true,
+        context: navigatorKey.currentContext);
+    var decodedVal = json.decode(res.body)['update'][0];
+    if (packageInfo.version != decodedVal['versionNumber']) {
+      displayDialog(navigatorKey.currentContext, "Update", null, () async {
+        if (!await launch(decodedVal['updateLink'])) {
+          throw 'Could not launch url';
+        }
+        exit(0);
+      }, "Update app",
+          "A new update is available to version ${decodedVal['versionNumber']}! Please update to avoid instabilities in application",
+          dismissDialog: false, willPop: false);
+    }
   }
 
   Future<void> initNotification() async {
@@ -87,18 +97,6 @@ class _MyAppState extends State<MyApp> {
         if (notification.title == "Update") {
           if (navigatorKey.currentContext != null) {
             if (packageInfo.version != message.data['version']) {
-              flutterLocalNotificationsPlugin.show(
-                  notification.hashCode,
-                  notification.title,
-                  notification.body,
-                  NotificationDetails(
-                    android: AndroidNotificationDetails(
-                      channel.id,
-                      channel.name,
-                      channelDescription: channel.description,
-                      icon: android.smallIcon,
-                    ),
-                  ));
               displayDialog(navigatorKey.currentContext, "Update", null,
                   () async {
                 if (!await launch(message.data['updateLink'])) {
@@ -110,20 +108,19 @@ class _MyAppState extends State<MyApp> {
                   dismissDialog: false, willPop: false);
             }
           }
-        } else {
-          flutterLocalNotificationsPlugin.show(
-              notification.hashCode,
-              notification.title,
-              notification.body,
-              NotificationDetails(
-                android: AndroidNotificationDetails(
-                  channel.id,
-                  channel.name,
-                  channelDescription: channel.description,
-                  icon: android.smallIcon,
-                ),
-              ));
         }
+        flutterLocalNotificationsPlugin.show(
+            notification.hashCode,
+            notification.title,
+            notification.body,
+            NotificationDetails(
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                icon: android.smallIcon,
+              ),
+            ));
       }
     });
   }
@@ -133,7 +130,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    checkForUpdate();
+    checkUpdate();
     initNotification();
   }
 
