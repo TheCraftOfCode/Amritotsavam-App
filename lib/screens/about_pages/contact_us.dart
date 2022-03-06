@@ -193,7 +193,7 @@ class ContactUs extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 23, top: 20),
                     child: Text(
-                      'Designed and Maintained by',
+                      'Developed and Maintained by',
                       style: GoogleFonts.nunito(
                           fontSize: 25,
                           color: colors.primaryTextColor,

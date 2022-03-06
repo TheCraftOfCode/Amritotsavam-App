@@ -194,6 +194,16 @@ class _HomePageState extends State<HomePage> {
                                             gradientEndingColor:
                                                 colors.dataCardColor),
                                         VerticalCard(
+                                            title: "Multimedia \nTeam",
+                                            svgLocation: "svgLocation",
+                                            gradientStartingColor:
+                                            colors.dataCardColor,
+                                            textAlign: TextAlign.start,
+                                            fontSize: 18,
+                                            route: const MultiMediaTeam(),
+                                            gradientEndingColor:
+                                            colors.dataCardColor),
+                                        VerticalCard(
                                             title: "Digital \nContent Team",
                                             svgLocation: "svgLocation",
                                             gradientStartingColor:
@@ -201,16 +211,6 @@ class _HomePageState extends State<HomePage> {
                                             textAlign: TextAlign.start,
                                             fontSize: 18,
                                             route: const DigitalTeam(),
-                                            gradientEndingColor:
-                                                colors.dataCardColor),
-                                        VerticalCard(
-                                            title: "Multimedia \nTeam",
-                                            svgLocation: "svgLocation",
-                                            gradientStartingColor:
-                                                colors.dataCardColor,
-                                            textAlign: TextAlign.start,
-                                            fontSize: 18,
-                                            route: const MultiMediaTeam(),
                                             gradientEndingColor:
                                                 colors.dataCardColor),
                                         VerticalCard(

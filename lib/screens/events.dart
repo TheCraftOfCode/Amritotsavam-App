@@ -331,41 +331,41 @@ Widget _horizontalWidgetCard(cardTitle, cardDate, onTap, inFocus, eventType) {
           borderRadius: BorderRadius.circular(10.0),
         ),
         semanticContainer: true,
-        child: Stack(
-          children: [
-            InkWell(
-              onTap: onTap,
-            ),
-            Positioned(
-                right: 0,
-                child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: getEventImage(eventType, 70.0))),
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    cardTitle,
-                    style: GoogleFonts.raleway(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Text(cardDate,
-                        style: GoogleFonts.raleway(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500)),
-                  )
-                ],
+        child: InkWell(
+          onTap: onTap,
+          child: Stack(
+            children: [
+              Positioned(
+                  right: 0,
+                  child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: getEventImage(eventType, 70.0))),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      cardTitle,
+                      style: GoogleFonts.raleway(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(cardDate,
+                          style: GoogleFonts.raleway(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500)),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         elevation: 10,
       ));

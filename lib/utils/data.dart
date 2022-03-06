@@ -149,6 +149,8 @@ var centralCoordinators = [
     phoneNo: '8610558837',
   ),
   PeopleData(
+      name: "Roobin Raj S", phoneNo: "6383867604", rollNo: "CB.EN.U4EEE18144"),
+  PeopleData(
     rollNo: 'CB.EN.U4AEE18018',
     name: 'C HEMAVATHY AISSHWARYA',
     phoneNo: '7358307212',
@@ -269,25 +271,22 @@ var digitalContentTeam = [
 
 var facultyCoordinators = [
   PeopleData(
-    name: "Sri PRAKASH A S",
-    phoneNo: "9443473725",
-    pictureURL: "assets/profiles/mr_prakaash_a_s.jpg"
-  ),
+      name: "Sri PRAKASH A S",
+      phoneNo: "9443473725",
+      pictureURL: "assets/profiles/mr_prakaash_a_s.jpg"),
   PeopleData(
-    name: "Sri PUSHPARAJ M",
-    phoneNo: "9944685515",
-    pictureURL: "assets/profiles/mr_pushparaj_m.jpg"
-  ),
+      name: "Sri PUSHPARAJ M",
+      phoneNo: "9944685515",
+      pictureURL: "assets/profiles/mr_pushparaj_m.jpg"),
   PeopleData(
     name: "Dr. RAMKUMAR A S",
     phoneNo: "9944205630",
     pictureURL: "assets/profiles/dr_ramkumar.jpg",
   ),
   PeopleData(
-    name: "Dr. JANCI RANI P R ",
-    phoneNo: "9486034723",
-    pictureURL: "assets/profiles/dr_janci_rani.jpg"
-  ),
+      name: "Dr. JANCI RANI P R ",
+      phoneNo: "9486034723",
+      pictureURL: "assets/profiles/dr_janci_rani.jpg"),
 ];
 
 var multimediaTeam = [
